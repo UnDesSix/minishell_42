@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/26 17:42:45 by calide-n          #+#    #+#             */
-/*   Updated: 2021/01/27 09:49:30 by calide-n         ###   ########.fr       */
+/*   Created: 2021/01/27 09:44:35 by calide-n          #+#    #+#             */
+/*   Updated: 2021/01/27 09:59:20 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "minishell.h"
 
-# include "structures.h"
-# include "functions.h"
-# include <stdio.h>
-
-#endif
+int	main(void)
+{
+	printf("Let's crush this minishell\n");
+	return (0);
+}
