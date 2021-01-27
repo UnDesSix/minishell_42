@@ -1,6 +1,2 @@
-This is 1st line of readme
-This is the 3nd line of README
-okwokfowofo
-]
-
-N'oublie pas de pull avant de push
+<h1>MINISHELL</h1>
+<h3>As beautifull as a shell</h3>
