@@ -6,11 +6,12 @@
 /*   By: mlarboul <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/30 07:47:24 by mlarboul          #+#    #+#             */
-/*   Updated: 2021/01/30 07:47:28 by mlarboul         ###   ########.fr       */
+/*   Updated: 2021/01/30 08:15:31 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <stdio.h>
 
 int	main(void)
 {
