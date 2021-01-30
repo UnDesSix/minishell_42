@@ -1,0 +1,10 @@
+After a command is entered, the following things are done:
+
+1-	Command is entered and if length is non-null, keep it in history. (Optionnal)
+2-	Parsing : Parsing is the breaking up of commands into individual words and strings (Split ?)
+3-	Checking for special characters like pipes, etc is done 
+4-	Checking if built-in commands are asked for. 
+5-	If pipes are present, handling pipes.
+6-	Executing system commands and libraries by forking a child and calling execvp.
+7-	Printing current directory name and asking for next input.
+
