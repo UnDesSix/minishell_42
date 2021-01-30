@@ -1,4 +1,4 @@
-NAME	= minishell
+NAME	= Minishell
 
 CC		= gcc -Wall -Werror -Wextra
 
