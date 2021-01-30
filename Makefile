@@ -1,12 +1,14 @@
 NAME	= Minishell
 
-CC		= gcc -Wall -Werror -Wextra
+CC		= gcc #-Wall -Werror -Wextra
 
 RM		= rm -rf
 
 INCS	= -I./includes/
 
 SRCS_NAME	= main.c	\
+			  builtins/echo.c \
+			  builtins/pwd.c
 
 SRCS_PATH	= ./srcs/
 
