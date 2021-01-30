@@ -6,11 +6,16 @@
 /*   By: mlarboul <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/30 07:47:24 by mlarboul          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2021/01/30 08:18:29 by calide-n         ###   ########.fr       */
+=======
+/*   Updated: 2021/01/30 08:15:31 by mlarboul         ###   ########.fr       */
+>>>>>>> matt
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <stdio.h>
 
 int	main(void)
 {
