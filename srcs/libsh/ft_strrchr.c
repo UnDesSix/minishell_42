@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: calide-n <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/30 13:50:42 by calide-n          #+#    #+#             */
-/*   Updated: 2021/01/30 13:56:41 by calide-n         ###   ########.fr       */
+/*   Created: 2020/11/05 13:04:10 by calide-n          #+#    #+#             */
+/*   Updated: 2021/01/30 16:58:33 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
+#include "libsh.h"
 
-void	pwd(char *file_name)
+char	*ft_strrchr(const char *s, int c)
 {
-	char filepath[MAX_PATH];
-	
-	if (getcwd(filepath, sizoef(filepath)) == NULL)
-		exit(1);
-	printf("%s\n", filepath);
-	exit(0);
+	int	i;
+
+	i = ft_strlen(s);
+	while (i >= 0)
+	{
+		if (s[i] == c)
+			return ((char *)s + i);
+		i--;
+	}
+	if (s[i] == c)
+		return ((char *)s + i);
+	return (0);
 }

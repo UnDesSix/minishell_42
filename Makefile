@@ -1,10 +1,12 @@
-NAME	= Minishell
+NAME	= minishell
 
-CC		= gcc #-Wall -Werror -Wextra
+CC		= clang #-Wall -Werror -Wextra
 
 RM		= rm -rf
 
-INCS	= -I./includes/
+LIBSH	= srcs/libsh/libsh.a
+
+INCS	= -Iincludes
 
 SRCS_NAME	= main.c	\
 			  builtins/echo.c \
@@ -12,23 +14,20 @@ SRCS_NAME	= main.c	\
 
 SRCS_PATH	= ./srcs/
 
-OBJS_NAME	= $(SRCS_NAME:.c=.o)
-
 OBJS_PATH	= ./objs/
 
 SRCS	= $(addprefix $(SRCS_PATH), $(SRCS_NAME))
 
-OBJS	= $(addprefix $(OBJS_PATH), $(OBJS_NAME))
+OBJS	= $(SRCS:.c=.o)
 
-$(OBJS_PATH)%.o: $(SRCS_PATH)%.c
-	@mkdir objs 2> /dev/null
-	echo -n '>'
+
+%.o: %.c
 	$(CC) $(INCS) -c $< -o $@
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(INCS) $(OBJS) -o $(NAME)
+	$(CC) $(INCS) $(LIBSH) $(OBJS) -o $(NAME)
 
 clean:
 	$(RM) $(OBJS)

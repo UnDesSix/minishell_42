@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: calide-n <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/30 13:44:31 by calide-n          #+#    #+#             */
-/*   Updated: 2021/01/30 13:59:01 by calide-n         ###   ########.fr       */
+/*   Created: 2020/11/05 12:57:05 by calide-n          #+#    #+#             */
+/*   Updated: 2020/11/05 12:57:10 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
+#include "libsh.h"
 
-void	echo(char *str, int flag, int fd)
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	size_t i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	write(fd, str, i);
-	if (flag == FALSE)
-		write(fd, "\n", 1);
-	exit(0);
+	while (lst)
+	{
+		f(lst->content);
+		lst = lst->next;
+	}
 }
