@@ -6,7 +6,7 @@
 /*   By: mlarboul <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/30 07:47:24 by mlarboul          #+#    #+#             */
-/*   Updated: 2021/01/30 08:39:07 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/02/17 10:38:41 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 
 int	main(void)
 {
-	printf("Let's crush this minishell\n");
+	printf("Let's crush this Minishell\n");
 	return (2);
 }
