@@ -6,11 +6,28 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 17:13:32 by calide-n          #+#    #+#             */
-/*   Updated: 2021/02/17 13:47:36 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/02/17 15:50:41 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+
+static char	ft_check_quotes(char *s, char *c, size_t i)
+{
+	while (s[i] && s[i] == ' ')
+		i++;
+	if (s[i] == '\'')
+	{
+		*c = '\'';
+		i++;
+	}
+	else if (s[i] == '"')
+	{
+		*c = '"';
+		i++;
+	}
+	return (i);
+}
 
 static char	*ft_strdup_to_char(char const *str, char c)
 {
@@ -33,28 +50,43 @@ static char	*ft_strdup_to_char(char const *str, char c)
 	return (dest);
 }
 
-static int	ft_get_word_nb(char const *s, char c)
+static int	ft_get_word_nb(char *s, char c)
 {
 	size_t	i;
 	size_t	nb;
+	int		tmpc;
 
 	i = 0;
 	nb = 0;
+	tmpc = c;
 	while (s[i])
 	{
-		while (s[i] == c)
+		while (s[i] && s[i] == c)
 			i++;
+		i = ft_check_quotes(s, &c, i);
 		if (s[i] != '\0')
-		{
 			nb++;
-			while (s[i] && s[i] != c)
-				i++;
-		}
+		while (s[i] && s[i] != c)
+			i++;
+		c = tmpc;
+		while (s[i] && s[i] != c)
+			i++;
 	}
 	return (nb);
 }
 
-char	**ft_split(char const *s, char c)
+int	ft_index(char *s, int i, char c, char tmpc)
+{
+	while (s[i] && s[i] != c)
+		i++;
+	i++;
+	c = tmpc;
+	while (s[i] == ' ')
+		i++;
+	return (i);
+}
+
+char	**ft_split(char *s, char c)
 {
 	size_t	nb_of_words;
 	char	**tab;
@@ -73,11 +105,9 @@ char	**ft_split(char const *s, char c)
 	tmpc = c;
 	while (j < nb_of_words)
 	{
-		while (s[i] && s[i] == c)
-			i++;
+		i = ft_check_quotes(s, &c, i);
 		tab[j++] = ft_strdup_to_char(s + i, c);
-		while (s[i] && s[i] != c)
-			i++;
+		i = ft_index(s, i, c, tmpc);
 	}
 	tab[j] = 0;
 	return (tab);
