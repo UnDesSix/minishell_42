@@ -4,116 +4,74 @@
 
 #define BUFF_SIZE 3
 
-typedef struct	s_gnl_saver
+void	update_buff(char *buffer)
 {
-	char	buffer[BUFF_SIZE];
-	ssize_t	read_bytes;
-	ssize_t	size_line;
-	size_t	index; // Index tells us where we are in the buffer
-}				t_gnl_saver;
+	int		i;
+	int		j;
+	char	tmp[BUFF_SIZE + 1];
 
-size_t	ft_strlen(char *str)
+	i = -1;
+	while (buffer[++i])
+		tmp[i] = buffer[i];
+	i = 0;
+	j = 0;
+	while (buffer[i] && buffer[i] != '\n')
+		i++;
+	if (buffer[i] == '\n')
+		i++;
+	while (i < BUFF_SIZE)
+		buffer[j++] = tmp[i++];
+	while (j < BUFF_SIZE)
+		buffer[j++] = '\0';
+}
+
+int		save_line(char **line, char *buffer)
 {
-	size_t i;
+	int	i;
+	int	j;
+	int	r_val;
 
 	i = 0;
-	while (str[i])
+	j = -1;
+	r_val = 0;
+	while (buffer[i] && buffer[i] != '\n')
 		i++;
-	return (i);
-}
-
-char	*ft_strncpy(char *dest, char *src, size_t n)
-{
-	size_t i;
-
-	i = 0;
-	while (i < n && src[i])
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	while (i < n)
-		dest[i++] = '\0';
-	return (dest);
-}
-
-char	*realloc_str(char *old_str, size_t add_size)
-{
-	char	*new_str;
-	// Possibility to add a new var -> size of old str
-
-	if (!old_str)
-	{
-		new_str = malloc(sizeof(char) * (add_size + 1));
-		new_str[add_size + 1] = '\0';
-		if (!new_str)
-			return (NULL);
-		return (new_str);
-	}
-	new_str = malloc(sizeof(char) * (ft_strlen(old_str) + add_size + 1));
-	if (!new_str)
-		return (NULL);
-	new_str[ft_strlen(old_str) + add_size + 1] = '\0';
-	ft_strncpy(new_str, old_str, ft_strlen(old_str));
-	free(old_str);
-	return (new_str);
-}
-
-/*
-//	This function allocate (or reallocate) enough space to copy the buffer
-//	int final line.
-//	The return value "status" can be :
-//		- 1  : there is a '\n'
-//		- 0  : there is not a '\n'
-//		- -1 : something wrong happened
-*/
-int		line_saver(t_gnl_saver *saver, char **line)
-{
-	size_t	i;
-	size_t	j;
-	int		status;
-
-	i = saver->index;
-	while (i < saver->read_bytes && saver->buffer[i] != '\n')
-		i++;
-	if (saver->buffer[i] == '\n')
-		status = 1;
-	else
-		status = 0;
+	if (buffer[i] == '\n')
+		r_val = 1;
 	if (!(*line))
 	{
-		*line = realloc_str(*line, i);
-		ft_strncpy(*line, saver->buffer, i - saver->index);
-		saver->size_line = i - saver->index;
-		saver->index += i;
-		return (status);
+		*line = malloc(sizeof(char) * (i + 1));
+		if (!*line)
+			return (-1);
+		while (++j < i)
+			(*line)[j] = buffer[j];
+		(*line)[j] = '\0';
+		return (r_val);
 	}
-	*line = realloc_str(*line, i);
-	ft_strncpy(*line + saver->size_line, saver->buffer + saver->index, i - saver->index);
-	saver->index += i;
-	return (status);
+	return (r_val);
 }
 
 int		get_next_line(int fd, char **line)
 {
-	static t_gnl_saver	saver;
-	int					status;
+	static char	buffer[BUFF_SIZE + 1];
+	int			read_bytes;
+	int			i;
 
-	saver.read_bytes = 1;
-	saver.size_line = 0;
-	saver.index = 0;
-	status = 0;
+	read_bytes = 1;
 	*line = NULL;
-	while (saver.read_bytes && !status)
+	i = 0;
+	while (read_bytes)
 	{
-		saver.read_bytes = read(fd, saver.buffer, BUFF_SIZE);
-		status = line_saver(&saver, line);
-		if (saver.read_bytes < 0)
-			return (-1);
+		if (!buffer[0])
+			read_bytes = read(fd, buffer, BUFF_SIZE);
+		buffer[BUFF_SIZE] = '\0';
+		if (save_line(line, buffer) == 1)
+		{
+			update_buff(buffer);
+			return (1);
+		}
 	}
-	if (!saver.read_bytes)
-		return (0);
-	return (1);
+	return (0);
 }
 
 int		main()
@@ -125,7 +83,7 @@ int		main()
 	{
 		if (line)
 		{
-			printf("%s\n", line);
+			printf("line %d : \"%s\"\n", i++, line);
 			free(line);
 		}
 	}
