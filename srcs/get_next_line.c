@@ -2,7 +2,13 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-int		ft_handle_err(int ret, char **line, char **stack)
+#define BUFFER_SIZE 1024
+
+char	*ft_strdup(char *str);
+char	*ft_strjoin(char *s1, char *s2);
+char	*ft_nl(char const *str, int c);
+
+int	ft_handle_err(int ret, char **line, char **stack)
 {
 	if (!ret && !*stack)
 	{
@@ -21,17 +27,17 @@ int		ft_handle_err(int ret, char **line, char **stack)
 	return (1);
 }
 
-int		ft_verify_line(int ret, char **line, char **stack)
+int	ft_verify_line(int ret, char **line, char **stack)
 {
-	size_t	i;
 	char	*tmp;
 	char	*tmp_stack;
 	int		err;
 
-	i = 0;
-	if ((err = ft_handle_err(ret, line, stack)) != 1)
+	err = ft_handle_err(ret, line, stack);
+	if (err != 1)
 		return (err);
-	if ((tmp = ft_nl(*stack, '\n')))
+	tmp = ft_nl(*stack, '\n');
+	if (tmp)
 	{
 		*tmp = '\0';
 		*line = ft_strdup(*stack);
@@ -45,23 +51,31 @@ int		ft_verify_line(int ret, char **line, char **stack)
 		*line = ft_strdup(*stack);
 		free(*stack);
 		*stack = NULL;
-		return (0);
 	}
 	return (0);
 }
 
-int		get_next_line(int fd, char **line)
+int	ft_extra_function_because_the_norm_sucks(char **buff, int fd, char **line)
+{
+	*buff = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (fd < 0 || BUFFER_SIZE <= 0 || line == NULL || (!(buff)))
+		return (-1);
+	return (1);
+}
+
+int	get_next_line(int fd, char **line)
 {
 	static char	*stack[256];
 	char		*buff;
 	int			ret;
 	char		*tmp;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || line == NULL ||
-			(!(buff = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1)))))
+	if (ft_extra_function_because_the_norm_sucks(&buff, fd, line) == -1)
 		return (-1);
-	while ((ret = read(fd, buff, BUFFER_SIZE)) > 0)
+	ret = 1;
+	while (ret)
 	{
+		ret = read(fd, buff, BUFFER_SIZE);
 		buff[ret] = '\0';
 		if (!stack[fd])
 			stack[fd] = ft_strdup(buff);
@@ -75,6 +89,5 @@ int		get_next_line(int fd, char **line)
 			break ;
 	}
 	free(buff);
-	buff = NULL;
 	return (ft_verify_line(ret, &*line, &stack[fd]));
 }

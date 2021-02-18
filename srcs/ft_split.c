@@ -6,11 +6,12 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 17:13:32 by calide-n          #+#    #+#             */
-/*   Updated: 2021/02/17 15:50:41 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/02/18 11:17:36 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include <stdio.h>
 
 static char	ft_check_quotes(char *s, char *c, size_t i)
 {
@@ -75,12 +76,13 @@ static int	ft_get_word_nb(char *s, char c)
 	return (nb);
 }
 
-int	ft_index(char *s, int i, char c, char tmpc)
+int	ft_index(char *s, int i, char *c, char tmpc)
 {
-	while (s[i] && s[i] != c)
+	while (s[i] && s[i] != *c)
 		i++;
-	i++;
-	c = tmpc;
+	if (s[i] == *c)
+		i++;
+	*c = ' ';
 	while (s[i] == ' ')
 		i++;
 	return (i);
@@ -107,7 +109,7 @@ char	**ft_split(char *s, char c)
 	{
 		i = ft_check_quotes(s, &c, i);
 		tab[j++] = ft_strdup_to_char(s + i, c);
-		i = ft_index(s, i, c, tmpc);
+		i = ft_index(s, i, &c, tmpc);
 	}
 	tab[j] = 0;
 	return (tab);

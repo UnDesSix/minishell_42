@@ -1,40 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/05 13:02:41 by calide-n          #+#    #+#             */
-/*   Updated: 2021/02/18 17:06:45 by calide-n         ###   ########.fr       */
+/*   Created: 2021/02/18 18:49:24 by calide-n          #+#    #+#             */
+/*   Updated: 2021/02/18 20:04:27 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libsh.h"
+#include "includes/header.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+int echo(t_input input)
 {
-	char	*str;
-	size_t	i;
-	size_t	j;
-	size_t	len;
+	int i;
+	int flag;
 
-	i = -1;
-	j = 0;
-	if (!s1 || !s2)
+	if (!input.args[0])
 		return (0);
-	len = ft_strlen(s1) + ft_strlen(s2);
-	str = (char *)malloc(sizeof(char) * (len + 1));
-	if (!str)
-		return (0);
-	while (s1[++i])
-		str[i] = s1[i];
-	while (s2[j])
+	i = 0;
+	flag = 0;
+	if ((strcmp(input.args[0], "-n") == 0))
 	{
-		str[i] = s2[j];
-		j++;
+		i = 1;
+		flag = 1;
+	}
+
+	while (input.args[i])
+	{
+		ft_putstr_fd(input.args[i], input.fd);
+		if (input.args[i + 1])
+			ft_putstr_fd(" ", input.fd);
 		i++;
 	}
-	str[i] = '\0';
-	return (str);
+	if (flag == 0)
+		ft_putstr_fd("\n", input.fd);
+	return (0);
 }

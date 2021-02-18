@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   main2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/05 13:04:10 by calide-n          #+#    #+#             */
-/*   Updated: 2021/01/30 16:58:33 by calide-n         ###   ########.fr       */
+/*   Created: 2021/02/18 20:13:11 by calide-n          #+#    #+#             */
+/*   Updated: 2021/02/18 20:15:55 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libsh.h"
+#include <stdio.h>
+#include <stdlib.h>
 
-char	*ft_strrchr(const char *s, int c)
+int	get_next_line(int fd, char **line);
+
+int main(void)
 {
-	int	i;
+	int ret;
+	char *line;
 
-	i = ft_strlen(s);
-	while (i >= 0)
+	while ((ret = get_next_line(0, &line)) > 0)
 	{
-		if (s[i] == c)
-			return ((char *)s + i);
-		i--;
+		printf("[%d] %s\n", ret, line);
+		free(line);
 	}
-	if (s[i] == c)
-		return ((char *)s + i);
+	printf("[%d] %s\n", ret, line);
+	free(line);
 	return (0);
 }
