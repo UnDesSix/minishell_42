@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 11:29:16 by calide-n          #+#    #+#             */
-/*   Updated: 2021/02/19 08:37:05 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/02/19 18:42:37 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,26 +26,70 @@ int	ft_check_cmd(char *str)
 	return (1);
 }
 
-t_input	ft_selector(char **tabs)
+int		ft_count_words(int i, char **tabs)
+{
+	int nb_word;
+
+	nb_word = 0;
+	while (tabs[i] && ft_strcmp(tabs[i], "|") != 0 && (ft_strcmp(tabs[i], ";") != 0))
+	{
+		nb_word++;
+		i++;
+	}
+//	printf("[%d]\n", nb_word);
+	return (nb_word);
+}
+
+t_input	*ft_selector(char **tabs)
 {
 	int i = 0;
 	int j = 0;
-	t_input input;
-	input.command = NULL;
+	int nb_input = 1;
+	t_input *input;
+
 	if (tabs[0])
 	{
-		if (ft_check_cmd(tabs[0]) == 0)
-			printf("msh : command not found : %s\n", tabs[0]);
-		input.command = tabs[0];
-		while (tabs[i])
-			i++;
-		input.args = malloc(sizeof(char *) * (i + 1));
-		i = 1;
 		while (tabs[i])
 		{
-			input.args[i - 1] = tabs[i];
+			if (!ft_strcmp(tabs[i], "|") || (!ft_strcmp(tabs[i], ";")))
+				nb_input++;
+			i++;
+		}	
+		i = 0;
+		input = malloc(sizeof(t_input) * nb_input + 1);
+		nb_input = 0;
+		while (tabs[i])
+		{
+			j = 0;
+			input[nb_input].args = malloc(sizeof(char *) * (ft_count_words(i, tabs) + 1));
+			while (tabs[i] && ft_strcmp(tabs[i], "|") != 0 && (ft_strcmp(tabs[i], ";") != 0))
+			{
+				input[nb_input].args[j] = tabs[i];
+				j++;
+				i++;
+			}
+			input[nb_input].args[i] = NULL;
+			nb_input++;
+			if (tabs[i + 1] && tabs[i])
+				i++;
+		}
+	}
+	i = 0;
+	int tmp = nb_input;
+	nb_input = 0;
+	while (nb_input < tmp)
+	{
+		i = 0;
+		ft_putstr("[");
+		while (input[nb_input].args[i])
+		{
+			ft_putstr(input[nb_input].args[i]);
+			ft_putstr(" ");
 			i++;
 		}
+		ft_putstr("]");
+		ft_putstr("\n");
+		nb_input++;
 	}
 	return (input);
 }

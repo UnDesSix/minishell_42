@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 11:31:01 by calide-n          #+#    #+#             */
-/*   Updated: 2021/02/19 08:54:50 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/02/19 18:42:01 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include "../libsh/libsh.h"
 #include <signal.h>
 #include <fcntl.h>
-
+#include <sys/wait.h>
 
 typedef struct	s_input
 {
@@ -30,8 +30,8 @@ typedef struct	s_input
 
 int		get_next_line(int fd, char **line);
 char	**ft_split(char *s, char c);
-t_input	ft_selector(char **tabs);
-int		ft_execute(t_input input);
+t_input	*ft_selector(char **tabs);
+int		ft_execute(t_input *input);
 int		pwd(void);
 int		echo(t_input input);
 int		cd(t_input input);

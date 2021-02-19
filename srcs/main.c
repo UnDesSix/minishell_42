@@ -5,7 +5,7 @@ int main(int argc, char **argv)
 	char	*line;
 	int		ret = 0;
 	char 	**tabs;
-	t_input	input;
+	t_input	*input;
 
 	while (1)
 	{
@@ -15,7 +15,7 @@ int main(int argc, char **argv)
 			return (0);
 		tabs = ft_split(line, ' ');
 		input = ft_selector(tabs);
-		ft_redirections(&input);		
+//		ft_redirections(&input);		
 		ft_execute(input);
 	}
 	return (0);
