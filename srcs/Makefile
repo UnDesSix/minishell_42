@@ -4,15 +4,19 @@ CC		= clang #-Wall -Werror -Wextra
 
 RM		= rm -rf
 
-LIBSH	= srcs/libsh/libsh.a
+LIBSH	= libsh/libsh.a
 
-INCS	= -Iincludes
+INCS	= -I./includes
 
-SRCS_NAME	= main.c	\
-			  builtins/echo.c \
-			  builtins/pwd.c
+SRCS_NAME	= main.c			\
+			  get_next_line.c 	\
+			  separator.c		\
+			  execute.c			\
+			  pwd.c				\
+			  echo.c			\
+			  redirections.c	\
 
-SRCS_PATH	= ./srcs/
+SRCS_PATH	= ./
 
 OBJS_PATH	= ./objs/
 

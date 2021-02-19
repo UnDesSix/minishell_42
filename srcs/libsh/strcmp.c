@@ -1,29 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   strcmp.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/05 13:04:10 by calide-n          #+#    #+#             */
-/*   Updated: 2021/01/30 16:58:33 by calide-n         ###   ########.fr       */
+/*   Created: 2021/02/19 08:42:27 by calide-n          #+#    #+#             */
+/*   Updated: 2021/02/19 08:43:48 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libsh.h"
-
-char	*ft_strrchr(const char *s, int c)
+int	ft_strcmp(char const *s1, char const *s2)
 {
-	int	i;
+	size_t i;
 
-	i = ft_strlen(s);
-	while (i >= 0)
-	{
-		if (s[i] == c)
-			return ((char *)s + i);
-		i--;
-	}
-	if (s[i] == c)
-		return ((char *)s + i);
-	return (0);
+	i = 0;
+	while (s1[i] && s2[i] && s1[i] == s2[i])
+		i++;
+	return (s1[i] - s2[i]);
 }

@@ -1,40 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/05 13:02:41 by calide-n          #+#    #+#             */
-/*   Updated: 2021/02/18 17:06:45 by calide-n         ###   ########.fr       */
+/*   Created: 2021/02/18 17:50:12 by calide-n          #+#    #+#             */
+/*   Updated: 2021/02/19 08:45:11 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libsh.h"
+#include "includes/header.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+int	ft_execute(t_input input)
 {
-	char	*str;
-	size_t	i;
-	size_t	j;
-	size_t	len;
+	int i = 0;
 
-	i = -1;
-	j = 0;
-	if (!s1 || !s2)
-		return (0);
-	len = ft_strlen(s1) + ft_strlen(s2);
-	str = (char *)malloc(sizeof(char) * (len + 1));
-	if (!str)
-		return (0);
-	while (s1[++i])
-		str[i] = s1[i];
-	while (s2[j])
-	{
-		str[i] = s2[j];
-		j++;
-		i++;
-	}
-	str[i] = '\0';
-	return (str);
+	if (strcmp(input.command, "pwd") == 0)
+		pwd();
+	if (strcmp(input.command, "echo") == 0)
+		echo(input);
+	if (strcmp(input.command, "exit") == 0)
+		exit(0);
+	return (0);	
 }

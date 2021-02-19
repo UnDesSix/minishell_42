@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/05 13:02:15 by calide-n          #+#    #+#             */
-/*   Updated: 2021/01/30 16:53:54 by calide-n         ###   ########.fr       */
+/*   Created: 2021/02/18 18:39:02 by calide-n          #+#    #+#             */
+/*   Updated: 2021/02/19 08:35:34 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strchr(const char *s, int c)
-{
-	int	i;
+#include "includes/header.h"
 
-	i = 0;
-	while (s[i])
-	{
-		if (c == s[i])
-			return ((char *)s + i);
-		i++;
-	}
-	if (s[i] == c)
-		return ((char *)s + i);
-	return (0);
+int	pwd(void)
+{
+	char cwd[4096];
+
+	getcwd(cwd, sizeof(cwd));
+	ft_putstr(cwd);
+	ft_putstr("\n");
+	return (1);
 }
