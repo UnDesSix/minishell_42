@@ -13,6 +13,7 @@ SRCS_NAME	= main.c			\
 			  separator.c		\
 			  execute.c			\
 			  pwd.c				\
+			  cd.c				\
 			  echo.c			\
 			  redirections.c	\
 
@@ -31,7 +32,7 @@ OBJS	= $(SRCS:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(INCS) $(LIBSH) $(OBJS) -o $(NAME)
+	$(CC) $(OBJS) $(LIBSH) $(INCS) -o $(NAME)
 
 clean:
 	$(RM) $(OBJS)

@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 11:31:01 by calide-n          #+#    #+#             */
-/*   Updated: 2021/02/18 19:12:36 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/02/19 08:54:50 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ t_input	ft_selector(char **tabs);
 int		ft_execute(t_input input);
 int		pwd(void);
 int		echo(t_input input);
+int		cd(t_input input);
 int		ft_redirections(t_input * input);
 #endif
