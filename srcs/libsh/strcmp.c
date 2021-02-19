@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   strcmp.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/18 18:39:02 by calide-n          #+#    #+#             */
-/*   Updated: 2021/02/19 08:35:34 by calide-n         ###   ########.fr       */
+/*   Created: 2021/02/19 08:42:27 by calide-n          #+#    #+#             */
+/*   Updated: 2021/02/19 08:43:48 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/header.h"
-
-int	pwd(void)
+int	ft_strcmp(char const *s1, char const *s2)
 {
-	char cwd[4096];
+	size_t i;
 
-	getcwd(cwd, sizeof(cwd));
-	ft_putstr(cwd);
-	ft_putstr("\n");
-	return (1);
+	i = 0;
+	while (s1[i] && s2[i] && s1[i] == s2[i])
+		i++;
+	return (s1[i] - s2[i]);
 }

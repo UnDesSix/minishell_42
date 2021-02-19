@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 11:29:16 by calide-n          #+#    #+#             */
-/*   Updated: 2021/02/18 17:49:16 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/02/19 08:37:05 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,16 @@ t_input	ft_selector(char **tabs)
 	{
 		if (ft_check_cmd(tabs[0]) == 0)
 			printf("msh : command not found : %s\n", tabs[0]);
-		input.command = ft_strdup(tabs[0]);
+		input.command = tabs[0];
 		while (tabs[i])
 			i++;
 		input.args = malloc(sizeof(char *) * (i + 1));
 		i = 1;
 		while (tabs[i])
 		{
-			input.args[i - 1] = ft_strdup(tabs[i]);
+			input.args[i - 1] = tabs[i];
 			i++;
 		}
-		tabs[i] = NULL;
-		free(tabs);
 	}
 	return (input);
 }

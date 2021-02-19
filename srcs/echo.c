@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 18:49:24 by calide-n          #+#    #+#             */
-/*   Updated: 2021/02/18 20:04:27 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/02/19 08:40:42 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int echo(t_input input)
 		i = 1;
 		flag = 1;
 	}
-
 	while (input.args[i])
 	{
 		ft_putstr_fd(input.args[i], input.fd);
