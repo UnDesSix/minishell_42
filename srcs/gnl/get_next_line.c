@@ -90,6 +90,7 @@ int		create_line(char **line, char *tmp, int i, int r_v)
 	while (++j < i)
 		(*line)[j] = tmp[j];
 	(*line)[j] = '\0';
+	
 	return (r_v);
 }
 
@@ -116,12 +117,18 @@ int		get_next_line(int fd, char **line)
 
 	*line = NULL;
 	read_b = 1;
-	while ((read_b))
+	while (read_b)
 	{
 		read_b = read(fd, buffer, BUFF_SIZE);
+		if (read_b == 0)
+			break ;
 		buffer[read_b] = '\0';
 		if (!tmp || !tmp[0])
+		{
+			if (tmp)
+				free(tmp);
 			tmp = ft_strdup(buffer);
+		}
 		else
 			tmp = ft_strjoin(tmp, buffer);
 		if (check_tmp(line, tmp) == 1)
@@ -145,6 +152,6 @@ int		main()
 		free(line);
 	}
 	printf("line %d : \"%s\"\n", i++, line);
-		free(line);
+	free(line);
 	return (0);
 }
