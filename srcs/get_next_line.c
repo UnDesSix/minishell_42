@@ -1,12 +1,19 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
+#include "includes/header.h"
 
 #define BUFFER_SIZE 1024
 
-char	*ft_strdup(char *str);
-char	*ft_strjoin(char *s1, char *s2);
-char	*ft_nl(char const *str, int c);
+char	*ft_nl(char const *str, int c)
+{
+	while (*str)
+	{
+		if (*str == (char)c)
+			return ((char *)str);
+		str++;
+	}
+	if ((char)c == '\0')
+		return ((char *)str);
+	return (NULL);
+}
 
 int	ft_handle_err(int ret, char **line, char **stack)
 {
