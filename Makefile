@@ -27,7 +27,7 @@ OBJS	= $(SRCS:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(INCS) $(LIBSH) $(OBJS) -o $(NAME)
+	$(CC) $(OBJS) $(LIBSH) $(INC) -o $(NAME)
 
 clean:
 	$(RM) $(OBJS)
