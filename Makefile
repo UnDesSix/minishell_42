@@ -4,15 +4,20 @@ CC		= clang #-Wall -Werror -Wextra
 
 RM		= rm -rf
 
-LIBSH	= srcs/libsh/libsh.a
+LIBSH	= libsh/libsh.a
 
-INCS	= -Iincludes
+INCS	= -I./includes
 
-SRCS_NAME	= main.c	\
-			  builtins/echo.c \
-			  builtins/pwd.c
+SRCS_NAME	= main.c			\
+			  get_next_line.c 	\
+			  separator.c		\
+			  execute.c			\
+			  pwd.c				\
+			  cd.c				\
+			  echo.c			\
+			  redirections.c	\
 
-SRCS_PATH	= ./srcs/
+SRCS_PATH	= ./
 
 OBJS_PATH	= ./objs/
 
@@ -27,7 +32,7 @@ OBJS	= $(SRCS:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(OBJS) $(LIBSH) $(INC) -o $(NAME)
+	$(CC) $(OBJS) $(LIBSH) $(INCS) -o $(NAME)
 
 clean:
 	$(RM) $(OBJS)
