@@ -1,6 +1,6 @@
 #include "includes/header.h"
 
-int main(int argc, char **argv)
+int main(int argc, char **argv, char **envp)
 {
 	char	*line;
 	int		ret = 0;
@@ -16,7 +16,7 @@ int main(int argc, char **argv)
 		tabs = ft_split(line, ' ');
 		input = ft_selector(tabs);
 		ft_redirections(&input);		
-		ft_execute(input);
+		ft_execute(input, envp);
 	}
 	return (0);
 }

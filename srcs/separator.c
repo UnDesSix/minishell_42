@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 11:29:16 by calide-n          #+#    #+#             */
-/*   Updated: 2021/02/19 08:37:05 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/02/19 11:54:59 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	ft_check_cmd(char *str)
 			strcmp(str, "export")	&&
 			strcmp(str, "unset")	&&
 			strcmp(str, "env")		&&
+			strcmp(str, "mkdir")	&&
 			strcmp(str, "exit"))
 		return (0);
 	return (1);

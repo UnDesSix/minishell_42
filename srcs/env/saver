@@ -1,0 +1,97 @@
+#include "ft_list.h"
+
+t_list	*create_list_with_envp(char **envp)
+{
+	t_list	*begin_list;
+	int		env_size;
+	
+	env_size = 0;
+	while (envp[env_size])
+		env_size++;
+	begin_list = ft_list_push_strs(env_size, envp);
+	return (begin_list);
+}
+
+/*
+//	The function env_builtin displays the environment.
+//	The function takes two parameters, beginning of the list and argv.
+//	It should be called alone without any arguments. If there are argument
+//	it returns error -1 and display a error message.
+//	Otherwise, it display the list of environemental variables, with the last
+//	variables at the end of the list and return 0.
+*/
+int		env_builtin(t_list begin_list, char ** argv)
+{
+	
+}
+
+int		export_builtin()
+{
+}
+
+int		unset_builtin()
+{
+}
+
+int		main(int argc, char **argv, char **envp)
+{
+	t_list	*begin_list;
+	t_list	*tmp;
+
+	create_list_with_envp(envp);
+	if (ft_strcmp(argv[1], "env") == 0)
+	{
+		tmp = begin_list;
+		while (tmp)
+		{
+			printf("%s\n", tmp->data);
+			tmp = tmp->next;
+		}
+	}
+	else if (ft_strcmp(argv[1], "unset") == 0)
+	{
+		// No errors if variables do'ont exits
+		// error if missiong arg
+		int		i;
+		char	*str;
+
+		i = 2;
+		tmp = begin_list;
+		if (!argv[i])
+			printf("unset: not enough arguments\n"); // ft_putstr
+		while (argv[i])
+		{
+			str = ft_strjoin(argv[i], "=");
+			ft_list_remove_if(&tmp, str, ft_strncmp, strlen(str));
+			free(str);
+			i++;
+		}
+		while (tmp)
+		{
+			printf("%s\n", tmp->data);
+			tmp = tmp->next;
+		}
+	}
+	
+	/*
+	else if (ft_strcmp(argv[1], "export") == 0 && !argv[2])
+	{
+		
+	}*/
+	else if (ft_strcmp(argv[1], "export") == 0 && !argv[2])
+	{
+		ft_list_sort(&begin_list, ft_strcmp);
+		ft_list_foreach(begin_list, ft_strjoin);
+		tmp = begin_list;
+		while (tmp)
+		{
+			printf("%s\n", tmp->data);
+			tmp = tmp->next;
+		}
+		ft_list_clear_data(begin_list, free);
+		return (0);
+	}
+	ft_list_clear(begin_list);
+	return (0);
+}
+
