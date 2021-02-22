@@ -1,25 +1,13 @@
 #include "ft_list.h"
 
-void	ft_list_clear(t_list *begin_list)
+void	ft_list_clear(t_list *begin_list, void (*free_fct)(void *))
 {
 	t_list	*tmp;
 
 	while (begin_list)
 	{
 		tmp = begin_list->next;
-		free(begin_list);
-		begin_list = tmp;
-	}
-}
-
-void	ft_list_clear_data(t_list *begin_list, void (*f)(void *))
-{
-	t_list	*tmp;
-
-	while (begin_list)
-	{
-		tmp = begin_list->next;
-		f(begin_list->data);
+		(free_fct)(begin_list->data);
 		free(begin_list);
 		begin_list = tmp;
 	}
