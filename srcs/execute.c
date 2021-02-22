@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 17:50:12 by calide-n          #+#    #+#             */
-/*   Updated: 2021/02/19 20:42:26 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/02/19 22:25:35 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,24 +50,28 @@ int	ft_check_if_bin(t_input *input, char **binary_path)
 	return (0);
 }
 
-int	ft_execute(t_input *input)
+int	ft_execute(t_input *input, int nb_block)
 {
 	int i = 0;
-	
+
 	char *binary_path[] = {"/sbin/", "/bin/", "/usr/bin/", "/usr/sbin/", "/usr/local/bin/", NULL};
 
-	if (ft_strcmp(input[0].args[0], "exit") == 0)
-		exit(0);
-	else if (ft_strcmp(input[0].args[0], "pwd") == 0)
-		pwd();
-	else if (ft_strcmp(input[0].args[0], "cd") == 0)
-		cd(input[0]);
-	else
+	while (i < nb_block)
 	{
-		if (!ft_check_if_bin(&input[0], binary_path))
-			printf("Is not binary\n");
+		if (ft_strcmp(input[i].args[0], "exit") == 0)
+			exit(0);
+		else if (ft_strcmp(input[i].args[0], "pwd") == 0)
+			pwd();
+		else if (ft_strcmp(input[i].args[0], "cd") == 0)
+			cd(input[i]);
 		else
-			ft_bin_binary(input[0]);
+		{
+			if (!ft_check_if_bin(&input[i], binary_path))
+				printf("Is not binary\n");
+			else
+				ft_bin_binary(input[i]);
+		}
+		i++;
 	}
 	return (0);	
 }

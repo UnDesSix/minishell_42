@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 11:29:16 by calide-n          #+#    #+#             */
-/*   Updated: 2021/02/19 18:42:37 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/02/19 22:26:31 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@ int		ft_count_words(int i, char **tabs)
 		nb_word++;
 		i++;
 	}
-//	printf("[%d]\n", nb_word);
+	//	printf("[%d]\n", nb_word);
 	return (nb_word);
 }
 
-t_input	*ft_selector(char **tabs)
+t_input	*ft_selector(char **tabs, int *nb_block)
 {
 	int i = 0;
 	int j = 0;
@@ -49,12 +49,14 @@ t_input	*ft_selector(char **tabs)
 
 	if (tabs[0])
 	{
+//		ft_putstr(tabs[0]);
 		while (tabs[i])
 		{
 			if (!ft_strcmp(tabs[i], "|") || (!ft_strcmp(tabs[i], ";")))
 				nb_input++;
 			i++;
-		}	
+		}
+		*nb_block = nb_input;
 		i = 0;
 		input = malloc(sizeof(t_input) * nb_input + 1);
 		nb_input = 0;
@@ -73,23 +75,23 @@ t_input	*ft_selector(char **tabs)
 			if (tabs[i + 1] && tabs[i])
 				i++;
 		}
-	}
-	i = 0;
-	int tmp = nb_input;
-	nb_input = 0;
-	while (nb_input < tmp)
-	{
-		i = 0;
-		ft_putstr("[");
-		while (input[nb_input].args[i])
-		{
-			ft_putstr(input[nb_input].args[i]);
-			ft_putstr(" ");
-			i++;
-		}
-		ft_putstr("]");
-		ft_putstr("\n");
-		nb_input++;
+//		i = 0;
+//		int tmp = nb_input;
+//		nb_input = 0;
+//		while (nb_input < tmp)
+//		{
+//			i = 0;
+//			ft_putstr("[");
+//			while (input[nb_input].args[i])
+//			{
+//				ft_putstr(input[nb_input].args[i]);
+//				ft_putstr(" ");
+//				i++;
+//			}
+//			ft_putstr("]");
+//			ft_putstr("\n");
+//			nb_input++;
+//		}
 	}
 	return (input);
 }
