@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 14:41:04 by calide-n          #+#    #+#             */
-/*   Updated: 2021/02/22 09:41:34 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/02/23 18:25:49 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ int	ft_check_next_quote(char *str, int i, char c)
 	return (1);
 }
 
-char	*ft_manage_quote(char *str, int *i, char c)
+t_word	ft_manage_quote(char *str, int *i, char c)
 {
-	char	*word;
+	t_word	word;
 	int		j;
 	int		k;
 
@@ -32,67 +32,88 @@ char	*ft_manage_quote(char *str, int *i, char c)
 	if (!ft_check_next_quote(str, *i, c))
 	{
 		printf("Error quote\n");
-		return (NULL);
+		word.content = NULL;
+		return (word);
 	}
-	while (str[j] && str[j] != c)
+	while (str[j] && str[j] != c && str[j] != ';')
 		j++;
-	word = malloc(sizeof(char) * (j + 1));
-	while (str[*i] && str[*i] != c)
+	word.content = malloc(sizeof(char) * (j + 1));
+	while (str[*i] && str[*i] != c && str[j] != ';')
 	{
-		word[k] = str[*i];
+		word.content[k] = str[*i];
 		*i += 1;
 		k++;
 	}
-	word[k] = '\0';
+	word.content[k] = '\0';
 	*i += 1;
 	return (word);
 }
 
-char	*ft_manage_space(char *str, int *i)
+t_word	ft_manage_space(char *str, int *i)
 {
-	char	*word;
+	t_word	word;
 	int		j;
 	int		k;
 
 	j = *i;
 	k = 0;
-	while (str[j] && str[j] != ' ' && str[j] != '\'' && str[j] != '"')
+	word.sep = 0;
+	while (str[j] && str[j] != ' ' && str[j] != '\'' && str[j] != '"' && str[j] != '\'' && str[j] != ';')
 		j++;
-	word = malloc(sizeof(char) * (j + 1));
-	while (str[*i] && str[*i] != ' ' && str[*i] != '\'' && str[*i] != '"')
+	word.content = malloc(sizeof(char) * (j + 1));
+	while (str[*i] && str[*i] != ' ' && str[*i] != '\'' && str[*i] != '"' && str[*i] != '\'' && str[*i] != ';')
 	{
-		word[k] = str[*i];
+		word.content[k] = str[*i];
 		*i += 1;
 		k++;
 	}
-	word[k] = '\0';
-	if (str[*i] != '\'' && str[*i] != '"')
+	word.content[k] = '\0';
+	if (str[*i] == ' ')
 		*i += 1;
 	return (word);
 }
 
-char	*get_next_word(char *str, int on)
+t_word	get_next_word(char *str, int on, int *ret)
 {
 	static int	i;
-	char		*word;
 	int			k;
 	int			j;
+	t_word		word;
 
 	k = 0;
 	j = 0;
 	if (on == 0)
 		i = 0;
 	if (!str[i])
-		return (NULL);
+	{
+		*ret = 0;
+		word.content = NULL;
+		return (word);
+	}
 	while (str[i] == ' ')
 		i++;
-	if (str[i] != '\'' && str[i] != '"')
+	if (str[i] == ';')
+	{
+		word.content = NULL;
+		word.sep = 0;
+		*ret = 0;
+		i++;
+		return (word);
+	}
+	else if (str[i] != '\'' && str[i] != '"')
 		word = ft_manage_space(str, &i);
 	else if (str[i] == '\'')
+	{
 		word = ft_manage_quote(str, &i, '\'');
+		word.sep = 1;
+	}
 	else if (str[i] == '"')
+	{
 		word = ft_manage_quote(str, &i, '"');
+		word.sep = 2;
+	}
 	while (str[i] == ' ')
 		i++;
+	*ret = 1;
 	return (word);
 }

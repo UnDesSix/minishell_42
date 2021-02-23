@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 09:40:39 by calide-n          #+#    #+#             */
-/*   Updated: 2021/02/23 20:00:14 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/02/23 10:25:18 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/header.h"
 
-t_word	get_next_word(char *str, int on, int *ret);
+int	get_next_word(char *str, int on, t_word *word);
 int	get_nb_word(char *str, int on);
 
 int	ft_count_lines()
@@ -60,10 +60,14 @@ int	ft_nb_blocks(char *str)
 		if (str[i] == ';' && quote == 0)
 		{
 			i++;
-			while (str[i] == ' ')
+			while (str[i])
+			{
+				if (str[i] != ' ')
+					break;
 				i++;
+			}
 			if (str[i] == '\0')
-				break;
+				nb--;
 			nb++;
 		}
 		i++;
@@ -71,71 +75,12 @@ int	ft_nb_blocks(char *str)
 	return (nb);
 }
 
-t_word	*ft_word(char *line, int reset)
-{
-	int ret;
-	int windex;
-	int nb;
-	t_word *word;
-	int new_line;
-
-	windex = 0;
-	ret = 1;
-	nb = 0;
-	while (get_nb_word(line, reset) != 0)
-	{
-		nb++;
-		reset = 1;
-	}
-	new_line = reset;
-	word = malloc(sizeof(t_word) * (nb + 1));
-	while (ret)
-	{
-		word[windex] = get_next_word(line, new_line, &ret);
-		new_line = 1;
-		if (word[windex].content)
-		{
-			if (ft_strcmp(word[windex].content, ";") == 0)
-				break;
-		}
-		windex++;
-	}
-	return (word);
-}
-
 int	main(int argc, char **argv)
 {
-	char 	*line;
-	int		nb_blocks;
-	t_block	*block;
-	int		reset;
+	char *line;
 
-	get_next_line(0, &line);
-	nb_blocks = ft_nb_blocks(line);
-	block = (t_block *)malloc(sizeof(t_block) * (nb_blocks + 1));
-	int index = 0;
-	reset = 0;
-	while (index < nb_blocks)
-	{
-		block[index].word = ft_word(line, reset);
-		reset = 1;
-		index++;	
-	}
-	index = 0;
-	int windex = 0;
-	while (index < nb_blocks)
-	{
-		windex = 0;
-		printf("%d [", index);
-		while (block[index].word[windex].content)
-		{
-			printf(" [%s]", block[index].word[windex].content);
-			windex++;
-		}
-		printf(" ]\n");
-		reset = 1;
-		index++;	
-	}
+	while (get_next_line(0, &line) != 0)
+		free(line);
 	free(line);
 	return (0);
 }
