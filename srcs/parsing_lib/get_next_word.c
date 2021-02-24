@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 14:41:04 by calide-n          #+#    #+#             */
-/*   Updated: 2021/02/23 18:25:49 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/02/24 15:36:35 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ t_word	ft_manage_quote(char *str, int *i, char c)
 	k = 0;
 	*i += 1;
 	j = *i;
+	word.space = 0;
 	if (!ft_check_next_quote(str, *i, c))
 	{
 		printf("Error quote\n");
@@ -46,6 +47,8 @@ t_word	ft_manage_quote(char *str, int *i, char c)
 	}
 	word.content[k] = '\0';
 	*i += 1;
+	if (str[*i] == ' ' || str[*i - 2])
+		word.space = 1;
 	return (word);
 }
 
@@ -58,10 +61,11 @@ t_word	ft_manage_space(char *str, int *i)
 	j = *i;
 	k = 0;
 	word.sep = 0;
-	while (str[j] && str[j] != ' ' && str[j] != '\'' && str[j] != '"' && str[j] != '\'' && str[j] != ';')
+	word.space = 0;
+	while (str[j] && str[j] != ' ' && str[j] != '\'' && str[j] != '"' && str[j] != '\'' && str[j] != ';' && str[j] != '=')
 		j++;
 	word.content = malloc(sizeof(char) * (j + 1));
-	while (str[*i] && str[*i] != ' ' && str[*i] != '\'' && str[*i] != '"' && str[*i] != '\'' && str[*i] != ';')
+	while (str[*i] && str[*i] != ' ' && str[*i] != '\'' && str[*i] != '"' && str[*i] != '\'' && str[*i] != ';' && str[*i] != '=')
 	{
 		word.content[k] = str[*i];
 		*i += 1;
@@ -69,7 +73,10 @@ t_word	ft_manage_space(char *str, int *i)
 	}
 	word.content[k] = '\0';
 	if (str[*i] == ' ')
+	{
+		word.space = 1;
 		*i += 1;
+	}
 	return (word);
 }
 
@@ -84,6 +91,8 @@ t_word	get_next_word(char *str, int on, int *ret)
 	j = 0;
 	if (on == 0)
 		i = 0;
+	word.sep = 0;
+	word.space = 0;
 	if (!str[i])
 	{
 		*ret = 0;
@@ -94,11 +103,19 @@ t_word	get_next_word(char *str, int on, int *ret)
 		i++;
 	if (str[i] == ';')
 	{
-		word.content = NULL;
+		word.content = ft_strdup(";");
 		word.sep = 0;
-		*ret = 0;
+		*ret = 2;
 		i++;
 		return (word);
+	}
+	else if (str[i] == '=')
+	{
+		word.content = ft_strdup("=");
+		word.sep = 0;
+		i++;
+		if (str[i] == ' ')
+			word.space = 1;
 	}
 	else if (str[i] != '\'' && str[i] != '"')
 		word = ft_manage_space(str, &i);

@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 14:41:04 by calide-n          #+#    #+#             */
-/*   Updated: 2021/02/23 18:38:53 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/02/24 15:35:34 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ void	ft_manage_quote_count(char *str, int *i, char c)
 
 void	ft_manage_space_count(char *str, int *i)
 {
-	while (str[*i] && str[*i] != ' ' && str[*i] != '\'' && str[*i] != '"' && str[*i] != ';')
+	while (str[*i] && str[*i] != ' ' && str[*i] != '\'' && str[*i] != '"' && str[*i] != ';' && str[*i] != '=')
 		*i += 1;
-	if (str[*i] != '\'' && str[*i] != '"' && str[*i] != ';')
+	if (str[*i] != '\'' && str[*i] != '"' && str[*i] != ';' && str[*i] != '=')
 		*i += 1;
 }
 
@@ -49,7 +49,6 @@ int	get_nb_word(char *str, int on)
 	static int	i;
 	int			k;
 	int			j;
-
 
 	k = 0;
 	j = 0;
@@ -62,7 +61,12 @@ int	get_nb_word(char *str, int on)
 	if (str[i] == ';')
 	{
 		i++;
-		return (0);
+		return (2);
+	}
+	if (str[i] == '=' || str[i] == '|' || str[i] == '<' || str[i] == '>')
+	{
+		i++;
+		return (1);
 	}
 	else if (str[i] != '\'' && str[i] != '"')
 		ft_manage_space_count(str, &i);
