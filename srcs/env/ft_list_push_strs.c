@@ -57,7 +57,7 @@ t_list	*ft_list_push_strs(int size, char **strs)
 	t_list	*elem;
 
 	i = 0;
-	elem = 0;
+	elem = NULL;
 	if (!strs)
 		return (0);
 	while (i < size)
@@ -65,7 +65,6 @@ t_list	*ft_list_push_strs(int size, char **strs)
 		tmp = ft_strdup(strs[i]);
 		var = malloc(sizeof(t_var));
 		var->name = extract_var_name(tmp);
-//		printf("name : %s\n", var->name);
 		var->content = extract_var_content(tmp);
 		var->is_define = 1;
 		free(tmp);

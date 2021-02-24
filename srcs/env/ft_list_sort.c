@@ -25,7 +25,8 @@ void	ft_list_sort(t_list **begin_list, int (*cmp)())
 		flag_loop = 0;
 		while (elem2)
 		{
-			if ((*cmp)(elem1->data, elem2->data) > 0)
+			if ((*cmp)(((t_var *)elem1->data)->name,
+						((t_var *)elem2->data)->name) > 0)
 			{
 				ft_swap(&(elem1->data), &(elem2->data));
 				flag_loop = 1;

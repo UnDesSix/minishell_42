@@ -16,18 +16,24 @@ int	ft_isalnum(int c)
 	return (0);
 }
 
-int	var_syntax_is_ok(char *str)
+int	var_syntax_is_ok(char *str, char *builtin)
 {
 	int i;
 
 	i = 0;
 	if (!ft_isalpha(str[i]) && str[i] != '_')
+	{
+		printf("bash: %s: %s: invalid parameter name\n", builtin, argv[i]);
 		return (0);
+	}
 	i++;
 	while (str[i])
 	{
 		if (!ft_isalnum(str[i]) && str[i] != '_')
+		{
+			printf("bash: %s: %s: invalid parameter name\n", builtin, argv[i]);
 			return (0);
+		}
 		i++;
 	}
 	return (1);
