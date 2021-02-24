@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/header.h"
+#include "includes/header.h"
 
 int	ft_check_next_quote_count(char *str, int i, char c)
 {

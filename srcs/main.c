@@ -1,24 +1,47 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/02/24 19:26:04 by calide-n          #+#    #+#             */
+/*   Updated: 2021/02/24 19:36:11 by calide-n         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "includes/header.h"
 
 int main(int argc, char **argv)
 {
+	t_block	*block;
 	char	*line;
-	int		ret = 0;
-	char 	**tabs;
-	t_input	*input;
-	int		nb_blocks = 0;
+	int index;
+	int windex = 0;
+	pid_t pid;
+	int status;
 
-	while (1)
+	while (get_next_line(0, &line) != 0)
 	{
-		ft_putstr("➜ msh ");
-		ret = get_next_line(0, &line);
-		if (ret <= 0)
-			return (0);
-		tabs = ft_split(line, ' ');
-		input = ft_selector(tabs, &nb_blocks);
-//		ft_redirections(&input);		
-		if (input)
-			ft_execute(input, nb_blocks);
+		index = 0;
+		if (block)
+			free(block);
+		block = ft_get_blocks(line);
+		ft_identify_block(&block);
+		free(line);
+//		while (block[index].stop)
+//		{
+//			windex = 0;
+//			printf("%d [", index);
+//			while (block[index].word[windex].content)
+//			{
+//
+//				printf(" [%s spe:%d: space:%d: type:%d:]", block[index].word[windex].content, block[index].word[windex].sep, block[index].word[windex].space, block[index].word[windex].type);
+//				windex++;
+//			}
+//			printf(" ]\n");
+//			index++;	
+//		}
 	}
 	return (0);
 }

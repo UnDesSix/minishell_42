@@ -6,11 +6,11 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 14:41:04 by calide-n          #+#    #+#             */
-/*   Updated: 2021/02/24 15:36:35 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/02/24 20:11:26 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/header.h"
+#include "includes/header.h"
 
 int	ft_check_next_quote(char *str, int i, char c)
 {
@@ -62,10 +62,12 @@ t_word	ft_manage_space(char *str, int *i)
 	k = 0;
 	word.sep = 0;
 	word.space = 0;
-	while (str[j] && str[j] != ' ' && str[j] != '\'' && str[j] != '"' && str[j] != '\'' && str[j] != ';' && str[j] != '=')
+	while (str[j] && str[j] != ' ' && str[j] != '\''
+		&& str[j] != '"' && str[j] != '\'' && str[j] != ';' && str[j] != '=')
 		j++;
 	word.content = malloc(sizeof(char) * (j + 1));
-	while (str[*i] && str[*i] != ' ' && str[*i] != '\'' && str[*i] != '"' && str[*i] != '\'' && str[*i] != ';' && str[*i] != '=')
+	while (str[*i] && str[*i] != ' ' && str[*i] != '\''
+		&& str[*i] != '"' && str[*i] != '\'' && str[*i] != ';' && str[*i] != '=')
 	{
 		word.content[k] = str[*i];
 		*i += 1;

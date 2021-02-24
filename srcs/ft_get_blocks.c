@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/header.h"
+#include "includes/header.h"
 
 t_word	get_next_word(char *str, int on, int *ret);
 int	get_nb_word(char *str, int on);

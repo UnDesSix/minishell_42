@@ -10,12 +10,11 @@ INCS	= -I./includes
 
 SRCS_NAME	= main.c			\
 			  get_next_line.c 	\
-			  separator.c		\
-			  execute.c			\
-			  pwd.c				\
-			  cd.c				\
-			  echo.c			\
-			  redirections.c	\
+			  get_next_word.c	\
+			  get_nb_word.c		\
+			  ft_get_blocks.c	\
+			  ft_identify.c		\
+			  ft_expansion.c
 
 SRCS_PATH	= ./
 
@@ -43,5 +42,5 @@ fclean: clean
 
 re: clean all
 
-#norme: clean 
-#	~/.norminette/norminette.rb ./includes/* ./srcs/*
+norme: clean 
+	norminette

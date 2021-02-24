@@ -1,23 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   ft_expansion.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/18 18:39:02 by calide-n          #+#    #+#             */
-/*   Updated: 2021/02/19 08:35:34 by calide-n         ###   ########.fr       */
+/*   Created: 2021/02/24 19:46:06 by calide-n          #+#    #+#             */
+/*   Updated: 2021/02/24 20:07:29 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/header.h"
 
-int	pwd(void)
+int	ft_expand_word(t_word *word)
 {
-	char cwd[4096];
+	int i;
 
-	getcwd(cwd, sizeof(cwd));
-	ft_putstr(cwd);
-	ft_putstr("\n");
-	return (1);
+	i = 0;
+	//if (word->sep != '\'' && word->content[i] == '$')
+	//{
+	//	
+	//}
+	return (0);
+}
+
+int ft_expansion(t_block *block)
+{
+	int b;
+	int w;
+
+	b = 0;
+	w = 0;
+	while (block[b].stop)
+	{
+		while (block[b].word[w].content)
+		{
+			ft_expand_word(&block[b].word[w]);
+			w++;
+		}
+		b++;
+	}
+	return (0);
 }
