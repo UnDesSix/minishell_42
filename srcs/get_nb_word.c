@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 14:41:04 by calide-n          #+#    #+#             */
-/*   Updated: 2021/02/25 11:42:38 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/02/25 17:41:41 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,31 +44,43 @@ void	ft_manage_space_count(char *str, int *i)
 		*i += 1;
 }
 
+int	get_nb_spe_char(char *str, int *i)
+{
+	if (str[*i] == ';')
+	{
+		*i += 1;
+		return (2);
+	}
+	if (str[*i] == '=' || str[*i] == '|' || str[*i] == '<' || str[*i] == '>')
+	{
+		if (str[*i + 1] == '>')
+			*i += 1;
+		*i += 1;
+		return (1);
+	}
+	return (0);
+}
+
 int	get_nb_word(char *str, int on)
 {
 	static int	i;
 	int			k;
 	int			j;
+	int 		ret;
 
 	k = 0;
 	j = 0;
+	ret = 0;
 	if (on == 0)
 		i = 0;
 	if (str[i] == '\0')
 		return (0);
 	while (str[i] == ' ')
 		i++;
-	if (str[i] == ';')
-	{
-		i++;
-		return (2);
-	}
-	if (str[i] == '=' || str[i] == '|' || str[i] == '<' || str[i] == '>')
-	{
-		i++;
-		return (1);
-	}
-	else if (str[i] != '\'' && str[i] != '"')
+	ret = get_nb_spe_char(str, &i);
+	if (ret != 0)
+		return (ret);
+	if (str[i] != '\'' && str[i] != '"')
 		ft_manage_space_count(str, &i);
 	else if (str[i] == '\'')
 		ft_manage_quote_count(str, &i, '\'');

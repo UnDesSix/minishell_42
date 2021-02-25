@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 14:41:04 by calide-n          #+#    #+#             */
-/*   Updated: 2021/02/25 11:20:00 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/02/25 17:27:14 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ t_word	get_next_word(char *str, int on, int *ret)
 		i++;
 	if (ft_manage_semicolon(str[i], &word, ret, &i))
 		return (word);
-	else if (ft_manage_speop(str[i], &word, &i))
+	else if (ft_manage_speop(str, &word, &i))
 		return (word);
 	else if (str[i] != '\'' && str[i] != '"')
 		word = ft_manage_space(str, &i);

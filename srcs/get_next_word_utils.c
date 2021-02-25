@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 11:11:05 by calide-n          #+#    #+#             */
-/*   Updated: 2021/02/25 11:22:03 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/02/25 17:33:29 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,16 +90,23 @@ int	ft_manage_semicolon(char c, t_word *word, int *ret, int *i)
 	return (0);
 }
 
-int	ft_manage_speop(char c, t_word *word, int *i)
+int	ft_manage_speop(char *str, t_word *word, int *i)
 {
-	if (c == '=' || c == '|' || c == '<' || c == '>')
+	if (str[*i] == '=' || str[*i] == '|' || str[*i] == '<' || str[*i] == '>')
 	{
-		word->content = (char *)malloc(sizeof(char) * 2);
-		word->content[0] = c;
-		word->content[1] = '\0';
-		word->sep = 0;
+		if (str[*i + 1] == '>')
+		{
+			word->content = ft_strdup(">>");
+			*i += 1;
+		}
+		else
+		{
+			word->content = (char *)malloc(sizeof(char) * 2);
+			word->content[0] = str[*i];
+			word->content[1] = '\0';
+		}
 		*i += 1;
-		if (c == ' ')
+		if (str[*i] == ' ')
 			word->space = 1;
 		return (1);
 	}

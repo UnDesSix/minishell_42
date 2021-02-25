@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 11:31:01 by calide-n          #+#    #+#             */
-/*   Updated: 2021/02/25 11:34:51 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/02/25 17:31:57 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int		pwd(void);
 int		echo(t_input input);
 t_word	ft_manage_quote(char *str, int *i, char c);
 t_word	ft_manage_space(char *str, int *i);
-int		ft_manage_speop(char c, t_word *word, int *i);
+int		ft_manage_speop(char *str, t_word *word, int *i);
 int		ft_manage_semicolon(char c, t_word *word, int *ret, int *i);
 int		ft_manage_null(char c, t_word *word, int *ret);
 int		cd(t_input input);
