@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 15:15:26 by calide-n          #+#    #+#             */
-/*   Updated: 2021/02/24 19:29:26 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/02/25 11:29:23 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 int	ft_check_cmd(char *word)
 {
-	return(ft_strcmp(word, "echo") == 0 || ft_strcmp(word, "ls") == 0||
-			ft_strcmp(word, "pwd") == 0 || ft_strcmp(word, "export") == 0 ||
-			ft_strcmp(word, "unset") == 0 || ft_strcmp(word, "env") == 0);
+	return (ft_strcmp(word, "echo") == 0 || ft_strcmp(word, "ls") == 0
+		|| ft_strcmp(word, "pwd") == 0 || ft_strcmp(word, "export") == 0
+		|| ft_strcmp(word, "unset") == 0 || ft_strcmp(word, "env") == 0);
 }
 
 int	ft_check_speop(char *word)
 {
-	return(ft_strcmp(word, "|") == 0 || ft_strcmp(word, "<") == 0 ||
-			ft_strcmp(word, ">") == 0|| ft_strcmp(word, ">>") == 0||
-			ft_strcmp(word, "=") == 0);
+	return (ft_strcmp(word, "|") == 0 || ft_strcmp(word, "<") == 0
+		|| ft_strcmp(word, ">") == 0 || ft_strcmp(word, ">>") == 0
+		|| ft_strcmp(word, "=") == 0);
 }
 
 int	ft_identify_word(char *word)
@@ -37,8 +37,8 @@ int	ft_identify_word(char *word)
 
 void	ft_identify_block(t_block **block)
 {
-	int b;
-	int w;
+	int	b;
+	int	w;
 
 	b = 0;
 	while (block[b]->stop)

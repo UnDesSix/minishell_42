@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 14:41:04 by calide-n          #+#    #+#             */
-/*   Updated: 2021/02/24 15:35:34 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/02/25 11:42:38 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	ft_check_next_quote_count(char *str, int i, char c)
 
 void	ft_manage_quote_count(char *str, int *i, char c)
 {
-
 	*i += 1;
 	if (!ft_check_next_quote_count(str, *i, c))
 	{
@@ -38,7 +37,8 @@ void	ft_manage_quote_count(char *str, int *i, char c)
 
 void	ft_manage_space_count(char *str, int *i)
 {
-	while (str[*i] && str[*i] != ' ' && str[*i] != '\'' && str[*i] != '"' && str[*i] != ';' && str[*i] != '=')
+	while (str[*i] && str[*i] != ' ' && str[*i] != '\''
+		&& str[*i] != '"' && str[*i] != ';' && str[*i] != '=')
 		*i += 1;
 	if (str[*i] != '\'' && str[*i] != '"' && str[*i] != ';' && str[*i] != '=')
 		*i += 1;
@@ -78,3 +78,8 @@ int	get_nb_word(char *str, int on)
 		i++;
 	return (1);
 }
+
+/* get_nb_word will get the number of word in a string until it finds a semicolon
+ * semi colon is considered as a word so it will be counted.
+ * get_nb_word takes in consideration spaces, single quotes, double quotes...
+ */

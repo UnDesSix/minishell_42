@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 14:41:04 by calide-n          #+#    #+#             */
-/*   Updated: 2021/02/24 20:11:26 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/02/25 11:20:00 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,66 +20,33 @@ int	ft_check_next_quote(char *str, int i, char c)
 	return (1);
 }
 
-t_word	ft_manage_quote(char *str, int *i, char c)
+int	ft_manage_all_quotes(char *str, t_word *word, int *i)
 {
-	t_word	word;
-	int		j;
-	int		k;
-
-	k = 0;
-	*i += 1;
-	j = *i;
-	word.space = 0;
-	if (!ft_check_next_quote(str, *i, c))
+	if (str[*i] == '\'')
 	{
-		printf("Error quote\n");
-		word.content = NULL;
-		return (word);
+		if (!ft_check_next_quote(str, *i, str[*i]))
+		{
+			printf("Error quote\n");
+			word->content = NULL;
+			return (1);
+		}
+		*word = ft_manage_quote(str, i, '\'');
+		word->sep = 1;
+		return (1);
 	}
-	while (str[j] && str[j] != c && str[j] != ';')
-		j++;
-	word.content = malloc(sizeof(char) * (j + 1));
-	while (str[*i] && str[*i] != c && str[j] != ';')
+	else if (str[*i] == '"')
 	{
-		word.content[k] = str[*i];
-		*i += 1;
-		k++;
+		if (!ft_check_next_quote(str, *i, str[*i]))
+		{
+			printf("Error quote\n");
+			word->content = NULL;
+			return (0);
+		}
+		*word = ft_manage_quote(str, i, '"');
+		word->sep = 2;
+		return (1);
 	}
-	word.content[k] = '\0';
-	*i += 1;
-	if (str[*i] == ' ' || str[*i - 2])
-		word.space = 1;
-	return (word);
-}
-
-t_word	ft_manage_space(char *str, int *i)
-{
-	t_word	word;
-	int		j;
-	int		k;
-
-	j = *i;
-	k = 0;
-	word.sep = 0;
-	word.space = 0;
-	while (str[j] && str[j] != ' ' && str[j] != '\''
-		&& str[j] != '"' && str[j] != '\'' && str[j] != ';' && str[j] != '=')
-		j++;
-	word.content = malloc(sizeof(char) * (j + 1));
-	while (str[*i] && str[*i] != ' ' && str[*i] != '\''
-		&& str[*i] != '"' && str[*i] != '\'' && str[*i] != ';' && str[*i] != '=')
-	{
-		word.content[k] = str[*i];
-		*i += 1;
-		k++;
-	}
-	word.content[k] = '\0';
-	if (str[*i] == ' ')
-	{
-		word.space = 1;
-		*i += 1;
-	}
-	return (word);
+	return (0);
 }
 
 t_word	get_next_word(char *str, int on, int *ret)
@@ -95,44 +62,24 @@ t_word	get_next_word(char *str, int on, int *ret)
 		i = 0;
 	word.sep = 0;
 	word.space = 0;
-	if (!str[i])
-	{
-		*ret = 0;
-		word.content = NULL;
+	if (ft_manage_null(str[i], &word, ret))
 		return (word);
-	}
 	while (str[i] == ' ')
 		i++;
-	if (str[i] == ';')
-	{
-		word.content = ft_strdup(";");
-		word.sep = 0;
-		*ret = 2;
-		i++;
+	if (ft_manage_semicolon(str[i], &word, ret, &i))
 		return (word);
-	}
-	else if (str[i] == '=')
-	{
-		word.content = ft_strdup("=");
-		word.sep = 0;
-		i++;
-		if (str[i] == ' ')
-			word.space = 1;
-	}
+	else if (ft_manage_speop(str[i], &word, &i))
+		return (word);
 	else if (str[i] != '\'' && str[i] != '"')
 		word = ft_manage_space(str, &i);
-	else if (str[i] == '\'')
-	{
-		word = ft_manage_quote(str, &i, '\'');
-		word.sep = 1;
-	}
-	else if (str[i] == '"')
-	{
-		word = ft_manage_quote(str, &i, '"');
-		word.sep = 2;
-	}
-	while (str[i] == ' ')
-		i++;
+	else if (ft_manage_all_quotes(str, &word, &i))
+		return (word);
 	*ret = 1;
 	return (word);
 }
+
+/* Get next word works like GNL, it will get the next word.
+ * It looks at the first character to determine if the word is 
+ * between quotes, NULL, a special operator...
+ * Once a word is defined, it is malloc and returned.
+ */

@@ -8,13 +8,13 @@ LIBSH	= libsh/libsh.a
 
 INCS	= -I./includes
 
-SRCS_NAME	= main.c			\
-			  get_next_line.c 	\
-			  get_next_word.c	\
-			  get_nb_word.c		\
-			  ft_get_blocks.c	\
-			  ft_identify.c		\
-			  ft_expansion.c
+SRCS_NAME	= main.c				\
+			  get_next_line.c 		\
+			  get_next_word.c		\
+			  get_next_word_utils.c	\
+			  get_nb_word.c			\
+			  ft_get_blocks.c		\
+			  ft_identify.c
 
 SRCS_PATH	= ./
 
