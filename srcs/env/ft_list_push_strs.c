@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_list_push_strs.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mlarboul <mlarboul@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/02/25 11:46:53 by mlarboul          #+#    #+#             */
+/*   Updated: 2021/02/25 11:57:16 by mlarboul         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_list.h"
 
 char	*extract_var_name(char *str)
@@ -20,7 +32,6 @@ char	*extract_var_name(char *str)
 		i++;
 	}
 	name[i] = '\0';
-//	printf("name root : %s\n", name);
 	return (name);
 }
 

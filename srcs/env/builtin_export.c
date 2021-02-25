@@ -1,4 +1,16 @@
-#include  "ft_list.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtin_export.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mlarboul <mlarboul@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/02/25 10:08:37 by mlarboul          #+#    #+#             */
+/*   Updated: 2021/02/25 17:44:17 by mlarboul         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "ft_list.h"
 
 /*
 **	This function is called when export builtin doesn't have any argument.
@@ -9,7 +21,8 @@
 **	Returns '-1' if something wrong happens (most likely malloc issue).
 **	Otherwise function should return '0'.
 */
-int		export_alone(t_list *begin_list)
+
+int	export_alone(t_list *begin_list)
 {
 	char	**tabs;
 	char	*tmp;
@@ -35,13 +48,17 @@ int		export_alone(t_list *begin_list)
 
 /*
 **	The function export_builtin
-**	The function takes two parameters, the address of the address of the beginning of list and argv.
-**	It should be called alone with at least one arguments. If there are argument
-**	it returns error 1 and display a error message.
+**	The function takes two parameters, the address of the address of the
+**	beginning of list and the address of a s_block variable.
+**	It can be called alone or with several arguments. If at least one of the
+**	argument is bad-syntaxed it returns error 1 and display a error message.
 **	Otherwise, it displays the list of environemental variables, with the last
 **	variables at the end of the list and returns 0.
+**	TODO :	- line 69 -> add export_argv
+**			- change "char **argv" by "t_block *block"
 */
-int		export_builtin(t_list *begin_list, char **argv)
+
+int	export_builtin(t_list *begin_list, char **argv)
 {
 	int		i;
 	int		var_is_def;
@@ -50,27 +67,5 @@ int		export_builtin(t_list *begin_list, char **argv)
 	i = 2;
 	if (!argv[i])
 		return (export_alone(begin_list));
-	// 
-	while (argv[i])
-
 	return (0);
 }
-
-
-
-
-
-
-
-
-	/*
-	** Only to check if everything is OK
-	*/
-	/*
-		while (begin_list)
-		{
-			printf("%s=", ((t_var *)begin_list->data)->name);			//USE FD_PUTSTR
-			printf("%s\n", ((t_var *)begin_list->data)->content);			//USE FD_PUTSTR
-			begin_list = begin_list->next;
-		}
-	*/

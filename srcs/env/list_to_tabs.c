@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_to_tabs.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mlarboul <mlarboul@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/02/25 11:47:54 by mlarboul          #+#    #+#             */
+/*   Updated: 2021/02/25 13:53:07 by mlarboul         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_list.h"
 
 void	free_tabs(char **tabs)
@@ -12,7 +24,7 @@ void	free_tabs(char **tabs)
 
 int	ft_list_size(t_list *begin_list, int type)
 {
-	int count;
+	int	count;
 
 	count = 0;
 	while (begin_list)
@@ -46,7 +58,7 @@ void	list_to_tabs_env(t_list *begin_list, char **tabs, int size)
 
 char	*conc_var(char *tmp, char *content)
 {
-	char *tab;
+	char	*tab;
 
 	tab = ft_strjoin(tmp, "=\"");
 	free(tmp);
@@ -82,15 +94,16 @@ void	list_to_tabs_export(t_list *begin_list, char **tabs, int size)
 }
 
 /*
- **	The function list_to_tabs converts chained list into a array of char *.
- **	The function takes two parameters, the beginning of the list and a the
- **	type of tabs output required. The output can be for env(0), which simply
- **	has a syntax like : var_name=var_content. Plus, it doesn't include varibles
- **	for which  var_is_define different from 1.
- **	Otherwise, the output is for export (1) which has a syntax a bit different
- **	: var_name="var_content". It takes all variables into account exept a 
- **	specific one : "_=var_content".
- */
+**	The function list_to_tabs converts chained list into a array of char *.
+**	The function takes two parameters, the beginning of the list and a the
+**	type of tabs output required. The output can be for env(0), which simply
+**	has a syntax like : var_name=var_content. Plus, it doesn't include varibles
+**	for which  var_is_define different from 1.
+**	Otherwise, the output is for export (1) which has a syntax a bit different
+**	: var_name="var_content". It takes all variables into account exept a
+**	specific one : "_=var_content".
+*/
+
 char	**list_to_tabs(t_list *begin_list, int type)
 {
 	int		size;

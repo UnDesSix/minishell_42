@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   var_syntax_is_ok.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mlarboul <mlarboul@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/02/25 11:48:17 by mlarboul          #+#    #+#             */
+/*   Updated: 2021/02/25 13:53:46 by mlarboul         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_list.h"
 
 int	ft_isalpha(int c)
@@ -18,7 +30,7 @@ int	ft_isalnum(int c)
 
 int	var_syntax_is_ok(char *str, char *builtin)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!ft_isalpha(str[i]) && str[i] != '_')

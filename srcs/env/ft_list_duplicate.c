@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_list_duplicate.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mlarboul <mlarboul@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/02/25 10:08:23 by mlarboul          #+#    #+#             */
+/*   Updated: 2021/02/25 11:53:53 by mlarboul         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_list.h"
 
 t_var	*ft_var_duplicate(t_var *data)
@@ -12,6 +24,7 @@ t_var	*ft_var_duplicate(t_var *data)
 	new_data->is_define = data->is_define;
 	return (new_data);
 }
+
 void	ft_list_duplicate(t_list **new_list, t_list *begin_list)
 {
 	t_var	*tmp;

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mlarboul <mlarboul@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/02/25 11:48:00 by mlarboul          #+#    #+#             */
+/*   Updated: 2021/02/25 11:58:40 by mlarboul         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_list.h"
 
 /*
@@ -6,6 +18,7 @@
 **	It returns a pointer to the begenning of the list if everything went well.
 **	Otherwise, it returns a NULL pointer (if malloc failed for instance).
 */
+
 t_list	*tabs_to_list(char **envp)
 {
 	t_list	*begin_list;
@@ -29,6 +42,7 @@ t_list	*tabs_to_list(char **envp)
 **	Otherwise, it displays the list of environemental variables, with the last
 **	variables at the end of the list and returns 0.
 */
+
 int		env_builtin(t_list *begin_list, char **argv)
 {
 	t_list	*tmp;
@@ -40,8 +54,8 @@ int		env_builtin(t_list *begin_list, char **argv)
 		{
 			if (((t_var *)tmp->data)->is_define)
 			{
-				printf("%s=", ((t_var *)tmp->data)->name);						//USE FD_PUTSTR
-				printf("%s\n", ((t_var *)tmp->data)->content);					//USE FD_PUTSTR
+				printf("%s=", ((t_var *)tmp->data)->name);
+				printf("%s\n", ((t_var *)tmp->data)->content);
 			}
 			tmp = tmp->next;
 		}
@@ -60,6 +74,7 @@ int		env_builtin(t_list *begin_list, char **argv)
 **	is not valid : see var_syntac_is_ok function.
 **	Otherwise, it removes the given variables and returns 0.
 */
+
 int		unset_builtin(t_list **begin_list, char **argv)
 {
 	t_list	*tmp;
@@ -73,21 +88,13 @@ int		unset_builtin(t_list **begin_list, char **argv)
 		ft_list_remove_if(begin_list, argv[i], ft_strcmp, free_var);
 		i++;
 	}
-	/*
-	** Only to check if everything is OK
-	*/
-	/*
-		while (*begin_list)
-		{
-			printf("%s=", ((t_var *)(*begin_list)->data)->name);							//USE FD_PUTSTR
-			printf("%s\n", ((t_var *)(*begin_list)->data)->content);						//USE FD_PUTSTR
-			*begin_list = (*begin_list)->next;
-		}
-	*/
 	return (0);
 }
 
-// Segfault without argument because first if is going somewhere it should not
+/*
+**	Segfault without argument because first if is going somewhere it should not
+*/
+
 int		main(int argc, char **argv, char **envp)
 {
 	t_list	*begin_list;

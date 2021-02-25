@@ -46,7 +46,7 @@ void	print_tabs(char **tabs);
 void	ft_list_sort(t_list **begin_list, int (*cmp)());
 void	ft_list_duplicate(t_list **new_list, t_list *begin_list);
 int		export_builtin(t_list *begin_list, char **argv);
-
+int		export_variable(t_block *block, t_list **begin_list);
 
 
 #endif
