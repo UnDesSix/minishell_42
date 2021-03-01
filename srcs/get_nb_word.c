@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 14:41:04 by calide-n          #+#    #+#             */
-/*   Updated: 2021/02/25 17:48:11 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/02/28 14:27:56 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,6 @@ int	get_nb_word(char *str, int on)
 		ft_manage_quote_count(str, &i, '\'');
 	else if (str[i] == '"')
 		ft_manage_quote_count(str, &i, '"');
-	while (str[i] == ' ')
-		i++;
 	return (1);
 }
 

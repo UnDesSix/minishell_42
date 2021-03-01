@@ -6,36 +6,11 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 09:40:39 by calide-n          #+#    #+#             */
-/*   Updated: 2021/02/25 11:45:04 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/01 14:11:59 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/header.h"
-
-int	ft_count_lines(void)
-{
-	int		nb;
-	char	*line;
-
-	nb = 0;
-	while (get_next_line(0, &line) != 0)
-		nb++;
-	return (nb);
-}
-
-int	ft_bksl(char *str)
-{
-	int	i;
-
-	i = 0;
-	if (!str[i])
-		return (0);
-	while (str[i])
-		i++;
-	if (str[i - 1] == '\'')
-		return (1);
-	return (0);
-}
 
 int	ft_nb_blocks(char *str)
 {
@@ -95,6 +70,24 @@ int	ft_nb_word(char *line, int reset)
 	return (nb);
 }
 
+void	ft_debug_word(t_word word)
+{
+	char *builtin;
+	char *type;
+
+	if (word.builtin == FALSE)
+		builtin = ft_strdup("FALSE");
+	else
+		builtin = ft_strdup("TRUE");
+	if (word.type == ARG)
+		type = ft_strdup("ARG");
+	else if (word.type == CMD)
+		type = ft_strdup("CMD");
+	else
+		type = ft_strdup("SEPOP");
+	printf("[%s] type[%s] builtin[%s]\n", word.content, type, builtin);
+}
+
 t_word	*ft_word(char *line, int reset)
 {
 	int		ret;
@@ -108,9 +101,13 @@ t_word	*ft_word(char *line, int reset)
 	nb = ft_nb_word(line, reset);
 	new_line = reset;
 	word = malloc(sizeof(t_word) * (nb + 1));
+	if (!word)
+		return (NULL);
 	while (ret)
 	{
-		word[windex] = get_next_word(line, new_line, &ret);
+		ret = get_next_word(line, new_line, &word[windex]);
+		ft_identify_word(&word[windex]);
+		ft_debug_word(word[windex]);
 		new_line = 1;
 		if (ret == 2)
 			break ;
@@ -127,10 +124,12 @@ t_block	*ft_get_blocks(char *line)
 	int		reset;
 	int		index;
 
-	nb_blocks = ft_nb_blocks(line);
-	block = (t_block *)malloc(sizeof(t_block) * (nb_blocks + 1));
 	index = 0;
 	reset = 0;
+	nb_blocks = ft_nb_blocks(line);
+	block = (t_block *)malloc(sizeof(t_block) * (nb_blocks + 1));
+	if (!block) 
+		return (NULL);
 	while (index < nb_blocks)
 	{
 		block[index].word = ft_word(line, reset);
