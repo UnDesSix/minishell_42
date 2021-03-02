@@ -6,21 +6,11 @@
 /*   By: mlarboul <mlarboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 11:47:54 by mlarboul          #+#    #+#             */
-/*   Updated: 2021/02/25 13:53:07 by mlarboul         ###   ########.fr       */
+/*   Updated: 2021/03/02 22:02:00 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_list.h"
-
-void	free_tabs(char **tabs)
-{
-	int	i;
-
-	i = 0;
-	while (tabs[i])
-		free(tabs[i++]);
-	free(tabs);
-}
 
 int	ft_list_size(t_list *begin_list, int type)
 {

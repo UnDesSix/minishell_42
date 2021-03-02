@@ -1,41 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_list_duplicate.c                                :+:      :+:    :+:   */
+/*   create_var.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlarboul <mlarboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/25 10:08:23 by mlarboul          #+#    #+#             */
-/*   Updated: 2021/02/25 11:53:53 by mlarboul         ###   ########.fr       */
+/*   Created: 2021/03/02 20:18:45 by mlarboul          #+#    #+#             */
+/*   Updated: 2021/03/02 21:11:38 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_list.h"
 
-t_var	*ft_var_duplicate(t_var *data)
+int	create_var(t_list **begin_list, char *name, char *content, int status)
 {
 	t_var	*new_data;
 
 	new_data = malloc(sizeof(t_var));
 	if (!new_data)
-		return (NULL);
-	new_data->name = ft_strdup(data->name);
-	new_data->content = ft_strdup(data->content);
-	new_data->is_define = data->is_define;
-	return (new_data);
-}
-
-void	ft_list_duplicate(t_list **new_list, t_list *begin_list)
-{
-	t_var	*tmp;
-
-	*new_list = NULL;
-	if (!begin_list)
-		return ;
-	while (begin_list)
+		return (-1);
+	new_data->name = ft_strdup(name);
+	if (!new_data->name)
+		return (-1);
+	new_data->is_define = 0;
+	if (status)
 	{
-		tmp = ft_var_duplicate(begin_list->data);
-		ft_list_push_back(new_list, tmp);
-		begin_list = begin_list->next;
+		new_data->is_define = 1;
+		new_data->content = ft_strdup(content);
+		if (!new_data->content)
+			return (-1);
 	}
+	else
+		new_data->content = NULL;
+	ft_list_push_back(begin_list, new_var);
+	if (!(*begin_list))
+		return (-1);
+	return (0);
 }

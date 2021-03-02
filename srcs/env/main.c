@@ -6,11 +6,15 @@
 /*   By: mlarboul <mlarboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 11:48:00 by mlarboul          #+#    #+#             */
-/*   Updated: 2021/02/25 11:58:40 by mlarboul         ###   ########.fr       */
+/*   Updated: 2021/03/02 22:03:26 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_list.h"
+
+/*
+** TODO : Split main into ENV / EXPORT / UNSET
+*/
 
 /*
 **	The function tabs_to_list converts envp (char **) into a
@@ -61,7 +65,7 @@ int		env_builtin(t_list *begin_list, char **argv)
 		}
 		return (0);
 	}
-	printf("env: env should be used without option or argument\n");							//USE FD_PUTSTR
+	printf("env: env should be used without option or argument\n");
 	return (1);
 }
 
@@ -70,7 +74,7 @@ int		env_builtin(t_list *begin_list, char **argv)
 **	The function takes two parameters, the address of the address of the
 **	beginning of list and argv. It takes a 't_list **' because the first
 **	element can be remove. Simply using a 't_list *' would generate mistakes.
-**	The only way the function returns an error (1), is if the varianle name
+**	The only way the function returns an error (1), is if the variable name
 **	is not valid : see var_syntac_is_ok function.
 **	Otherwise, it removes the given variables and returns 0.
 */
@@ -81,6 +85,7 @@ int		unset_builtin(t_list **begin_list, char **argv)
 	int		i;
 
 	i = 2;
+// CHECK SYNTAX FOR ALL VARIABLES
 	while (argv[i])
 	{
 		if (!var_syntax_is_ok(argv[i], "unset"))
