@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 09:40:39 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/01 14:11:59 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/02 13:46:48 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	ft_nb_blocks(char *str)
 			quote = 2;
 		if (str[i] == '"' && quote == 2)
 			quote = 0;
-		if (str[i] == ';' && quote == 0)
+		if ((str[i] == ';' || str[i] == '|') && quote == 0)
 		{
 			i++;
 			while (str[i] == ' ')
@@ -103,6 +103,7 @@ t_word	*ft_word(char *line, int reset)
 	word = malloc(sizeof(t_word) * (nb + 1));
 	if (!word)
 		return (NULL);
+	printf("[\n");
 	while (ret)
 	{
 		ret = get_next_word(line, new_line, &word[windex]);
@@ -113,6 +114,7 @@ t_word	*ft_word(char *line, int reset)
 			break ;
 		windex++;
 	}
+	printf("]\n");
 	word[nb].content = NULL;
 	return (word);
 }
