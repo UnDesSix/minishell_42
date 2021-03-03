@@ -6,7 +6,7 @@
 /*   By: mlarboul <mlarboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 10:08:37 by mlarboul          #+#    #+#             */
-/*   Updated: 2021/02/25 17:44:17 by mlarboul         ###   ########.fr       */
+/*   Updated: 2021/03/03 15:38:38 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,18 @@ int	export_alone(t_list *begin_list)
 	int		i;
 
 	i = 0;
-	ft_list_duplicate(&dup_list, begin_list);
+	if (ft_list_duplicate(&dup_list, begin_list) < 0)
+		return (-1);
 	ft_list_sort(&dup_list, ft_strcmp);
 	tabs = list_to_tabs(dup_list, 1);
+	if (!tabs)
+		return (-1);
 	ft_list_clear(dup_list, free_var);
 	while (tabs[i])
 	{
 		tmp = ft_strjoin("declare -x ", tabs[i]);
+		if (!tmp)
+			return (-1);
 		free(tabs[i]);
 		tabs[i] = tmp;
 		i++;
@@ -58,14 +63,14 @@ int	export_alone(t_list *begin_list)
 **			- change "char **argv" by "t_block *block"
 */
 
-int	export_builtin(t_list *begin_list, char **argv)
+int	export_builtin(t_list *begin_list, t_block block)
 {
 	int		i;
 	int		var_is_def;
 	t_var	*var;
 
 	i = 2;
-	if (!argv[i])
+	if (!block.word[1].content)
 		return (export_alone(begin_list));
-	return (0);
+	return (export_variable(block, &begin_list));
 }

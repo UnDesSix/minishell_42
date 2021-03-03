@@ -6,13 +6,13 @@
 /*   By: mlarboul <mlarboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 11:47:54 by mlarboul          #+#    #+#             */
-/*   Updated: 2021/03/02 22:02:00 by mlarboul         ###   ########.fr       */
+/*   Updated: 2021/03/03 15:34:47 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_list.h"
 
-int	ft_list_size(t_list *begin_list, int type)
+int		ft_list_size(t_list *begin_list, int type)
 {
 	int	count;
 
@@ -28,7 +28,7 @@ int	ft_list_size(t_list *begin_list, int type)
 	return (count);
 }
 
-void	list_to_tabs_env(t_list *begin_list, char **tabs, int size)
+int		list_to_tabs_env(t_list *begin_list, char **tabs, int size)
 {
 	int		i;
 	char	*tmp;
@@ -37,13 +37,20 @@ void	list_to_tabs_env(t_list *begin_list, char **tabs, int size)
 	while (i < size)
 	{
 		tabs[i] = ft_strdup(((t_var *)begin_list->data)->name);
+		if (!tabs[i])
+			return (-1);
 		tmp = ft_strjoin(tabs[i], "=");
+		if (!tmp[i])
+			return (-1);
 		free(tabs[i]);
 		tabs[i] = ft_strjoin(tmp, ((t_var *)begin_list->data)->content);
+		if (!tabs[i])
+			return (-1);
 		free(tmp);
 		i++;
 	}
 	tabs[i] = NULL;
+	return (0);
 }
 
 char	*conc_var(char *tmp, char *content)
@@ -51,15 +58,21 @@ char	*conc_var(char *tmp, char *content)
 	char	*tab;
 
 	tab = ft_strjoin(tmp, "=\"");
+	if (!tab)
+		return (NULL);
 	free(tmp);
 	tmp = ft_strjoin(tab, content);
+	if (!tmp)
+		return (NULL);
 	free(tab);
 	tab = ft_strjoin(tmp, "\"");
+	if (!tab)
+		return (NULL);
 	free(tmp);
 	return (tab);
 }
 
-void	list_to_tabs_export(t_list *begin_list, char **tabs, int size)
+int		list_to_tabs_export(t_list *begin_list, char **tabs, int size)
 {
 	int		i;
 	char	*tmp;
@@ -76,11 +89,14 @@ void	list_to_tabs_export(t_list *begin_list, char **tabs, int size)
 				tabs[i] = tmp;
 			else
 				tabs[i] = conc_var(tmp, ((t_var *)begin_list->data)->content);
+			if (!tabs[i])
+				return (-1);
 			i++;
 			begin_list = begin_list->next;
 		}
 	}
 	tabs[i] = NULL;
+	return (0);
 }
 
 /*
@@ -104,8 +120,10 @@ char	**list_to_tabs(t_list *begin_list, int type)
 	if (!tabs)
 		return (NULL);
 	if (type == 0)
-		list_to_tabs_env(begin_list, tabs, size);
+		if (list_to_tabs_env(begin_list, tabs, size) < 0)
+			return (NULL);
 	if (type == 1)
-		list_to_tabs_export(begin_list, tabs, size);
+		if (list_to_tabs_export(begin_list, tabs, size) < 0)
+			return (NULL);
 	return (tabs);
 }
