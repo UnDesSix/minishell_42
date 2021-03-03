@@ -2,5 +2,9 @@ Global		:
 ok
 
 Matthieu	:
+- Comment a bit much the code
+- Change variable type for env and unset
+- Test unset, export and env
+- Do a merge with the master
 
 Calixte		:
