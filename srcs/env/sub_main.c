@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   sub_main.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlarboul <mlarboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 11:48:00 by mlarboul          #+#    #+#             */
-/*   Updated: 2021/03/03 15:07:13 by mlarboul         ###   ########.fr       */
+/*   Updated: 2021/03/03 18:13:55 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,12 @@ t_list	*tabs_to_list(char **envp)
 **	variables at the end of the list and returns 0.
 */
 
-int		env_builtin(t_list *begin_list, char **argv)
+int		env_builtin(t_list *begin_list, t_block block)
 {
 	t_list	*tmp;
 
 	tmp = begin_list;
-	if (!argv[2])
+	if (!(block.word[i].content))
 	{
 		while (tmp)
 		{
@@ -79,18 +79,20 @@ int		env_builtin(t_list *begin_list, char **argv)
 **	Otherwise, it removes the given variables and returns 0.
 */
 
-int		unset_builtin(t_list **begin_list, char **argv)
+int		unset_builtin(t_list **begin_list, t_block block)
 {
 	t_list	*tmp;
+	t_word	*word;
 	int		i;
 
-	i = 2;
+	i = 1;
+	word = block.word;
 // CHECK SYNTAX FOR ALL VARIABLES
-	while (argv[i])
+	while (word[i].content)
 	{
-		if (!var_syntax_is_ok(argv[i], "unset"))
+		if (!var_syntax_is_ok(word[i].content, "unset"))
 			return (1);
-		ft_list_remove_if(begin_list, argv[i], ft_strcmp, free_var);
+		ft_list_remove_if(begin_list, word[i].content, ft_strcmp, free_var);
 		i++;
 	}
 	return (0);
@@ -100,17 +102,17 @@ int		unset_builtin(t_list **begin_list, char **argv)
 **	Segfault without argument because first if is going somewhere it should not
 */
 
-int		main(int argc, char **argv, char **envp)
+int		sub_main(t_block block, char **envp)
 {
 	t_list	*begin_list;
 
 	begin_list = tabs_to_list(envp);
-	if (ft_strcmp(argv[1], "env") == 0)
-		env_builtin(begin_list, argv);
-	else if (ft_strcmp(argv[1], "unset") == 0)
-		unset_builtin(&begin_list, argv);
-	else if (ft_strcmp(argv[1], "export") == 0)
-		export_builtin(begin_list, argv);
+	if (ft_strcmp(block.word[0], "env") == 0)
+		env_builtin(begin_list, block);
+	else if (ft_strcmp(block.word[0], "unset") == 0)
+		unset_builtin(&begin_list, block);
+	else if (ft_strcmp(block.word[0], "export") == 0)
+		export_builtin(begin_list, block);
 	ft_list_clear(begin_list, free_var);
 	return (0);
 }
