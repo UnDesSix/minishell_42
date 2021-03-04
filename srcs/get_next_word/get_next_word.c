@@ -6,22 +6,20 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 14:41:04 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/01 13:04:28 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/04 12:02:15 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/header.h"
 
-int	get_next_word(char *str, int on, t_word *word)
+int	get_next_word(char *str, t_word *word)
 {
-	static int	i;
+	static int	i = 0;
 	int			k;
 	int			j;
 
 	k = 0;
 	j = 0;
-	if (on == 0)
-		i = 0;
 	word->sep = 0;
 	word->space = 0;
 	word->type = 0;

@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 14:41:04 by calide-n          #+#    #+#             */
-/*   Updated: 2021/02/28 14:27:56 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/04 12:04:58 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ int	get_nb_spe_char(char *str, int *i)
 	return (0);
 }
 
-int	get_nb_word(char *str, int on)
+int	get_nb_word(char *str)
 {
-	static int	i;
+	static int	i = 0;
 	int			k;
 	int			j;
 	int 		ret;
@@ -71,8 +71,6 @@ int	get_nb_word(char *str, int on)
 	k = 0;
 	j = 0;
 	ret = 0;
-	if (on == 0)
-		i = 0;
 	if (str[i] == '\0')
 		return (0);
 	while (str[i] == ' ')

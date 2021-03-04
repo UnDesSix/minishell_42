@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 11:31:01 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/01 14:01:03 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/04 12:03:38 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ typedef struct s_block
 }				t_block;
 
 int		get_next_line(int fd, char **line);
-int		get_next_word(char *str, int on, t_word *word);
-int		get_nb_word(char *str, int on);
+int		get_next_word(char *str, t_word *word);
+int		get_nb_word(char *str);
 t_block	*ft_get_blocks(char *line);
 char	**ft_split(char *s, char c);
 t_input	*ft_selector(char **tabs, int *nb_blocks);

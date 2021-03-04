@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 09:40:39 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/02 13:46:48 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/04 12:03:57 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,23 +47,23 @@ int	ft_nb_blocks(char *str)
 	return (nb);
 }
 
-int	ft_nb_word(char *line, int reset)
+int	ft_nb_word(char *line)
 {
 	int	ret;
 	int	nb;
+	int	reset;
 
 	nb = 0;
 	ret = 1;
-	while (1)
+	reset = 0;
+	while (ret > 0)
 	{
-		ret = get_nb_word(line, reset);
+		ret = get_nb_word(line);
 		if (ret == 2)
 		{
 			nb++;
 			break ;
 		}
-		if (ret == 0)
-			break ;
 		nb++;
 		reset = 1;
 	}
@@ -86,30 +86,29 @@ void	ft_debug_word(t_word word)
 	else
 		type = ft_strdup("SEPOP");
 	printf("[%s] type[%s] builtin[%s]\n", word.content, type, builtin);
+	free(builtin);
+	free(type);
 }
 
-t_word	*ft_word(char *line, int reset)
+t_word	*ft_word(char *line)
 {
 	int		ret;
 	int		windex;
 	int		nb;
 	t_word	*word;
-	int		new_line;
 
 	windex = 0;
 	ret = 1;
-	nb = ft_nb_word(line, reset);
-	new_line = reset;
+	nb = ft_nb_word(line);
 	word = malloc(sizeof(t_word) * (nb + 1));
 	if (!word)
 		return (NULL);
 	printf("[\n");
 	while (ret)
 	{
-		ret = get_next_word(line, new_line, &word[windex]);
+		ret = get_next_word(line, &word[windex]);
 		ft_identify_word(&word[windex]);
 		ft_debug_word(word[windex]);
-		new_line = 1;
 		if (ret == 2)
 			break ;
 		windex++;
@@ -134,9 +133,8 @@ t_block	*ft_get_blocks(char *line)
 		return (NULL);
 	while (index < nb_blocks)
 	{
-		block[index].word = ft_word(line, reset);
+		block[index].word = ft_word(line);
 		block[index].stop = 1;
-		reset = 1;
 		index++;
 	}
 	block[nb_blocks].stop = 0;
