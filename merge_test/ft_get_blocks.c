@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 09:40:39 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/03 18:35:49 by mlarboul         ###   ########.fr       */
+/*   Updated: 2021/03/04 07:00:10 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	ft_debug_word(t_word word)
 		type = ft_strdup("CMD");
 	else
 		type = ft_strdup("SEPOP");
-	printf("[%s] type[%s] builtin[%s]\n", word.content, type, builtin);
+	printf("[%s] type[%d] builtin[%s]\n", word.content, word.type, builtin);
 	free(builtin);
 	free(type);
 }
