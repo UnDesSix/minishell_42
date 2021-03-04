@@ -6,11 +6,11 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 12:05:25 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/04 12:54:10 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/04 20:05:36 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/header.h"
+#include "../includes/header.h"
 
 char	*ft_strjoin_char(char *str, char c)
 {

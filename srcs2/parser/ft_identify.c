@@ -6,11 +6,11 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 15:15:26 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/04 11:48:31 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/04 20:33:15 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/header.h"
+#include "../includes/header.h"
 
 int ft_check_if_binary(char **paths, t_word *word)
 {   

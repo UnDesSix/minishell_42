@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 11:31:01 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/04 12:03:38 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/04 19:00:42 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # define ARG 2
 # define TRUE 1
 # define FALSE 0
+# define SPEOP_LST "=>|<;"
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
@@ -49,8 +50,13 @@ typedef struct s_block
 }				t_block;
 
 int		get_next_line(int fd, char **line);
-int		get_next_word(char *str, t_word *word);
-int		get_nb_word(char *str);
+int		get_next_word(char *str, t_word *word, int reset);
+int		get_nb_word(char *str, int reset);
+int		ft_check_next_quote(char *str, int i, char c);
+int		ft_count_quote(char *str, int *i, char *stop);
+int		ft_count_special_operator(char *str, int *i, char stop);
+int		ft_is_special_operator(char c);
+t_word	*ft_lexer(char *line);
 t_block	*ft_get_blocks(char *line);
 char	**ft_split(char *s, char c);
 t_input	*ft_selector(char **tabs, int *nb_blocks);
