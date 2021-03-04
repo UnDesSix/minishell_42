@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 11:31:01 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/04 19:00:42 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/04 21:20:41 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include <fcntl.h>
 # include <sys/wait.h>
 # include <sys/stat.h>
+
 
 typedef struct s_input
 {
@@ -49,6 +50,8 @@ typedef struct s_block
 	int		stop;
 }				t_block;
 
+#include "env.h"
+
 int		get_next_line(int fd, char **line);
 int		get_next_word(char *str, t_word *word, int reset);
 int		get_nb_word(char *str, int reset);
@@ -57,20 +60,10 @@ int		ft_count_quote(char *str, int *i, char *stop);
 int		ft_count_special_operator(char *str, int *i, char stop);
 int		ft_is_special_operator(char c);
 t_word	*ft_lexer(char *line);
-t_block	*ft_get_blocks(char *line);
-char	**ft_split(char *s, char c);
 t_input	*ft_selector(char **tabs, int *nb_blocks);
-int		ft_execute(t_input *input, int nb_block);
 int		pwd(void);
 int		echo(t_input input);
-int		ft_manage_quote(char *str, int *i, char c, t_word *word);
-int		ft_manage_space(char *str, int *i, t_word *word);
-int		ft_manage_speop(char *str, t_word *word, int *i);
-int		ft_manage_semicolon(char c, t_word *word, int *i);
-int		ft_manage_all_quotes(char *str, t_word *word, int *i);
-int		ft_manage_null(char c, t_word *word);
 int		cd(t_input input);
 int		ft_redirections(t_input *input);
 int		ft_identify_word(t_word *word);
-int 	ft_execute_block(t_block block);
 #endif
