@@ -9,6 +9,7 @@ LIBSH	= libsh/libsh.a
 INCS	= -I./includes
 
 SRCS_NAME	= main.c							\
+			  ast.c								\
 			  lexer/get_next_line.c 			\
 			  lexer/get_next_word.c				\
 			  lexer/get_nb_word.c				\
