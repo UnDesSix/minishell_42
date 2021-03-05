@@ -43,7 +43,9 @@ int	ft_check_next_quote(char *str, int i, char c)
 	i++;
 	while (str[i] != c)
 		if (str[i++] == '\0')
-			return (0);
+			return (-1);
+	if (str[i + 1] != ' ' && str[i + 1] != 0)
+		return (0);
 	return (1);
 }
 /*
@@ -79,15 +81,24 @@ int	ft_count_special_operator(char *str, int *i, char stop)
 
 int	ft_count_quote(char *str, int *i, char *stop)
 {
-	if (str[*i] == '\'' || str[*i] == '"' && *stop == ' ')
+	int	ret;
+
+	ret = 0;
+	if ((str[*i] == '\'' || str[*i] == '"') && *stop == ' ')
 	{
-		*stop = str[*i];
-		if (!ft_check_next_quote(str, *i, str[*i]))
+		ret = ft_check_next_quote(str, *i, str[*i]);
+		if (ret == -1)
 		{
 			printf("Error quote\n");
 			*i += 1;
 			return (-1);
 		}
+		if (ret == 0)
+		{
+			*stop = ' ';
+			return (0);
+		}
+		*stop = str[*i];
 		*i += 1;
 		return (1);
 	}

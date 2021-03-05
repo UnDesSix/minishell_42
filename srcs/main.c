@@ -29,7 +29,8 @@ int	ft_manage_line(char *line, char **envp, t_list *begin_list)
 
 	while (word[x].content)
 	{
-		printf("[%s] space=%d sep=%d\n", word[x].content,  word[x].space,  word[x].sep);
+		ft_putstr(word[x].content);
+		ft_putstr("\n");
 		free(word[x].content);
 		x++;
 	}

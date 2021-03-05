@@ -39,13 +39,15 @@ int	get_next_word_init(int reset, int *i, t_word *word, char *str)
 {
 	if (reset == 0)
 		*i = 0;
+	while (str[*i] == ' ')
+		*i += 1;
 	if (str[*i] == 0)
 	{
 		word->content = NULL;
+		word->sep = 0;
+		word->space = 0;
 		return (0);
 	}
-	while (str[*i] == ' ')
-		*i += 1;
 	return (1);
 }
 

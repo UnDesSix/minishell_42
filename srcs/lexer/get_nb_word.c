@@ -20,12 +20,15 @@
 
 int	get_nb_word_incrementation(char *str, int *i, char *stop)
 {
+	int	ret;
 	while (str[*i] && str[*i] != ' ' && !ft_is_special_operator(str[*i]))
 	{
 		if (str[*i] == '\'' || str[*i] == '"')
 		{
-			*stop = str[*i];
-			if (ft_check_next_quote(str, *i, str[*i]) == 0)
+			ret = ft_check_next_quote(str, *i, str[*i]);
+			if (ret == 1)
+				*stop = str[*i];
+			if (ret == -1)
 				return (-1);
 			else
 			{
@@ -73,7 +76,11 @@ int	get_nb_word(char *str, int reset)
 		return (-1);
 	if (stop == '\'' || stop == '"')
 		while (str[i] != stop && str[i])
+		{
+			if (str[i] == stop && str[i+1] != ' ')
+				stop = ' ';
 			i++;
+		}
 	else
 		if (get_nb_word_incrementation(str, &i, &stop) == -1)
 			return (-1);
