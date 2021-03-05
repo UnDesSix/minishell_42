@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 11:31:01 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/04 21:20:41 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/04 21:35:38 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,5 @@ int		echo(t_input input);
 int		cd(t_input input);
 int		ft_redirections(t_input *input);
 int		ft_identify_word(t_word *word);
+char    **ft_split(char const *s, char c);
 #endif

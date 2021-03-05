@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 13:02:27 by calide-n          #+#    #+#             */
-/*   Updated: 2021/01/30 16:54:25 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/04 21:43:09 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ char	*ft_strdup(const char *str)
 	char	*dest;
 
 	i = 0;
-	size = ft_strlen(str);
 	if (!str)
 		return (NULL);
+	size = ft_strlen(str);
 	dest = (char *)malloc(sizeof(char) * (size + 1));
 	if (!dest)
 		return (0);
