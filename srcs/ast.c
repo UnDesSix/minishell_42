@@ -6,7 +6,7 @@
 /*   By: calide-n <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 14:38:38 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/05 15:52:24 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/05 22:20:38 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_node	*create_node(void *data, t_node *right, t_node *left)
 	node = (t_node *)malloc(sizeof(t_node));
 	if (!node)
 		return (NULL);
-	node->data = ft_strdup(data);
+	node->cmd = ft_strdup(data);
 	node->right = right;
 	node->left = left;
 	return (node);
@@ -36,12 +36,12 @@ int	ast(t_word *word, int index, t_node *node)
 	{
 		if (ft_strcmp(word[i].content,"|") == 0)
 		{
-			node->data = ft_strdup("|");
+			node->cmd = ft_strdup("|");
 			node->right = (t_node *)malloc(sizeof(t_node));
 			node->left = (t_node *)malloc(sizeof(t_node));
-			ast(word, i + 1, node->left);
+			ast(word, i + 1, node->right);
 			word[i].content = NULL;
-			ast(word, index, node->right);
+			ast(word, index, node->left);
 			return (1);
 		}
 		i++;
@@ -49,9 +49,25 @@ int	ast(t_word *word, int index, t_node *node)
 	i = index;
 	while (word[i].content)
 	{
-		if (ft_strcmp(word[i].content,"echo") == 0 || ft_strcmp(word[i].content,"ls") == 0)
+		if (ft_strcmp(word[i].content,">") == 0 || ft_strcmp(word[i].content,"<") == 0)
 		{
-			node->data = ft_strdup(word[i].content);
+			node->cmd = ft_strdup(">");
+			node->right = (t_node *)malloc(sizeof(t_node));
+			node->left = (t_node *)malloc(sizeof(t_node));
+			//node->right->right = (t_node *)malloc(sizeof(t_node));
+			//node->left->cmd = word[i + 1].content;
+			word[i].content = NULL;
+			ast(word, index, node->right);
+			node = node->left;
+		}
+		i++;
+	}
+	i = index;
+	while (word[i].content)
+	{
+		if (ft_strcmp(word[i].content, "echo") == 0 || ft_strcmp(word[i].content,"ls") == 0)
+		{
+			node->cmd = ft_strdup(word[i].content);
 			return (1);
 		}
 		i++;

@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 11:31:01 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/05 15:18:46 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/05 21:47:39 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,6 @@
 # include <fcntl.h>
 # include <sys/wait.h>
 # include <sys/stat.h>
-
-typedef struct	s_node
-{
-	struct s_node	*right;
-	struct s_node	*left;
-	void			*data;
-}				t_node;
 
 typedef struct s_input
 {
@@ -57,6 +50,7 @@ typedef struct s_block
 }				t_block;
 
 #include "env.h"
+#include "structures.h"
 
 int		ast(t_word *word, int i, t_node *node);
 int		get_next_line(int fd, char **line);

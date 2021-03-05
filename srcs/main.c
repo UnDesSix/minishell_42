@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 19:26:04 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/05 15:59:06 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/05 22:02:56 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,14 @@
 
 void print2DUtil(t_node *root, int space) 
 { 
-    // Base case 
     if (root == NULL) 
         return; 
-  
-    // Increase distance between levels 
     space += COUNT; 
-  
-    // Process right child first 
     print2DUtil(root->right, space); 
-  
-    // Print current node after space 
-    // count 
     printf("\n"); 
     for (int i = COUNT; i < space; i++) 
         printf(" "); 
-    printf("[%s]\n", root->data); 
-  
-    // Process left child 
+    printf("[%s]\n", root->cmd); 
     print2DUtil(root->left, space); 
 }
 
@@ -51,7 +41,7 @@ int	ft_manage_line(char *line, char **envp, t_list *begin_list)
 //		export_builtin(begin_list, word);		
 	t_node *root;
 	root = (t_node *)malloc(sizeof(t_node));
-	root->data = NULL;
+	root->cmd = NULL;
 	root->right = NULL;
 	root->left = NULL;
 	ast(word, 0, root);
