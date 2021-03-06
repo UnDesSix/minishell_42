@@ -1,8 +1,12 @@
 Global		:
-ok
+- Do a merge with the master
 
 Matthieu	:
 - Test unset, export and env
-- Do a merge with the master
+- Fix export with bad syntaxed variables
+- Parse and execute the tree
+- Implement $?
+- Implement $_
+- Implement $SHLVL
 
 Calixte		:
