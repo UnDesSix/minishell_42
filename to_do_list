@@ -3,7 +3,7 @@ Global		:
 
 Matthieu	:
 - Test unset, export and env
-- Fix export with bad syntaxed variables
+- Fix export with bad syntaxed variables => MUST NOT STOP
 - Parse and execute the tree
 - Implement $?
 - Implement $_
