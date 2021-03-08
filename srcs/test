@@ -1,0 +1,14 @@
+echo "ok"
+echo 'ok'
+echo ok
+echo 'ok'ok
+echo "ok"ok
+echo ok"ok"
+echo 'ok'ok
+echo 'ok'ok"ok"
+echo "ok"ok'ok'
+echo 'ok'"ok"ok
+echo "ok"'ok'ok
+echo "ok ok" 'ok ok' ok ok
+"ok ok'ok'ok"
+echo $PATH

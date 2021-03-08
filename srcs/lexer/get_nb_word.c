@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 14:41:04 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/04 19:13:14 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/08 16:32:49 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,22 @@
 int	get_nb_word_incrementation(char *str, int *i, char *stop)
 {
 	int	ret;
+	int	tmp_stop;
+
 	while (str[*i] && str[*i] != ' ' && !ft_is_special_operator(str[*i]))
 	{
 		if (str[*i] == '\'' || str[*i] == '"')
 		{
 			ret = ft_check_next_quote(str, *i, str[*i]);
 			if (ret == 1)
-				*stop = str[*i];
-			if (ret == -1)
-				return (-1);
-			else
 			{
+				tmp_stop = str[*i];
 				*i += 1;
-				while (str[*i] && str[*i] != *stop)
+				while (str[*i] != tmp_stop)
 					*i += 1;
 			}
+			if (ret == -1)
+				return (-1);
 		}
 		*i += 1;
 	}
@@ -76,11 +77,7 @@ int	get_nb_word(char *str, int reset)
 		return (-1);
 	if (stop == '\'' || stop == '"')
 		while (str[i] != stop && str[i])
-		{
-			if (str[i] == stop && str[i+1] != ' ')
-				stop = ' ';
 			i++;
-		}
 	else
 		if (get_nb_word_incrementation(str, &i, &stop) == -1)
 			return (-1);

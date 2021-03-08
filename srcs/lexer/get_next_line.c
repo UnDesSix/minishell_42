@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 12:05:25 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/04 20:05:36 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/08 11:04:52 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,27 @@ char	*manage_stack(char *old_stack, char buffer)
 	return (stack);
 }
 
+int	ft_check_multi_lines(char **stack)
+{
+	int		i;
+	char	*tmp_stack;
+
+	i = 0;
+	if (!*stack)
+		return (0);
+	while ((*stack)[i])
+		i++;
+	if ((*stack)[i - 1] == '\\')
+	{
+		(*stack)[i - 1] = 0;
+		tmp_stack = ft_strdup(*stack);
+		free(*stack);
+		*stack = tmp_stack;
+		return (1);
+	}
+	return (0);
+}
+
 int	get_next_line(int fd, char **line)
 {
 	static char	*stack = NULL;
@@ -77,7 +98,10 @@ int	get_next_line(int fd, char **line)
 			stack = tmp;
 		}
 		if (buffer == '\n')
-			break ;
+		{
+			if (!ft_check_multi_lines(&stack))
+				break;
+		}
 	}
 	if (buffer == '\0')
 		return (0);

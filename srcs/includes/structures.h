@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 20:42:02 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/05 21:57:25 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/08 16:15:44 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ typedef struct	s_node
 	int				type;
 	char			*file_name;
 	int				fd;
+	int				redi_type;
 	char			*cmd;
 	char			**args;
 }				t_node;

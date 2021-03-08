@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 18:45:36 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/04 19:12:52 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/08 16:34:13 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ int	ft_count_special_operator(char *str, int *i, char stop)
 
 int	ft_count_quote(char *str, int *i, char *stop)
 {
-	int	ret;
+	int		ret;
+	char	tmp_stop;
 
 	ret = 0;
 	if ((str[*i] == '\'' || str[*i] == '"') && *stop == ' ')
@@ -95,6 +96,11 @@ int	ft_count_quote(char *str, int *i, char *stop)
 		}
 		if (ret == 0)
 		{
+			tmp_stop = str[*i];
+			*i += 1;
+			while (str[*i] != tmp_stop)
+				*i += 1;
+			*i += 1;
 			*stop = ' ';
 			return (0);
 		}

@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 14:41:04 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/04 20:40:14 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/08 16:31:55 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	get_next_word(char *str, t_word *word, int reset)
 		ret = ft_count_quote(str, &i, &stop);
 		if (ret == -1)
 			return (-1);
-		else if (ret == 1)
+		else if (ret == 1) 
 			begin++;
 		get_next_word_incre(stop, str, &i, word);
 	}

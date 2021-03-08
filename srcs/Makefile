@@ -9,7 +9,12 @@ LIBSH	= libsh/libsh.a
 INCS	= -I./includes
 
 SRCS_NAME	= main.c							\
-			  ast.c								\
+			  expansion/expansion.c				\
+			  ast/ast.c							\
+			  ast/ast_pipe.c					\
+			  ast/ast_redi.c					\
+			  ast/ast_args.c					\
+			  ast/ast_utils.c					\
 			  lexer/get_next_line.c 			\
 			  lexer/get_next_word.c				\
 			  lexer/get_nb_word.c				\
