@@ -6,11 +6,11 @@
 /*   By: mlarboul <mlarboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 10:08:37 by mlarboul          #+#    #+#             */
-/*   Updated: 2021/03/03 15:38:38 by mlarboul         ###   ########.fr       */
+/*   Updated: 2021/03/03 18:15:46 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_list.h"
+#include "../includes/header.h"
 
 /*
 **	This function is called when export builtin doesn't have any argument.

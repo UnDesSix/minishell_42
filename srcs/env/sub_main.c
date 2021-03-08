@@ -6,11 +6,11 @@
 /*   By: mlarboul <mlarboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 11:48:00 by mlarboul          #+#    #+#             */
-/*   Updated: 2021/03/03 18:13:55 by mlarboul         ###   ########.fr       */
+/*   Updated: 2021/03/03 20:31:36 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_list.h"
+#include "../includes/header.h"
 
 /*
 ** TODO : Split main into ENV / EXPORT / UNSET
@@ -52,7 +52,7 @@ int		env_builtin(t_list *begin_list, t_block block)
 	t_list	*tmp;
 
 	tmp = begin_list;
-	if (!(block.word[i].content))
+	if (!(block.word[1].content))
 	{
 		while (tmp)
 		{
@@ -85,15 +85,22 @@ int		unset_builtin(t_list **begin_list, t_block block)
 	t_word	*word;
 	int		i;
 
-	i = 1;
 	word = block.word;
+	i = 1;
 // CHECK SYNTAX FOR ALL VARIABLES
 	while (word[i].content)
 	{
-		if (!var_syntax_is_ok(word[i].content, "unset"))
+		if (!var_is_well_syntaxed(word[i].content, "unset"))
 			return (1);
 		ft_list_remove_if(begin_list, word[i].content, ft_strcmp, free_var);
 		i++;
+	}
+	t_list	*tmp1 = *begin_list;
+	while (tmp1)
+	{
+		printf("%s=", ((t_var *)tmp1->data)->name);
+		printf("%s\n", ((t_var *)tmp1->data)->content);
+		tmp1 = tmp1->next;
 	}
 	return (0);
 }
@@ -107,11 +114,11 @@ int		sub_main(t_block block, char **envp)
 	t_list	*begin_list;
 
 	begin_list = tabs_to_list(envp);
-	if (ft_strcmp(block.word[0], "env") == 0)
+	if (ft_strcmp(block.word[0].content, "env") == 0)
 		env_builtin(begin_list, block);
-	else if (ft_strcmp(block.word[0], "unset") == 0)
+	else if (ft_strcmp(block.word[0].content, "unset") == 0)
 		unset_builtin(&begin_list, block);
-	else if (ft_strcmp(block.word[0], "export") == 0)
+	else if (ft_strcmp(block.word[0].content, "export") == 0)
 		export_builtin(begin_list, block);
 	ft_list_clear(begin_list, free_var);
 	return (0);

@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   gnw_null.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/19 08:42:27 by calide-n          #+#    #+#             */
-/*   Updated: 2021/02/19 09:06:34 by calide-n         ###   ########.fr       */
+/*   Created: 2021/03/01 12:55:31 by calide-n          #+#    #+#             */
+/*   Updated: 2021/03/01 12:55:46 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libsh.h"
+#include "../includes/header.h"
 
-int	ft_strcmp(char const *s1, char const *s2)
+int ft_manage_null(char c, t_word *word)
 {
-	size_t	i;
-
-	i = 0;
-	while (s1[i] && s2[i] && s1[i] == s2[i])
-		i++;
-	return (s1[i] - s2[i]);
+    if (!c)
+    {   
+        word->content = NULL;
+        return (1);
+    }   
+    return (0);
 }
+

@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   print_tabs.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mlarboul <mlarboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/19 08:42:27 by calide-n          #+#    #+#             */
-/*   Updated: 2021/02/19 09:06:34 by calide-n         ###   ########.fr       */
+/*   Created: 2021/02/25 11:48:08 by mlarboul          #+#    #+#             */
+/*   Updated: 2021/03/03 18:19:14 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libsh.h"
+#include "../includes/header.h"
 
-int	ft_strcmp(char const *s1, char const *s2)
+void	print_tabs(char **tabs)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
-	while (s1[i] && s2[i] && s1[i] == s2[i])
+	while (tabs[i])
+	{
+		printf("%s\n", tabs[i]);
 		i++;
-	return (s1[i] - s2[i]);
+	}
 }

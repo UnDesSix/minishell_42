@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_create_elem.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mlarboul <mlarboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/19 08:42:27 by calide-n          #+#    #+#             */
-/*   Updated: 2021/02/19 09:06:34 by calide-n         ###   ########.fr       */
+/*   Created: 2021/02/25 11:46:20 by mlarboul          #+#    #+#             */
+/*   Updated: 2021/03/03 18:16:48 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libsh.h"
+#include "../includes/header.h"
 
-int	ft_strcmp(char const *s1, char const *s2)
+t_list	*ft_create_elem(void *data)
 {
-	size_t	i;
+	t_list	*elem;
 
-	i = 0;
-	while (s1[i] && s2[i] && s1[i] == s2[i])
-		i++;
-	return (s1[i] - s2[i]);
+	elem = malloc(sizeof(t_list));
+	if (!elem)
+		return (NULL);
+	elem->data = data;
+	elem->next = NULL;
+	return (elem);
 }
