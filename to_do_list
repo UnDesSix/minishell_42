@@ -1,5 +1,6 @@
 Global		:
 - Do a merge with the master
+- Check .sh send by eoliveir (for instance `echo"h"\o`)
 
 Matthieu	:
 - Test unset, export and env
@@ -8,5 +9,6 @@ Matthieu	:
 - Implement $?
 - Implement $_
 - Implement $SHLVL
+- Implement $OLDPWD and &PWD
 
 Calixte		:
