@@ -1,7 +1,0 @@
-
-
-
-		   | ft_get_blocks -> get_next_word |
-		   |								|
-		   |								|
-input line -> become blocks					| -> execute_block
