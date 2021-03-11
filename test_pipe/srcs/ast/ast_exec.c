@@ -13,16 +13,16 @@ int		exec_arg(t_node *node, t_saver *saver)
 	}
 	if (pid == 0)
 	{
-		if (saver->past_pfd)
-		{
-			close(saver->past_pfd[1]);
-			dup2(saver->past_pfd[0], 0);
-		}
-		if (saver->current_pfd)
-		{
-			close(saver->current_pfd[0]);
-			dup2(saver->current_pfd[1], 1);
-		}
+//		if (saver->past_pfd)
+//		{
+//			close(saver->past_pfd[1]);
+//			dup2(saver->past_pfd[0], 0);
+//		}
+//		if (saver->current_pfd)
+//		{
+//			close(saver->current_pfd[0]);
+//			dup2(saver->current_pfd[1], 1);
+//		}
 		ft_check_cmd(node->cmd);
 		new_envp = list_to_tabs(saver->envp_list, 0);
 		execve(node->cmd, node->args, new_envp);
