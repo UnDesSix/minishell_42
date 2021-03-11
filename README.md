@@ -3,4 +3,4 @@
 
 Exec, Unset and env are almost ready.
 
-We are still working on parsing 
+We are working on the AST
