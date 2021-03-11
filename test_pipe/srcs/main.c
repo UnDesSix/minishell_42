@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 19:26:04 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/11 16:11:41 by mlarboul         ###   ########.fr       */
+/*   Updated: 2021/03/11 22:13:06 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	ft_manage_line(char *line, char **envp, t_list *begin_list)
 		export_builtin(begin_list, word);		
 //	expansion(word, begin_list);
 	ast(word, 0, root);
-	print2DUtil(root, 0);
+//	print2DUtil(root, 0);
 /*	while (word[x].content)
 	{
 		ft_putstr("[");
@@ -85,7 +85,10 @@ int	ft_manage_line(char *line, char **envp, t_list *begin_list)
 	saver->past_pfd = NULL;
 	saver->current_pfd = NULL;
 	saver->envp_list = begin_list;
-	btree_prefix_exec(root, saver);
+	btree_prefix_exec(root, saver, 0);
+	wait(NULL);
+	close(saver->current_pfd[0]);
+	close(saver->current_pfd[1]);
 	ft_free_ast(root);
 	free(word);
 	return (0);
