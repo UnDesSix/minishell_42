@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 18:45:36 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/08 16:34:13 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/13 13:24:52 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,80 +33,81 @@ int	ft_is_special_operator(char c)
 }
 
 /*
- *  FT_CHECK_NEXT_QUOTE -> Check if a quotes has its corresponding pair
- *  Return value -> 0 pair is missing
- *                  1 pair is present
+ * FT_INIT_WORD -> init word with default values
  */
 
-int	ft_check_next_quote(char *str, int i, char c)
+void	ft_init_word(t_word *word)
 {
-	i++;
-	while (str[i] != c)
-		if (str[i++] == '\0')
-			return (-1);
-	if (str[i + 1] != ' ' && str[i + 1] != 0)
-		return (0);
-	return (1);
+	word->content = NULL;
+	word->sep = 0;
+	word->space = 0;
+	word->type = ARG;
+	word->builtin = FALSE;
 }
+
 /*
- * FT_COUNT_SPECIAL_OPERATOR -> Counts a word if the current char is 
- * a special operator.
- * Return values -> 1 character is a new word
- *                  0 character is not a new word
+ * SET_QUOTE -> set the quotes variable to the corresponding
+ * quotes (double, single or none) and increments line index
  */
 
-int	ft_count_special_operator(char *str, int *i, char stop)
+void	set_quote(int *b, int *quotes, int value, char *str)
 {
-	if (ft_is_special_operator(str[*i]) && stop == ' ')
+	*quotes = value;
+	*b += 1;
+}
+
+int	ft_is_bs_spechar(char c)
+{
+	int	i;
+
+	i = 0;
+	while (DQ_BS_SPECHAR[i])
 	{
-		*i += 1;
-		if (str[*i] == '>')
-		{
-			*i += 1;
-			return (2);
-		}
-		return (1);
+		if (c == DQ_BS_SPECHAR[i])
+			return (1);
+		i++;
 	}
 	return (0);
 }
 
-/*
- * FT_COUNT_QUOTES -> Checks if the word is between quotes,
- * and if so will check if the closing quote is missing.
- * It also sets the stop character to the corresponding quote
- * Return value -> -1 error
- *                  1 the word is between a pair of quotes
- *                  0 the word is not between quotes
- */
-
-int	ft_count_quote(char *str, int *i, char *stop)
+char	*ft_strdup_with_limits(char *str, int b, int e)
 {
-	int		ret;
-	char	tmp_stop;
+	int		i;
+	int		tmp;
+	char	*dst;
+	int		quotes;
 
-	ret = 0;
-	if ((str[*i] == '\'' || str[*i] == '"') && *stop == ' ')
+	quotes = 0;
+	if (str[b] == '"')
+		set_quote(&b, &quotes, 2, str);
+	else if (str[b] == '\'')
+		set_quote(&b, &quotes, 1, str);
+	i = e - b;
+	dst = (char *)malloc(sizeof(char) * (i + 1));
+	i = 0;
+	if (!dst)
+		return (NULL);
+//	printf("b[%d] e[%d]\n", b, e);
+	while (b < e)
 	{
-		ret = ft_check_next_quote(str, *i, str[*i]);
-		if (ret == -1)
+//		printf("->[%s]\n", &str[b]);
+		if (quotes != 1)
 		{
-			printf("Error quote\n");
-			*i += 1;
-			return (-1);
+			if (str[b] == '\\' && ft_is_bs_spechar(str[b + 1]))
+				b++;
 		}
-		if (ret == 0)
-		{
-			tmp_stop = str[*i];
-			*i += 1;
-			while (str[*i] != tmp_stop)
-				*i += 1;
-			*i += 1;
-			*stop = ' ';
-			return (0);
-		}
-		*stop = str[*i];
-		*i += 1;
-		return (1);
+		dst[i] = str[b];
+		i++;
+		b++;
 	}
-	return (0);
+	dst[i] = 0;
+	return (dst);
+}
+
+void	set_word_sep(t_word *word, char c)
+{
+	if (c == '\'')
+		word->sep = 1;
+	else
+		word->sep = 2;
 }

@@ -1,17 +1,18 @@
 
-echo
-
-
-
-
 rhobebou
 stop barking
 bonjour
 bonjour
 bonjour
-bonjourbonjourbonjourbonjourbonjour-n-n bonjour
-bonjour-n -n -n-n bonjour
--n '-n' bonjour
+bonjour
+bonjour
+bonjour
+bonjour
+ bonjour
+ bonjour
+ bonjour
+calixtedenasdetourrisecho bonjour
+bonjour
 /Users/calixtedenasdetourris
 ~
 ~
@@ -31,7 +32,7 @@ text calixtedenasdetourris calixtedenasdetourristext
 calixtedenasdetourris
 calixtedenasdetourris
 calixtedenasdetourris$USERtext oui oui oui oui calixtedenasdetourris oui calixtedenasdetourris 
-calixtedenasdetourris  calixtedenasdetourris calixtedenasdetourris  calixtedenasdetourris  calixtedenasdetourris -n calixtedenasdetourris
+calixtedenasdetourris  calixtedenasdetourris calixtedenasdetourris  calixtedenasdetourris  calixtedenasdetourris calixtedenasdetourris
  \  \
 \"   ""
 \" \" \" \"\"\" \'\'\'
@@ -205,19 +206,24 @@ text textcalixtedenasdetourris ... calixtedenasdetourris
 //home
 /Users/calixtedenasdetourris
 hello
-hellohello world"coucou"lala
-"coucou"'lala'
-"hello world""-n "hello world""
-"-n hello world"
-hello"world"
 hello
-world!
+hello world
+"coucou"lala
+"coucou"'lala'
+"hello world"
+" "hello world""
+" hello world"
+hello
+"world"
+hello
+world
+!
 "\\"
 "\n \n \n"
 "\n \\n \\n"
 hello"
 hello "
-hello -n \n world -n
+hello \n world
 //home
 "//home"
 '//home'
@@ -226,9 +232,11 @@ $'PWD'
 coucou
 0
 bonjour
-je suisgentil
+je suis
+gentil
 0
-One"argument"lol"n"ee"d"more?"\
+One"argument"lol
+"n"ee"d"more?"\
 abcd
 abcd
 abcde
@@ -240,7 +248,9 @@ ME
 HOME
 '/Users/calixtedenasdetourris'
 "$HOME"
-lalalal-nABC
+lalalal
+
+ABC
 $ a
 $     a
 
@@ -256,10 +266,10 @@ elieelie
 elie \ elie
 elie\ elie
 eliecalixtedenasdetourris//home/eliecalixtedenasdetourris0/elie/calixtedenasdetourris
+elie \\\\ leie
 'tomrrr et bonjour et \tom elie et elie 'elie' tom"
 elie 'tom and me' tom elie tom
 'tom' elie
-elie \\\\ leie
 elie         \ \ \ elie  elie
 elie'calixtedenasdetourris'eliecalixtedenasdetourris
 elie 'tom et elie' elie calixtedenasdetourris/elie

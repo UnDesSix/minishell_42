@@ -1,0 +1,4 @@
+ENV VAR
+	stops if char is not alpha_num (ex: $USERok = [], $USER* = calixtedetourris*)
+	double quote and spaces work the same.
+	single quote jsut prints waht's in between
