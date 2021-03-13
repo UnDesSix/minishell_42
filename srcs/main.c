@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 19:26:04 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/13 13:56:58 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/13 15:04:22 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ int	ft_manage_line(char **line, char **envp, t_list *begin_list)
 	*line = expansion(*line, begin_list);
 	//	printf("%s\n", *line);
 	word = ft_lexer(*line);
-//	if (!word)
-//		return (0);
+	if (!word)
+		return (0);
 	//	root = (t_node *)malloc(sizeof(t_node));
 	//if (ft_strcmp(word[0].content, "env") == 0)
 	//	env_builtin(begin_list, word);
@@ -83,8 +83,7 @@ int	ft_manage_line(char **line, char **envp, t_list *begin_list)
 	///	print2DUtil(root, 0);
 	while (word[x].content)
 	{
-		ft_putnbr_fd(x, 1);
-		ft_putstr(": [");
+		ft_putstr("[");
 		ft_putstr(word[x].content);
 		ft_putstr("]");
 		ft_putstr(" ");
@@ -118,9 +117,10 @@ int main(int argc, char **argv, char **envp)
 	{
 		if (line)
 		{
+			printf("%s\n", line);
 			ret = ft_manage_line(&line, envp, begin_list);
 		}
-		ft_putstr("\n➜ msh ");
+		ft_putstr("➜ msh ");
 		free(line);
 	}
 	free(line);

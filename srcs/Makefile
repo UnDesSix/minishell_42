@@ -11,7 +11,7 @@ INCS	= -I./includes
 SRCS_NAME	= main.c							\
 			  expansion/expansion.c				\
 			  expansion/expansion_utils.c		\
-			  ast_exec.c						\
+			  ast/ast_exec.c					\
 			  ast/ast.c							\
 			  ast/ast_pipe.c					\
 			  ast/ast_redi.c					\

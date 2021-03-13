@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 18:57:22 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/13 14:28:27 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/13 15:43:59 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	handle_space(char *line, t_lexer *lex, t_word *word)
 	char	*tmp;
 	char	*tmp_word;
 	int		begin;
-	
+
 	begin = lex->i;
 	if (line[lex->i] == 0 || line[lex->i] == '\''
 		|| line[lex->i] == '"' || line[lex->i] == '\\'
@@ -25,7 +25,8 @@ int	handle_space(char *line, t_lexer *lex, t_word *word)
 		return (0);
 	while (line[lex->i] != ' ' && line[lex->i])
 	{
-		if (ft_is_special_operator(line[lex->i]) || line[lex->i] == '"' || line[lex->i] == '\'' || line[lex->i] == '\\')
+		if (ft_is_special_operator(line[lex->i]) || line[lex->i] == '"'
+			|| line[lex->i] == '\'' || line[lex->i] == '\\')
 			break ;
 		lex->i++;
 	}
@@ -40,7 +41,8 @@ int	handle_space(char *line, t_lexer *lex, t_word *word)
 		free(tmp_word);
 	}
 	free(tmp);
-	if (line[lex->i] == ' ' || line[lex->i] == '\0' || ft_is_special_operator(line[lex->i]))
+	if (line[lex->i] == ' ' || line[lex->i] == '\0'
+		|| ft_is_special_operator(line[lex->i]))
 		lex->x += 1;
 	return (0);
 }
@@ -76,7 +78,8 @@ int	handle_quotes(char *line, t_lexer *lex, t_word *word)
 	free(tmp);
 	if (line[lex->i] == stop)
 		lex->i++;
-	if (line[lex->i] == ' ' || line[lex->i] == '\0' || ft_is_special_operator(line[lex->i]))
+	if (line[lex->i] == ' ' || line[lex->i] == '\0'
+		|| ft_is_special_operator(line[lex->i]))
 		lex->x += 1;
 	return (0);
 }
@@ -103,7 +106,8 @@ int	handle_bcklsh(char *line, t_lexer *lex, t_word *word)
 		free(tmp_word);
 	}
 	free(tmp);
-	if (line[lex->i] == ' ' || line[lex->i] == '\0' || ft_is_special_operator(line[lex->i]))
+	if (line[lex->i] == ' ' || line[lex->i] == '\0'
+		|| ft_is_special_operator(line[lex->i]))
 		lex->x += 1;
 	return (0);
 }
@@ -144,7 +148,6 @@ t_word	*malloc_word(char *line)
 	i = 0;
 	nb_word = 0;
 	nb_word = get_nb_word(line);
-	printf("%d\n", nb_word);
 	if (nb_word < 0)
 		return (NULL);
 	word = malloc(sizeof(t_word) * (nb_word + 1));

@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 14:41:04 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/13 14:21:13 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/13 15:44:52 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void	get_nb_word_quotes(char *line, int *i, int *nb_word, char quote)
 
 int	get_nb_word(char *line)
 {
-	int	i;
-	int	nb_word;
+	int		i;
+	int		nb_word;
 	char	stop;
 
 	i = 0;
@@ -46,15 +46,8 @@ int	get_nb_word(char *line)
 	stop = ' ';
 	while (line[i])
 	{
-		printf("%d : [%s]\n", stop, &line[i]);
-		if (line[i] == '\\')
+		if (line[i] == '\\' && stop != '\'')
 			i++;
-		else if (ft_is_special_operator(line[i]) && stop == ' ')
-		{
-			if (line[i + 1] != ' ' && line[i + 1] != '\0')
-				nb_word++;
-			nb_word++;
-		}
 		else if (line[i] == '"' && stop == ' ')
 			stop = '"';
 		else if (line[i] == '\'' && stop == ' ')
@@ -63,18 +56,30 @@ int	get_nb_word(char *line)
 			stop = ' ';
 		else if (line[i] == '\'' && stop == '\'')
 			stop = ' ';
+		else if (ft_is_special_operator(line[i]) && stop == ' ')
+		{
+			if (line[i + 1] != ' ' && line[i + 1] != '\0')
+				nb_word++;
+			if (line[i - 1] != ' ' && line[i - 1] != '\0')
+				nb_word++;
+		}
 		else if (line[i] == ' ' && stop == ' ')
 		{
 			nb_word++;
 			i++;
 			while (line[i] == ' ')
 				i++;
-			continue;
+			continue ;
 		}
 		i++;
 	}
+	if (stop != ' ')
+	{
+		printf("Error quotes\n");
+		return (-1);
+	}
 	if (i > 0)
-		if (line[i] == 0 && line[i - 1] != ' ')
+		if ((line[i] == 0 && line[i - 1] != ' '))
 			nb_word++;
 	return (nb_word);
 }

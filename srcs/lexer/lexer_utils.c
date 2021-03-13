@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 18:45:36 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/13 13:24:52 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/13 15:45:09 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,8 @@ char	*ft_strdup_with_limits(char *str, int b, int e)
 	i = 0;
 	if (!dst)
 		return (NULL);
-//	printf("b[%d] e[%d]\n", b, e);
 	while (b < e)
 	{
-//		printf("->[%s]\n", &str[b]);
 		if (quotes != 1)
 		{
 			if (str[b] == '\\' && ft_is_bs_spechar(str[b + 1]))
