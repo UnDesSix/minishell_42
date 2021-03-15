@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 18:15:33 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/08 15:05:09 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/15 12:56:28 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,24 +22,28 @@
  * original state
  */
 
-int	ft_while_pipe(t_word *word, int i, t_node *node, int index)
+int	ft_while_pipe(t_word *word, t_ast_var ast_var, t_node *node, t_list *begin_list)
 {
-	i = index;
-	while (word[i].content)
+	int	tmp_index;
+	ast_var.i = ast_var.index;
+	while (word[ast_var.i].content)
 	{
-		if (ft_strcmp(word[i].content, "|") == 0)
+		if (ft_strcmp(word[ast_var.i].content, "|") == 0)
 		{
 			node->type = PIPE;
-			if (ft_manage_branch(word, &node->right, i + 1) < 0)
+			tmp_index = ast_var.index;
+			ast_var.index = ast_var.i + 1;
+			if (ft_manage_branch(word, &node->right, ast_var, begin_list) < 0)
 				return (-1);
-			free(word[i].content);
-			word[i].content = NULL;
-			if (ft_manage_branch(word, &node->left, index) < 0)
+			ast_var.index = tmp_index;
+			free(word[ast_var.i].content);
+			word[ast_var.i].content = NULL;
+			if (ft_manage_branch(word, &node->left, ast_var, begin_list) < 0)
 				return (-1);
-			word[i].content = ft_strdup("|");
+			word[ast_var.i].content = ft_strdup("|");
 			return (1);
 		}
-		i++;
+		ast_var.i++;
 	}
 	return (0);
 }

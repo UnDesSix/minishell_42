@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 11:31:01 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/13 13:20:00 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/15 15:28:34 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define DOUBLE_R 7
 # define SIMPLE_L 8
 # define SPEOP_LST "=>|<;"
-# define DQ_BS_SPECHAR "$`\\"
+# define DQ_BS_SPECHAR "\"$`\\"
 # define STOP_ENV_VAR_CHAR " \"'$|/	~;?*[#=%!-"
 # include <stdio.h>
 # include <unistd.h>
@@ -73,15 +73,15 @@ typedef struct s_block
  *	AST CREATIOM
  */
 
-int		ast(t_word *word, int i, t_node *node);
+int		ast(t_word *word, t_ast_var ast_var, t_node *node, t_list *begin_list);
 void	ft_free_ast(t_node *node);
 void    fill_node(t_node *node, int type, char *cmd, char *file_name);
 char    **ft_token_to_tab(t_word *word);
 void    set_node(t_node *node);
-int 	ft_while_pipe(t_word *word, int i, t_node *node, int index);
-int 	ft_while_redi(t_word *word, int i, t_node *node, int index);
-int		ft_while_args(t_word *word, int i, t_node *node, int index);
-int		ft_manage_branch(t_word *word, t_node **node, int index);
+int 	ft_while_pipe(t_word *word, t_ast_var ast_var, t_node *node, t_list *begin_list);
+int 	ft_while_redi(t_word *word, t_ast_var ast_var, t_node *node, t_list *begin_list);
+int		ft_while_args(t_word *word, t_ast_var ast_var, t_node *node, t_list *begin_list);
+int		ft_manage_branch(t_word *word, t_node **node, t_ast_var ast_var, t_list *begin_list);
 
 /*
  *	EXPANSION
@@ -101,15 +101,16 @@ void	set_quote(int *b, int *quotes, int value, char *str);
 void	ft_init_word(t_word *word);
 char	*ft_strdup_with_limits(char *str, int b, int e);
 void	set_word_sep(t_word *word, char c);
-char	*ft_check_cmd(char *str);
+char	*ft_check_cmd(char *str, t_list *begin_list);
 
 void	btree_prefix_exec(t_node *root, t_saver *saver, int side);
+int update_env(t_list *begin_list, char *cmd);
 
 t_word	*ft_lexer(char *line);
 t_input	*ft_selector(char **tabs, int *nb_blocks);
 int		pwd(void);
 int		echo(t_input input);
-int		cd(t_input input);
+int		cd(char **tab, t_list *begin_list);
 int		ft_redirections(t_input *input);
 int		ft_identify_word(t_word *word);
 char    **ft_split(char const *s, char c);

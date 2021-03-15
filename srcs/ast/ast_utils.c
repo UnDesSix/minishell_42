@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 18:16:19 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/08 15:26:57 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/15 12:24:59 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,16 @@
  * to create other nodes below the current one.
  */
 
-int	ft_manage_branch(t_word *word, t_node **node, int index)
+int	ft_manage_branch(t_word *word, t_node **node, t_ast_var ast_var, t_list *begin_list)
 {
-	if (word[index].content == NULL)
+	if (word[ast_var.index].content == NULL)
 		*node = NULL;
 	else
 	{
 		*node = (t_node *)malloc(sizeof(t_node));
 		if (!(*node))
 			return (-1);
-		ast(word, index, *node);
+		ast(word, ast_var, *node, begin_list);
 	}
 	return (0);
 }

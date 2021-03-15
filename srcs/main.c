@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 19:26:04 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/13 15:04:22 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/15 16:04:32 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,47 +59,70 @@ int	ft_manage_line(char **line, char **envp, t_list *begin_list)
 	t_node *root;
 	t_saver *saver;
 	int		x;
+	t_ast_var	ast_var;
 
 	x = 0;
 	*line = expansion(*line, begin_list);
-	//	printf("%s\n", *line);
 	word = ft_lexer(*line);
 	if (!word)
 		return (0);
-	//	root = (t_node *)malloc(sizeof(t_node));
-	//if (ft_strcmp(word[0].content, "env") == 0)
-	//	env_builtin(begin_list, word);
+	root = (t_node *)malloc(sizeof(t_node));
+	if (ft_strcmp(word[0].content, "env") == 0)
+		env_builtin(begin_list, word);
+	if (ft_strcmp(word[0].content, "cd") == 0)
+	{
+		char *tab[2] = {"cd", word[1].content};
+		cd(tab, begin_list);
+	}
 	//else if (ft_strcmp(word[0].content, "unset") == 0)
 	//	unset_builtin(&begin_list, word);
 	//else if (ft_strcmp(word[0].content, "export") == 0)
 	//	export_builtin(begin_list, word);
-	//	ast(word, 0, root);
-	//	saver = malloc(sizeof(t_saver));
-	//    saver->past_pfd = NULL;
-	//    saver->current_pfd = NULL;
-	//    saver->envp_list = begin_list;
-	//    btree_prefix_exec(root, saver, 0);
+	ast_var.index = 0;
+	ast_var.i = 0;
+	ast(word, ast_var, root, begin_list);
+	saver = malloc(sizeof(t_saver));
+    saver->past_pfd = NULL;
+    saver->current_pfd = NULL;
+    saver->envp_list = begin_list;
+	
 
-	///	print2DUtil(root, 0);
+///////////////ICI FREROT////////////////////
+
+
+
+    btree_prefix_exec(root, saver, 0);
+
+
+///////////////////////////////////////////
+
+
+
+
+
+	update_env(begin_list, word[0].content);
+	//print2DUtil(root, 0);
 	while (word[x].content)
 	{
-		ft_putstr("[");
-		ft_putstr(word[x].content);
-		ft_putstr("]");
-		ft_putstr(" ");
+//		ft_putstr("[");
+//		if (ft_strcmp(word[x].content, "echo") != 0)
+//			ft_putstr(word[x].content);
+//		ft_putstr("]");
+//		if (ft_strcmp(word[x].content, "echo") != 0 && word[x + 1].content != NULL)
+//			ft_putstr(" ");
 		free(word[x].content);
 		x++;
 	}
-	ft_putstr("\n");
-	//	ft_free_ast(root);
+//	ft_putstr("\n");
+	ft_free_ast(root);
 	free(word);
 	return (0);
 }
 
 void	exit_ms(int signal)
 {
-	printf("exiting ms...\n");
-	exit(0);
+	printf("\n");
+	return ;
 }
 
 int main(int argc, char **argv, char **envp)
@@ -110,17 +133,14 @@ int main(int argc, char **argv, char **envp)
 
 	ret = 0;
 	line = NULL;
-	ft_putstr("➜ msh ");
+	ft_putstr_fd("➜ msh ", 1);
 	begin_list = tabs_to_list(envp);
 	signal(SIGINT, exit_ms);
 	while (get_next_line(0, &line) != 0)
 	{
 		if (line)
-		{
-			printf("%s\n", line);
 			ret = ft_manage_line(&line, envp, begin_list);
-		}
-		ft_putstr("➜ msh ");
+		ft_putstr_fd("➜ msh ", 1);
 		free(line);
 	}
 	free(line);

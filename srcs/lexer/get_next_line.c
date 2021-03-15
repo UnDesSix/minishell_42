@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 12:05:25 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/13 15:46:04 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/13 16:22:39 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ int	get_next_line(int fd, char **line)
 	ret = 1;
 	*line = NULL;
 	stack = NULL;
+	buffer = '\0';
 	while (ret)
 	{
 		ret = read(fd, &buffer, 1);

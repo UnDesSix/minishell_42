@@ -9,6 +9,7 @@ LIBSH	= libsh/libsh.a
 INCS	= -I./includes
 
 SRCS_NAME	= main.c							\
+			  builtins/cd.c						\
 			  expansion/expansion.c				\
 			  expansion/expansion_utils.c		\
 			  ast/ast_exec.c					\
@@ -38,7 +39,8 @@ SRCS_NAME	= main.c							\
               env/create_var.c                  \
               env/ft_create_elem.c              \
               env/ft_list_find.c                \
-              env/list_to_tabs.c
+              env/list_to_tabs.c				\
+			  update_env/update_env.c			
 
 
 SRCS_PATH	= ./

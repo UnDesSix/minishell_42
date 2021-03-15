@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 20:42:02 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/11 20:11:08 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/15 11:30:43 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,11 @@ typedef struct	s_env_str
 	char	*after_var;
 	int		quote;
 }				t_env_str;
+
+typedef struct	s_ast_var
+{
+	int	i;
+	int	index;
+}				t_ast_var;
 
 #endif

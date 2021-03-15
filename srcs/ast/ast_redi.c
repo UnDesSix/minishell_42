@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 18:14:56 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/08 16:13:44 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/15 12:53:13 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ void	ft_handle_redi_type(char *str, t_node *node)
  *	if so it sets it to NULL else it calls the recursion
  */
 
-int	ft_left_branch_redi(t_node *node, t_word *word, int index, int i)
+int	ft_left_branch_redi(t_node *node, t_word *word, t_ast_var ast_var, t_list *begin_list)
 {
-	if (i == 0)
+	if (ast_var.i == 0)
 		node->right = NULL;
 	else
-		if (ft_manage_branch(word, &node->right, index) < 0)
+		if (ft_manage_branch(word, &node->right, ast_var, begin_list) < 0)
 			return (-1);
 	return (0);
 }
@@ -48,30 +48,34 @@ int	ft_left_branch_redi(t_node *node, t_word *word, int index, int i)
  *	it creates a node. Then it calls the recursion for both branchs
  */
 
-int	ft_while_redi(t_word *word, int i, t_node *node, int index)
+int	ft_while_redi(t_word *word, t_ast_var ast_var, t_node *node, t_list *begin_list)
 {
 	char	*tmp_word;
+	int		tmp_i;
 
-	i = index;
-	while (word[i].content)
+	ast_var.i = ast_var.index;
+	while (word[ast_var.i].content)
 	{
-		if (ft_strcmp(word[i].content, ">") == 0
-			|| ft_strcmp(word[i].content, "<") == 0
-			|| ft_strcmp(word[i].content, ">>") == 0)
+		if (ft_strcmp(word[ast_var.i].content, ">") == 0
+			|| ft_strcmp(word[ast_var.i].content, "<") == 0
+			|| ft_strcmp(word[ast_var.i].content, ">>") == 0)
 		{
-			ft_handle_redi_type(word[i].content, node);
-			fill_node(node, REDI, NULL, word[i + 1].content);
-			if (ft_manage_branch(word, &node->left, i + 2) < 0)
+			ft_handle_redi_type(word[ast_var.i].content, node);
+			fill_node(node, REDI, NULL, word[ast_var.i + 1].content);
+			tmp_i = ast_var.index;
+			ast_var.index = ast_var.i + 2;
+			if (ft_manage_branch(word, &node->left, ast_var, begin_list) < 0)
 				return (-1);
-			tmp_word = ft_strdup(word[i].content);
-			free(word[i].content);
-			word[i].content = NULL;
-			if (ft_left_branch_redi(node, word, index, i) < 0)
+			ast_var.index = tmp_i;
+			tmp_word = ft_strdup(word[ast_var.i].content);
+			free(word[ast_var.i].content);
+			word[ast_var.i].content = NULL;
+			if (ft_left_branch_redi(node, word, ast_var, begin_list) < 0)
 				return (-1);
-			word[i].content = tmp_word;
+			word[ast_var.i].content = tmp_word;
 			return (1);
 		}
-		i++;
+		ast_var.i++;
 	}
 	return (0);
 }
