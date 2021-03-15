@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 19:26:04 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/11 22:13:06 by mlarboul         ###   ########.fr       */
+/*   Updated: 2021/03/13 21:08:21 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ int	ft_manage_line(char *line, char **envp, t_list *begin_list)
 {
 	t_word	*word;
 	t_node	*root;
-	t_saver	*saver;
 	int		x;
 
 	x = 0;
@@ -71,24 +70,17 @@ int	ft_manage_line(char *line, char **envp, t_list *begin_list)
 //	expansion(word, begin_list);
 	ast(word, 0, root);
 //	print2DUtil(root, 0);
-/*	while (word[x].content)
-	{
-		ft_putstr("[");
-		ft_putstr(word[x].content);
-		ft_putstr("]");
-		ft_putstr(" ");
-		free(word[x].content);
-		x++;
-	}
-	ft_putstr("\n");*/
-	saver = malloc(sizeof(t_saver));
-	saver->past_pfd = NULL;
-	saver->current_pfd = NULL;
-	saver->envp_list = begin_list;
-	btree_prefix_exec(root, saver, 0);
-	wait(NULL);
-	close(saver->current_pfd[0]);
-	close(saver->current_pfd[1]);
+	ast_run(root, begin_list);
+//	while (word[x].content)
+//	{
+//		ft_putstr("[");
+//		ft_putstr(word[x].content);
+//		ft_putstr("]");
+//		ft_putstr(" ");
+//		free(word[x].content);
+//		x++;
+//	}
+//	ft_putstr("\n");
 	ft_free_ast(root);
 	free(word);
 	return (0);
@@ -108,14 +100,14 @@ int main(int argc, char **argv, char **envp)
 
 	ret = 0;
 	line = NULL;
-//	ft_putstr("➜ msh ");
+	ft_putstr("➜ msh ");
 	begin_list = tabs_to_list(envp);
 	signal(SIGINT, exit_ms);
 	while (get_next_line(0, &line) != 0)
 	{
 		if (line)
 			ret = ft_manage_line(line, envp, begin_list);
-//		ft_putstr("➜ msh ");
+		ft_putstr("➜ msh ");
 		free(line);
 	}
 	free(line);

@@ -1,9 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ast_exec.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mlarboul <mlarboul@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/13 12:02:08 by mlarboul          #+#    #+#             */
+/*   Updated: 2021/03/13 21:20:23 by mlarboul         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/header.h"
 
 int		exec_arg(t_node *node, t_saver *saver, int flag)
 {
 	pid_t	pid;
-	char	**new_envp;
 
 	pid = fork();
 	if (pid < 0)
@@ -13,9 +24,15 @@ int		exec_arg(t_node *node, t_saver *saver, int flag)
 	}
 	if (pid == 0)
 	{
-		new_envp = list_to_tabs(saver->envp_list, 0);
+	node->envp = list_to_tabs(saver->envp_list, 0);
 		if (flag == 1)
 		{
+			if (saver->past_pfd)
+			{
+				close(saver->past_pfd[1]);
+				close(0);
+				dup(saver->past_pfd[0]);
+			}
 			close(saver->current_pfd[0]);
 			close(1);
 			dup(saver->current_pfd[1]);
@@ -26,7 +43,7 @@ int		exec_arg(t_node *node, t_saver *saver, int flag)
 			close(0);
 			dup(saver->current_pfd[0]);
 		}
-		execve(node->cmd, node->args, new_envp);
+		execve(node->cmd, node->args, node->envp);
 		exit(0);
 	}
 	return (0);

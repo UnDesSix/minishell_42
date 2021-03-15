@@ -16,6 +16,8 @@ SRCS_NAME	= main.c							\
 			  ast/ast_args.c					\
 			  ast/ast_utils.c					\
 			  ast/ast_exec.c					\
+			  ast/ast_clean.c					\
+			  ast/ast_run.c						\
 			  lexer/get_next_line.c 			\
 			  lexer/get_next_word.c				\
 			  lexer/get_nb_word.c				\

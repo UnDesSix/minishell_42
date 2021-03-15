@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 11:31:01 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/11 18:51:30 by mlarboul         ###   ########.fr       */
+/*   Updated: 2021/03/13 15:07:21 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,7 @@ int		ft_identify_word(t_word *word);
 char    **ft_split(char const *s, char c);
 
 void	btree_prefix_exec(t_node *node, t_saver *saver, int flag);
+void	btree_prefix_clean(t_node *node);
+int		ast_run(t_node *root, t_list *begin_list);
 int		ft_check_cmd(char *str);
 #endif
