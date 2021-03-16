@@ -9,11 +9,16 @@ LIBSH	= libsh/libsh.a
 INCS	= -I./includes
 
 SRCS_NAME	= main.c							\
+			  debug.c							\
 			  builtins/cd.c						\
+			  builtins/exit.c					\
+			  builtins/pwd.c					\
+			  builtins/echo.c					\
 			  expansion/expansion.c				\
 			  expansion/expansion_utils.c		\
 			  ast/ast_exec.c					\
 			  ast/ast.c							\
+			  ast/check_ast.c					\
 			  ast/ast_pipe.c					\
 			  ast/ast_redi.c					\
 			  ast/ast_args.c					\

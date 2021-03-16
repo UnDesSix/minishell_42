@@ -6,144 +6,100 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 19:26:04 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/15 16:04:32 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/15 19:01:45 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/header.h"
 #define COUNT 5
 
-void print2DUtil(t_node *root, int space) 
-{ 
-	if (root == NULL) 
-		return; 
-	space += COUNT; 
-	print2DUtil(root->right, space); 
-	printf("\n"); 
-	for (int i = COUNT; i < space; i++) 
-		printf(" "); 
-	if (root->type == PIPE)
-		printf("PIPE\n"); 
-	else if (root->type == REDI)
-	{
-		printf("REDI "); 
-		if (root->redi_type == SIMPLE_R)
-			printf("[>] ");
-		else if (root->redi_type == DOUBLE_R)
-			printf("[>>] ");
-		else if (root->redi_type == SIMPLE_L)
-			printf("[<] ");
-		printf("[%s]\n", root->file_name);
-	}
-	else if (root->type == FD)
-		printf("FILE->[%s]\n", root->file_name); 
-	else
-	{
-		printf("CMD->[");
-		int x = 0;
-		while (root->args[x + 1])
-		{
-			printf("%s ", root->args[x]);
-			x++;
-		}
-		printf("%s", root->args[x]);
-		printf("]\n");
-	}
-	print2DUtil(root->left, space); 
-}
-
-int	ft_manage_line(char **line, char **envp, t_list *begin_list)
+void	ft_free_words(t_word *word)
 {
-	t_word	*word;
-	char	*line_cpy;
-	t_node *root;
-	t_saver *saver;
-	int		x;
-	t_ast_var	ast_var;
+	int	x;
 
 	x = 0;
+	while (word[x].content)
+	{
+//		print_word(word[x]);
+		free(word[x].content);
+		x++;
+	}
+	ft_putstr("\n");
+	free(word);
+}
+
+int	ft_manage_line(char **line, t_list *begin_list)
+{
+	t_word	*word;
+	t_node *root;
+	t_saver *saver;
+	t_ast_var	ast_var;
+
 	*line = expansion(*line, begin_list);
 	word = ft_lexer(*line);
 	if (!word)
 		return (0);
-	root = (t_node *)malloc(sizeof(t_node));
-	if (ft_strcmp(word[0].content, "env") == 0)
-		env_builtin(begin_list, word);
-	if (ft_strcmp(word[0].content, "cd") == 0)
+	if (word[0].content)
 	{
-		char *tab[2] = {"cd", word[1].content};
-		cd(tab, begin_list);
+		if (ft_strcmp(word[0].content, "exit") == 0)
+		{
+			ft_free_words(word);
+			return (0);
+		}
 	}
-	//else if (ft_strcmp(word[0].content, "unset") == 0)
-	//	unset_builtin(&begin_list, word);
-	//else if (ft_strcmp(word[0].content, "export") == 0)
-	//	export_builtin(begin_list, word);
+	root = (t_node *)malloc(sizeof(t_node));
 	ast_var.index = 0;
 	ast_var.i = 0;
 	ast(word, ast_var, root, begin_list);
-	saver = malloc(sizeof(t_saver));
-    saver->past_pfd = NULL;
-    saver->current_pfd = NULL;
-    saver->envp_list = begin_list;
-	
-
-///////////////ICI FREROT////////////////////
-
-
-
-    btree_prefix_exec(root, saver, 0);
-
-
-///////////////////////////////////////////
-
-
-
-
-
-	update_env(begin_list, word[0].content);
-	//print2DUtil(root, 0);
-	while (word[x].content)
+	if (check_ast(root) == -1)
 	{
-//		ft_putstr("[");
-//		if (ft_strcmp(word[x].content, "echo") != 0)
-//			ft_putstr(word[x].content);
-//		ft_putstr("]");
-//		if (ft_strcmp(word[x].content, "echo") != 0 && word[x + 1].content != NULL)
-//			ft_putstr(" ");
-		free(word[x].content);
-		x++;
+		ft_free_words(word);
+		return (1);
 	}
-//	ft_putstr("\n");
+	print2DUtil(root, 0);
+	//saver = malloc(sizeof(t_saver));
+	//saver->past_pfd = NULL;
+	//saver->current_pfd = NULL;
+	//saver->envp_list = begin_list;
+//	btree_prefix_exec(root, saver, 0);
+	ft_free_words(word);
 	ft_free_ast(root);
-	free(word);
-	return (0);
+	//free(saver);
+	return (1);
 }
 
-void	exit_ms(int signal)
-{
-	printf("\n");
-	return ;
-}
-
-int main(int argc, char **argv, char **envp)
+int	get_input(t_list *begin_list)
 {
 	char	*line;
 	int		ret;
-	t_list	*begin_list;
 
 	ret = 0;
 	line = NULL;
 	ft_putstr_fd("➜ msh ", 1);
-	begin_list = tabs_to_list(envp);
-	signal(SIGINT, exit_ms);
-	while (get_next_line(0, &line) != 0)
+	while (42)
 	{
+		ret = get_next_line(0, &line);
 		if (line)
-			ret = ft_manage_line(&line, envp, begin_list);
+		{
+			if (ret == 0)
+				break ;
+			ret = ft_manage_line(&line, begin_list);
+			if (ret == 0)
+				break;
+			free(line);
+		}
 		ft_putstr_fd("➜ msh ", 1);
-		free(line);
 	}
 	free(line);
+	return (0);
+}
+
+int main(int argc, char **argv, char **envp)
+{
+	t_list	*begin_list;
+
+	begin_list = tabs_to_list(envp);
+	get_input(begin_list);
 	ft_list_clear(begin_list, free_var);
 	return (0);
 }

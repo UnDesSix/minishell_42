@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 11:31:01 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/15 15:28:34 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/15 18:39:19 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,39 +35,7 @@
 # include <sys/wait.h>
 # include <sys/stat.h>
 # include <signal.h>
-
-typedef struct s_lexer
-{
-	int		i;
-	char	*line;
-	int		x;
-	int		begin;
-}				t_lexer;
-
-typedef struct s_input
-{
-	char	*command;
-	char	**args;
-	int		fd;
-}				t_input;
-
-typedef struct s_word
-{
-	char	*content;
-	int		sep;
-	int		space;
-	int		type;
-	int		builtin;
-}				t_word;
-
-typedef struct s_block
-{
-	t_word	*word;
-	int		stop;
-}				t_block;
-
-#include "env.h"
-#include "structures.h"
+# include "structures.h"
 
 /*
  *	AST CREATIOM
@@ -75,13 +43,18 @@ typedef struct s_block
 
 int		ast(t_word *word, t_ast_var ast_var, t_node *node, t_list *begin_list);
 void	ft_free_ast(t_node *node);
-void    fill_node(t_node *node, int type, char *cmd, char *file_name);
-char    **ft_token_to_tab(t_word *word);
-void    set_node(t_node *node);
-int 	ft_while_pipe(t_word *word, t_ast_var ast_var, t_node *node, t_list *begin_list);
-int 	ft_while_redi(t_word *word, t_ast_var ast_var, t_node *node, t_list *begin_list);
-int		ft_while_args(t_word *word, t_ast_var ast_var, t_node *node, t_list *begin_list);
-int		ft_manage_branch(t_word *word, t_node **node, t_ast_var ast_var, t_list *begin_list);
+void	fill_node(t_node *node, int type, char *cmd, char *file_name);
+char	**ft_token_to_tab(t_word *word);
+void	set_node(t_node *node);
+int		ft_while_pipe(t_word *word, t_ast_var ast_var, t_node *node, t_list
+		*begin_list);
+int		ft_while_redi(t_word *word, t_ast_var ast_var, t_node *node, t_list
+		*begin_list);
+int		ft_while_args(t_word *word, t_ast_var ast_var, t_node *node, t_list
+		*begin_list);
+int		ft_manage_branch(t_word *word, t_node **node, t_ast_var ast_var, t_list
+		*begin_list);
+int	check_ast(t_node *ast);
 
 /*
  *	EXPANSION
@@ -93,6 +66,11 @@ void	free_exp_var(t_env_str *env, char *tmp_line);
 void	set_exp_quote(char c, t_env_str *env);
 int		go_to_end_var(char *line, int i, int quote);
 
+/*
+ *	LEXER / PARSER
+ */
+
+t_word	*ft_lexer(char *line);
 int		get_next_line(int fd, char **line);
 int		get_next_word(char *str, t_word *word, int reset);
 int		get_nb_word(char *str);
@@ -104,14 +82,46 @@ void	set_word_sep(t_word *word, char c);
 char	*ft_check_cmd(char *str, t_list *begin_list);
 
 void	btree_prefix_exec(t_node *root, t_saver *saver, int side);
-int update_env(t_list *begin_list, char *cmd);
 
-t_word	*ft_lexer(char *line);
-t_input	*ft_selector(char **tabs, int *nb_blocks);
+/*
+ *	BUILTINS
+ */
+
 int		pwd(void);
-int		echo(t_input input);
+int		echo(char **tab);
 int		cd(char **tab, t_list *begin_list);
-int		ft_redirections(t_input *input);
-int		ft_identify_word(t_word *word);
-char    **ft_split(char const *s, char c);
+int		ft_exit(void);
+
+int		export_builtin(t_list *begin_list, t_word *word);
+t_bool	var_is_well_syntaxed(char *str, char *builtin);
+int		create_var(t_list **begin_list, char *name, char *content, int status);
+int		export_variable(t_word *word, t_list **begin_list);
+void	free_tabs(char **tabs);
+void	free_var(void *data);
+
+/*
+ ** LIST PROTOYPES
+ */
+t_list	*ft_create_elem(void *data);
+void	ft_list_clear(t_list *begin_list, void (*free_fct)(void *));
+int		ft_list_duplicate(t_list **dst_list, t_list *src_list);
+t_list	*ft_list_find(t_list *begin_list, void *data_ref, int (*cmp)());
+void	ft_list_foreach(t_list *begin_list, char *(*f)(char *, char *));
+void	ft_list_push_back(t_list **begin_list, void *data);
+t_list	*ft_list_push_strs(int size, char **strs);
+void	ft_list_remove_if(t_list **begin_list, void *data_ref,
+		int (*cmp)(), void (*free_fct)(void *));
+void	ft_list_sort(t_list **begin_list, int (*cmp)());
+char	**list_to_tabs(t_list *begin_list, int type);
+void	print_tabs(char **tabs);
+
+t_list	*tabs_to_list(char **envp);
+int		env_builtin(t_list *begin_list, t_word *word);
+int		unset_builtin(t_list **begin_list, t_word *word);
+
+/*
+ *	DEBUG
+ */
+void    print_word(t_word word);
+void print2DUtil(t_node *root, int space);
 #endif

@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 12:05:25 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/13 16:22:39 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/15 18:33:49 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,12 @@ int	get_next_line(int fd, char **line)
 	while (ret)
 	{
 		ret = read(fd, &buffer, 1);
+		if (buffer == '\0')
+		{
+			*line = ft_strdup("exit");
+			printf("exit\n");
+			return (1);
+		}
 		if (buffer != '\n')
 		{
 			tmp = manage_stack(stack, buffer);
@@ -101,8 +107,6 @@ int	get_next_line(int fd, char **line)
 			if (!ft_check_multi_lines(&stack))
 				break ;
 	}
-	if (buffer == '\0')
-		return (0);
 	*line = stack;
 	return (1);
 }

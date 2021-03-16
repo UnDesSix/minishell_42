@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 18:57:22 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/13 15:43:59 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/15 18:30:41 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ int	handle_space(char *line, t_lexer *lex, t_word *word)
 		free(tmp_word);
 	}
 	free(tmp);
+	if (line[lex->i] == ' ')
+		word->space = TRUE;
 	if (line[lex->i] == ' ' || line[lex->i] == '\0'
 		|| ft_is_special_operator(line[lex->i]))
 		lex->x += 1;
@@ -56,6 +58,9 @@ int	handle_quotes(char *line, t_lexer *lex, t_word *word)
 
 	if (line[lex->i] != '\'' && line[lex->i] != '"')
 		return (0);
+	word->sep = 1;
+	if (line[lex->i] == '"')
+		word->sep += 1;
 	stop = line[lex->i];
 	begin = lex->i;
 	lex->i++;
@@ -78,6 +83,8 @@ int	handle_quotes(char *line, t_lexer *lex, t_word *word)
 	free(tmp);
 	if (line[lex->i] == stop)
 		lex->i++;
+	if (line[lex->i] == ' ')
+		word->space = TRUE;
 	if (line[lex->i] == ' ' || line[lex->i] == '\0'
 		|| ft_is_special_operator(line[lex->i]))
 		lex->x += 1;
@@ -106,6 +113,8 @@ int	handle_bcklsh(char *line, t_lexer *lex, t_word *word)
 		free(tmp_word);
 	}
 	free(tmp);
+	if (line[lex->i] == ' ')
+		word->space = TRUE;
 	if (line[lex->i] == ' ' || line[lex->i] == '\0'
 		|| ft_is_special_operator(line[lex->i]))
 		lex->x += 1;
@@ -134,6 +143,8 @@ int	handle_spechar(char *line, t_lexer *lex, t_word *word)
 		tmp[1] = '\0';
 	}
 	lex->i += 1;
+	if (line[lex->i] == ' ')
+		word->space = TRUE;
 	word->content = tmp;
 	lex->x += 1;
 	return (0);

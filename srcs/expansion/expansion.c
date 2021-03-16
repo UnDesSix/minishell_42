@@ -6,17 +6,65 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 19:17:47 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/13 15:40:18 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/15 18:32:47 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/header.h"
+
+char	*add_quote_word(char *str)
+{
+	int		len;
+	char	*dst;
+	int		i;
+
+	i = 0;
+	len = ft_strlen(str);
+	dst = (char *)malloc(sizeof(char) * (len + 3));
+	dst[0] = '"';
+	while (str[i])
+	{
+		dst[i + 1] = str[i];
+		i++;
+	}
+	dst[i + 1] = '"';
+	dst[i + 2] = '\0';
+	return (dst);
+}
+
+char	*add_quotes(char *str)
+{
+	char	**split;
+	int		i;
+	char	*tmp;
+	char	*dst;
+	
+	i = 0;
+	split = ft_split(str, ' ');
+	dst = ft_strdup("");
+	while (split[i])
+	{
+		tmp = add_quote_word(split[i]);
+		free(split[i]);
+		split[i] = ft_strdup(tmp);
+		if (split[i + 1])
+			split[i] = ft_strjoin(split[i], " ");
+		free(tmp);
+		tmp = ft_strjoin(dst, split[i]);
+		free(dst);
+		dst = ft_strdup(tmp);
+		free(tmp);
+		i++;
+	}
+	return (dst);
+}
 
 char	*replace_var(char *str, t_list *begin_list)
 {
 	char	*var;
 	int		i;
 	t_list	*tmp_list;
+	char	*var_with_quotes;
 
 	i = 1;
 	tmp_list = begin_list;
@@ -25,7 +73,9 @@ char	*replace_var(char *str, t_list *begin_list)
 	{
 		if (ft_strcmp(&str[1], ((t_var *)(tmp_list->data))->name) == 0)
 		{
-			var = ft_strdup(((t_var *)(tmp_list->data))->content);
+			var_with_quotes = add_quotes(((t_var *)(tmp_list->data))->content);
+			var = ft_strdup(var_with_quotes);
+			free(var_with_quotes);
 			break ;
 		}
 		tmp_list = tmp_list->next;
@@ -129,11 +179,11 @@ char	*expansion(char *line, t_list *begin_list)
 		if (line[i] == '\\')
 			i++;
 		else if (line[i] == '~'
-			&& (line[i + 1] == '/' || line[i + 1] == ' ' || line[i + 1] == '\0')
-			&& env.quote != 1)
+				&& (line[i + 1] == '/' || line[i + 1] == ' ' || line[i + 1] == '\0')
+				&& env.quote != 1)
 			line = manage_tild(line, &env, &i);
 		else if (line[i] == '$' && line[i + 1] != ' '
-			&& line[i + 1] && env.quote != 1)
+				&& line[i + 1] && env.quote != 1)
 			line = manage_dollar(line, &env, &i, begin_list);
 		else
 			set_exp_quote(line[i], &env);
