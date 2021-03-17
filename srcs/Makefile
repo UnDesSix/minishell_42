@@ -16,6 +16,7 @@ SRCS_NAME	= main.c							\
 			  builtins/echo.c					\
 			  expansion/expansion.c				\
 			  expansion/expansion_utils.c		\
+			  expansion/expansion_utils2.c		\
 			  ast/ast_exec.c					\
 			  ast/ast.c							\
 			  ast/check_ast.c					\
@@ -24,9 +25,11 @@ SRCS_NAME	= main.c							\
 			  ast/ast_args.c					\
 			  ast/ast_utils.c					\
 			  lexer/get_next_line.c 			\
+			  lexer/sort_words.c 				\
 			  lexer/get_nb_word.c				\
 			  lexer/lexer_utils.c				\
 			  lexer/lexer.c						\
+			  lexer/lexer_quotes.c				\
 			  parser/ft_identify.c				\
               env/builtin_export.c              \
               env/export_variable.c             \
@@ -45,7 +48,6 @@ SRCS_NAME	= main.c							\
               env/ft_create_elem.c              \
               env/ft_list_find.c                \
               env/list_to_tabs.c				\
-			  update_env/update_env.c			
 
 
 SRCS_PATH	= ./
@@ -66,6 +68,7 @@ $(NAME): $(OBJS)
 	$(CC) $(OBJS) $(LIBSH) $(INCS) -o $(NAME)
 
 clean:
+	make clean -C libsh/
 	$(RM) $(OBJS)
 	$(RM) $(OBJS_PATH)
 

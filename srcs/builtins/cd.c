@@ -6,13 +6,13 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 15:14:00 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/15 16:03:39 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/17 11:17:50 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/header.h"
 
-int	set_pwd(t_list *begin_list, char *pwd)
+int		set_pwd(t_list *begin_list, char *pwd)
 {
 	t_list	*tmp_list;
 
@@ -29,7 +29,7 @@ int	set_pwd(t_list *begin_list, char *pwd)
 	return (0);
 }
 
-int	set_old_pwd(t_list *begin_list)
+int		set_old_pwd(t_list *begin_list)
 {
 	t_list	*tmp_list;
 	char	*old_pwd;
@@ -75,7 +75,7 @@ char	*get_goto_default_pwd(t_list *begin_list)
 	return (pwd);
 }
 
-int	cd(char **tab, t_list *begin_list)
+int		cd(char **tab, t_list *begin_list)
 {
 	char	*pwd;
 	char	tmp_pwd[4096];

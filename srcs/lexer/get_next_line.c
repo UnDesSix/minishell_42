@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 12:05:25 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/15 18:33:49 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/17 12:04:50 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,14 @@ char	*manage_stack(char *old_stack, char buffer)
 	return (stack);
 }
 
-int	ft_check_multi_lines(char **stack)
+int		ft_check_multi_lines(char **stack, char buffer)
 {
 	int		i;
 	char	*tmp_stack;
 
 	i = 0;
+	if (buffer != '\n')
+		return (1);
 	if (!*stack)
 		return (0);
 	while ((*stack)[i])
@@ -77,7 +79,18 @@ int	ft_check_multi_lines(char **stack)
 	return (0);
 }
 
-int	get_next_line(int fd, char **line)
+int		ctrl_d(char **line, char buffer)
+{
+	if (buffer == '\0')
+	{
+		*line = ft_strdup("exit");
+		printf("exit\n");
+		return (1);
+	}
+	return (0);
+}
+
+int		get_next_line(int fd, char **line)
 {
 	static char	*stack = NULL;
 	char		buffer;
@@ -91,21 +104,16 @@ int	get_next_line(int fd, char **line)
 	while (ret)
 	{
 		ret = read(fd, &buffer, 1);
-		if (buffer == '\0')
-		{
-			*line = ft_strdup("exit");
-			printf("exit\n");
+		if (ctrl_d(line, buffer))
 			return (1);
-		}
 		if (buffer != '\n')
 		{
 			tmp = manage_stack(stack, buffer);
 			free(stack);
 			stack = tmp;
 		}
-		if (buffer == '\n')
-			if (!ft_check_multi_lines(&stack))
-				break ;
+		if (!ft_check_multi_lines(&stack, buffer))
+			break ;
 	}
 	*line = stack;
 	return (1);

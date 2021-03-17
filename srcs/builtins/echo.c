@@ -6,13 +6,13 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 16:25:32 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/15 16:32:49 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/17 11:18:03 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/header.h"
 
-int echo(char **tab)
+int	echo(char **tab)
 {
 	int	flag;
 	int	i;

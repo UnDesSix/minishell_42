@@ -6,23 +6,21 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 18:16:19 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/16 19:24:35 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/17 10:23:26 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/header.h"
 
 /*
- * FT_MANAGE_BRANCH -> defines a branch depending on the given array of word.
- * If it's empty it sets the node to NULL. Else it will call the recursion
- * to create other nodes below the current one.
- */
+** FT_MANAGE_BRANCH -> defines a branch depending on the given array of word.
+** If it's empty it sets the node to NULL. Else it will call the recursion
+** to create other nodes below the current one.
+*/
 
-int	ft_manage_branch(t_word *word, t_node **node, t_ast_var ast_var, t_list *begin_list)
+int		ft_manage_branch(t_word *word, t_node **node,
+		t_ast_var ast_var, t_list *begin_list)
 {
-	while (word[ast_var.i].content)
-		printf("[%s] ", word[ast_var.i++].content);
-	printf("\n");
 	if (word[ast_var.index].content == NULL)
 		*node = NULL;
 	else
@@ -36,8 +34,8 @@ int	ft_manage_branch(t_word *word, t_node **node, t_ast_var ast_var, t_list *beg
 }
 
 /*
- * FILL_NODE -> fills an existing node with the given data
- */
+** FILL_NODE -> fills an existing node with the given data
+*/
 
 void	fill_node(t_node *node, int type, char *cmd, char *file_name)
 {
@@ -47,8 +45,8 @@ void	fill_node(t_node *node, int type, char *cmd, char *file_name)
 }
 
 /*
- * FT_TOKEN_TO_TAB -> creates an array of string from an array of word
- */
+** FT_TOKEN_TO_TAB -> creates an array of string from an array of word
+*/
 
 char	**ft_token_to_tab(t_word *word)
 {
@@ -72,9 +70,9 @@ char	**ft_token_to_tab(t_word *word)
 }
 
 /*
- * SET_NODE -> sets all the parameters of a node to a default value of
- * NULL or 0
- */
+** SET_NODE -> sets all the parameters of a node to a default value of
+** NULL or 0
+*/
 
 void	set_node(t_node *node)
 {
@@ -89,10 +87,10 @@ void	set_node(t_node *node)
 }
 
 /*
- * FT_FREE_AST -> frees the whole tree except the strings of node->args
- * which are part of the main token array. They are freed in another function.
- * The tree is freed from left to right
- */
+** FT_FREE_AST -> frees the whole tree except the strings of node->args
+** which are part of the main token array. They are freed in another function.
+** The tree is freed from left to right
+*/
 
 void	ft_free_ast(t_node *node)
 {

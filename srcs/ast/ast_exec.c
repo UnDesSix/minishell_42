@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ast_exec.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/17 10:13:21 by calide-n          #+#    #+#             */
+/*   Updated: 2021/03/17 10:13:51 by calide-n         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/header.h"
 
 int		exec_arg(t_node *node, t_saver *saver, int side)
@@ -14,10 +26,6 @@ int		exec_arg(t_node *node, t_saver *saver, int side)
 	}
 	if (pid == 0)
 	{
-//		if (side == 0)
-//			dup2(saver->current_pfd[1], 1);
-//		if (side == 1)
-//			dup2(saver->current_pfd[0], 0);
 		new_envp = list_to_tabs(saver->envp_list, 0);
 		execve(node->args[0], node->args, new_envp);
 		exit(0);
@@ -46,13 +54,10 @@ int		exec_node(t_node *node, t_saver *saver, int side)
 {
 	if (node->type == PIPE)
 		exec_pipe(node, saver);
-	//	if (node->type == REDI)
-	//		execute_arg(node, saver);
 	if (node->type == ARG)
 		exec_arg(node, saver, side);
 	return (0);
 }
-
 
 void	btree_prefix_exec(t_node *node, t_saver *saver, int side)
 {

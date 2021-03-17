@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 11:31:01 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/15 18:39:19 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/17 11:31:29 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@
 # include "structures.h"
 
 /*
- *	AST CREATIOM
- */
+**	AST CREATIOM
+*/
 
 int		ast(t_word *word, t_ast_var ast_var, t_node *node, t_list *begin_list);
 void	ft_free_ast(t_node *node);
@@ -54,22 +54,28 @@ int		ft_while_args(t_word *word, t_ast_var ast_var, t_node *node, t_list
 		*begin_list);
 int		ft_manage_branch(t_word *word, t_node **node, t_ast_var ast_var, t_list
 		*begin_list);
-int	check_ast(t_node *ast);
+int		check_ast(t_node *ast);
 
 /*
- *	EXPANSION
- */
+**	EXPANSION
+*/
 
 char	*expansion(char *line, t_list *begin_list);
 void	init_exp_var(t_env_str *env, char **tmp_line, char *line);
 void	free_exp_var(t_env_str *env, char *tmp_line);
 void	set_exp_quote(char c, t_env_str *env);
 int		go_to_end_var(char *line, int i, int quote);
+char    *add_quote_word(char *str);
+char    *add_quotes(char *str);
+char    *replace_var(char *str, t_list *begin_list);
+int     get_exp_var(char *tmp_line, int tmp_i, t_env_str *env, t_list *begin_list);
 
 /*
- *	LEXER / PARSER
- */
+**	LEXER / PARSER
+*/
 
+t_word	*sort_words(t_word *word);
+int		word_is_redi(char *str);
 t_word	*ft_lexer(char *line);
 int		get_next_line(int fd, char **line);
 int		get_next_word(char *str, t_word *word, int reset);
@@ -78,14 +84,14 @@ int		ft_is_special_operator(char c);
 void	set_quote(int *b, int *quotes, int value, char *str);
 void	ft_init_word(t_word *word);
 char	*ft_strdup_with_limits(char *str, int b, int e);
-void	set_word_sep(t_word *word, char c);
 char	*ft_check_cmd(char *str, t_list *begin_list);
-
+int		handle_quotes(char *line, t_lexer *lex, t_word *word);
 void	btree_prefix_exec(t_node *root, t_saver *saver, int side);
+void	incre_word(char *line, t_lexer *lex, t_word *word);
 
 /*
- *	BUILTINS
- */
+**	BUILTINS
+*/
 
 int		pwd(void);
 int		echo(char **tab);
@@ -100,8 +106,9 @@ void	free_tabs(char **tabs);
 void	free_var(void *data);
 
 /*
- ** LIST PROTOYPES
- */
+** LIST PROTOYPES
+*/
+
 t_list	*ft_create_elem(void *data);
 void	ft_list_clear(t_list *begin_list, void (*free_fct)(void *));
 int		ft_list_duplicate(t_list **dst_list, t_list *src_list);
@@ -120,8 +127,9 @@ int		env_builtin(t_list *begin_list, t_word *word);
 int		unset_builtin(t_list **begin_list, t_word *word);
 
 /*
- *	DEBUG
- */
-void    print_word(t_word word);
-void print2DUtil(t_node *root, int space);
+**	DEBUG
+*/
+
+void	print_word(t_word word);
+void	print2DUtil(t_node *root, int space);
 #endif

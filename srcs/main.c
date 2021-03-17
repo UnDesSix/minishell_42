@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 19:26:04 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/15 19:01:45 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/17 10:49:05 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	ft_manage_line(char **line, t_list *begin_list)
 
 	*line = expansion(*line, begin_list);
 	word = ft_lexer(*line);
+	word = sort_words(word);
 	if (!word)
 		return (0);
 	if (word[0].content)
