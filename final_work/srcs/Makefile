@@ -17,8 +17,8 @@ SRCS_NAME	= main.c							\
 			  ast/ast_args.c					\
 			  ast/ast_utils.c					\
 			  ast/ast_run.c						\
+			  ast/pipe.c					\
 			  ast/ast_pipe.c					\
-			  ast/ast_pipe2.c					\
 			  ast/ast_exec.c					\
 			  ast/ast_count.c					\
 			  ast/ast_clean.c					\

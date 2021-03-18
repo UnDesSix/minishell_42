@@ -1,0 +1,5 @@
+total 12
+drwxrwxr-x  3 user42 user42 4096 mars  18 13:16 .
+drwxrwxr-x  9 user42 user42 4096 mars  18 11:00 ..
+-rw-rw-r--  1 user42 user42    0 mars  18 13:16 file1
+drwxrwxr-x 12 user42 user42 4096 mars  18 13:15 srcs
