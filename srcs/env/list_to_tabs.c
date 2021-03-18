@@ -6,7 +6,7 @@
 /*   By: mlarboul <mlarboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 11:47:54 by mlarboul          #+#    #+#             */
-/*   Updated: 2021/03/03 18:19:10 by mlarboul         ###   ########.fr       */
+/*   Updated: 2021/03/15 20:58:15 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,14 @@ int		list_to_tabs_env(t_list *begin_list, char **tabs, int size)
 		if (!tabs[i])
 			return (-1);
 		tmp = ft_strjoin(tabs[i], "=");
-		if (!tmp[i])
+		if (!tmp)
 			return (-1);
 		free(tabs[i]);
 		tabs[i] = ft_strjoin(tmp, ((t_var *)begin_list->data)->content);
 		if (!tabs[i])
 			return (-1);
 		free(tmp);
+		begin_list = begin_list->next;
 		i++;
 	}
 	tabs[i] = NULL;

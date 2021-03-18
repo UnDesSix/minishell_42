@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 16:19:12 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/18 10:24:52 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/18 14:54:27 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,6 @@ int	pwd(t_word *word)
 	if (errno != 0)
 		printf("msh: %s\n", strerror(errno));
 	ft_putstr(pwd);
+	ft_putstr("\n");
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 15:14:00 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/18 10:02:37 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/18 15:48:31 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,6 @@ int		cd(t_word *word, t_list *begin_list)
 	errno = 0;
 	pwd = NULL;
 	set_old_pwd(begin_list);
-	for (int x = 0; word[x].content; x++)
-		printf("[%s]\n", word[x].content);
 	if (word[1].content)
 	{
 		if (ft_strcmp(word[1].content, "") == 0)
@@ -97,7 +95,10 @@ int		cd(t_word *word, t_list *begin_list)
 		else
 			chdir(word[1].content);
 		if (errno != 0)
+		{
 			printf("msh: cd: %s: %s\n", word[1].content, strerror(errno));
+			return (1);
+		}
 		getcwd(tmp_pwd, sizeof(tmp_pwd));
 		pwd = ft_strdup(tmp_pwd);
 	}

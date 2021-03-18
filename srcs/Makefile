@@ -14,10 +14,16 @@ SRCS_NAME	= main.c							\
 			  builtins/exit.c					\
 			  builtins/pwd.c					\
 			  builtins/echo.c					\
+			  builtins/exec_builtins.c			\
 			  expansion/expansion.c				\
 			  expansion/expansion_utils.c		\
 			  expansion/expansion_utils2.c		\
 			  ast/ast_exec.c					\
+			  ast/ast_clean.c					\
+			  ast/ast_count.c					\
+			  ast/pipe.c						\
+			  ast/ast_run.c						\
+			  ast/redirection.c					\
 			  ast/ast.c							\
 			  ast/check_ast.c					\
 			  ast/ast_pipe.c					\

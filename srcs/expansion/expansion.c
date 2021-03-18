@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 19:17:47 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/18 09:38:13 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/18 15:53:39 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,13 @@ char	*manage_dollar(char *line, t_env_str *env, int *i, t_list *begin_list)
 	return (line);
 }
 
+void	manage_exit_status(t_list *begin_list)
+{
+	t_list	*tmp_list;
+
+	tmp_list = begin_list;
+}
+
 char	*expansion(char *orline, t_list *begin_list)
 {
 	int			i;
@@ -99,8 +106,10 @@ char	*expansion(char *orline, t_list *begin_list)
 				line[i + 1] == ' ' || line[i + 1] == '\0')
 				&& env.quote != 1)
 			line = manage_tild(line, &env, &i);
-		else if (line[i] == '$' && line[i + 1] != ' '
-				&& line[i + 1] && env.quote != 1)
+		else if (line[i] == '$' && line[i + 1] == '?')
+			manage_exit_status(begin_list);
+		else if (line[i] == '$' && line[i + 1] != ' ' &&
+			line[i + 1] && env.quote != 1)
 			line = manage_dollar(line, &env, &i, begin_list);
 		else
 			set_exp_quote(line[i], &env);

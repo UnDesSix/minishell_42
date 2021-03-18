@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 19:26:04 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/18 10:58:30 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/18 15:57:35 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ void	ft_free_words(t_word *word)
 	x = 0;
 	while (word[x].content)
 	{
-//		print_word(word[x]);
+		//		print_word(word[x]);
 		free(word[x].content);
 		x++;
 	}
-	ft_putstr("\n");
+	//	ft_putstr("\n");
 	free(word);
 }
 
@@ -38,6 +38,7 @@ int	ft_manage_line(char *orline, t_list *begin_list)
 	char	*line;
 
 	line = expansion(orline, begin_list);
+	printf("[%s]\n", line);
 	word = ft_lexer(line);
 	free(line);
 	if (!word)
@@ -47,21 +48,11 @@ int	ft_manage_line(char *orline, t_list *begin_list)
 		return (0);
 	if (word[0].content)
 	{
-		char *tab[] = {word[0].content, word[1].content, NULL};
 		if (ft_strcmp(word[0].content, "exit") == 0)
 		{
 			ft_free_words(word);
 			return (0);
 		}
-		if (ft_strcmp(word[0].content, "cd") == 0)
-			if (cd(word, begin_list) < 0)
-				return (1);
-		if (ft_strcmp(word[0].content, "echo") == 0)
-			if (echo(word) < 0)
-				return (1);
-		if (ft_strcmp(word[0].content, "pwd") == 0)
-			if (pwd(word) < 0)
-				return (1);
 	}
 	root = (t_node *)malloc(sizeof(t_node));
 	ast_var.index = 0;
@@ -72,17 +63,26 @@ int	ft_manage_line(char *orline, t_list *begin_list)
 		ft_free_words(word);
 		return (1);
 	}
-	print2DUtil(root, 0);
+	ast_run(root, begin_list);
+	//print2DUtil(root, 0);
 	ft_free_words(word);
 	ft_free_ast(root);
-	free(saver);
 	return (1);
 }
 
-void sig_handler(int ok){
+void sig_handler(int sig){
 
 	//Return type of the handler function should be void
-	printf("Inside handler function\n");
+	(void)sig;
+	if (g_proc.pid)
+	{
+		for (int z = 0; g_proc.pid[z]; z++)
+			kill(g_proc.pid[z], 2);
+		g_proc.pid = NULL;
+		ft_putstr("\n");
+	}
+	else
+		ft_putstr("\n➜ msh ");
 	return ;
 }
 
@@ -132,6 +132,7 @@ int	divide_lines(char *line, t_list *begin_list)
 	if (begin < i)
 		if (ft_manage_line(&line[begin], begin_list) == 0)
 			return (0);
+	printf("%d\n", g_proc.ret);
 	return (1);
 }
 
@@ -144,9 +145,10 @@ int	get_input(t_list *begin_list)
 	ret = 0;
 	line = NULL;
 	ft_putstr_fd("➜ msh ", 1);
-	signal(SIGINT,sig_handler);
+	signal(SIGINT, sig_handler);
 	while (42)
 	{
+		g_proc.pid = NULL;
 		ret = get_next_line(0, &line);
 		if (line)
 		{
@@ -167,6 +169,7 @@ int main(int argc, char **argv, char **envp)
 {
 	t_list	*begin_list;
 
+	g_proc.ret = 0;
 	begin_list = tabs_to_list(envp);
 	get_input(begin_list);
 	ft_list_clear(begin_list, free_var);

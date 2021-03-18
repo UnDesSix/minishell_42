@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 12:05:25 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/17 12:04:50 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/18 15:08:10 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ int		ft_check_multi_lines(char **stack, char buffer)
 		i++;
 	if ((*stack)[i - 1] == '\\' && (*stack)[i - 2] != '\\')
 	{
+		ft_putstr("> ");
 		(*stack)[i - 1] = 0;
 		tmp_stack = ft_strdup(*stack);
 		free(*stack);
@@ -79,10 +80,11 @@ int		ft_check_multi_lines(char **stack, char buffer)
 	return (0);
 }
 
-int		ctrl_d(char **line, char buffer)
+int		ctrl_d(char **line, char buffer, char *stack)
 {
 	if (buffer == '\0')
 	{
+		printf("s->[%s]\n", stack);
 		*line = ft_strdup("exit");
 		printf("exit\n");
 		return (1);
@@ -104,7 +106,7 @@ int		get_next_line(int fd, char **line)
 	while (ret)
 	{
 		ret = read(fd, &buffer, 1);
-		if (ctrl_d(line, buffer))
+		if (ctrl_d(line, buffer, stack))
 			return (1);
 		if (buffer != '\n')
 		{

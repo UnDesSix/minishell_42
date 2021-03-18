@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 20:42:02 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/17 10:26:30 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/18 15:38:56 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,13 @@
 # include "header.h"
 
 typedef int		t_bool;
+
+typedef struct	s_process
+{
+	pid_t	*pid;
+	int		index;
+	int		ret;
+}				t_process;
 
 typedef struct	s_list
 {
@@ -46,25 +53,34 @@ typedef struct	s_word
 	int		builtin;
 }				t_word;
 
-typedef struct	s_node
+typedef struct  s_node
 {
-	struct s_node	*right;
-	struct s_node	*left;
-	int				type;
-	char			*file_name;
-	int				fd;
-	int				pfd[2];
-	int				redi_type;
-	char			*cmd;
-	char			**args;
-}				t_node;
+    struct s_node   *right;
+    struct s_node   *left;
+    pid_t           child_pid;
+    int             type;
+    int             arg_id;
+    char            *file_name;
+    int             fd;
+    int             *pfd;
+    int             redi_type;
+    int             pfd_input;
+    int             pfd_output;
+    char            *cmd;
+    char            **args;
+    char            **envp;
+	t_word			*word;
+}               t_node;
 
-typedef struct	s_saver
+// KEEP THIS STRUC
+typedef struct  s_saver
 {
-	t_list	*envp_list;
-	int		*past_pfd;
-	int		*current_pfd;
-}				t_saver;
+    t_list  *envp_list;
+    int     arg_nb;
+    int     redi_on;
+    int     *past_pfd;
+    int     *curr_pfd;
+}               t_saver;
 
 typedef struct	s_env_str
 {
