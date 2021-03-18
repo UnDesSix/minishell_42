@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 15:14:00 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/17 11:17:50 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/18 10:02:37 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int		set_pwd(t_list *begin_list, char *pwd)
 	{
 		if (ft_strcmp((((t_var *)(tmp_list->data))->name), "PWD") == 0)
 		{
-			(((t_var *)(tmp_list->data))->content) = pwd;
+			free((((t_var *)(tmp_list->data))->content));
+			(((t_var *)(tmp_list->data))->content) = ft_strdup(pwd);
 			break ;
 		}
 		tmp_list = tmp_list->next;
@@ -49,11 +50,14 @@ int		set_old_pwd(t_list *begin_list)
 	{
 		if (ft_strcmp((((t_var *)(tmp_list->data))->name), "OLDPWD") == 0)
 		{
-			(((t_var *)(tmp_list->data))->content) = old_pwd;
+			free((((t_var *)(tmp_list->data))->content));
+			(((t_var *)(tmp_list->data))->content) = ft_strdup(old_pwd);
 			break ;
 		}
 		tmp_list = tmp_list->next;
 	}
+	if (old_pwd)
+		free(old_pwd);
 	return (0);
 }
 
@@ -62,6 +66,7 @@ char	*get_goto_default_pwd(t_list *begin_list)
 	t_list	*tmp_list;
 	char	*pwd;
 
+	tmp_list = begin_list;
 	while (tmp_list)
 	{
 		if (ft_strcmp((((t_var *)(tmp_list->data))->name), "HOME") == 0)
@@ -75,20 +80,30 @@ char	*get_goto_default_pwd(t_list *begin_list)
 	return (pwd);
 }
 
-int		cd(char **tab, t_list *begin_list)
+int		cd(t_word *word, t_list *begin_list)
 {
 	char	*pwd;
 	char	tmp_pwd[4096];
 
+	errno = 0;
+	pwd = NULL;
 	set_old_pwd(begin_list);
-	if (tab[1])
+	for (int x = 0; word[x].content; x++)
+		printf("[%s]\n", word[x].content);
+	if (word[1].content)
 	{
-		chdir(tab[1]);
+		if (ft_strcmp(word[1].content, "") == 0)
+			chdir(".");
+		else
+			chdir(word[1].content);
+		if (errno != 0)
+			printf("msh: cd: %s: %s\n", word[1].content, strerror(errno));
 		getcwd(tmp_pwd, sizeof(tmp_pwd));
 		pwd = ft_strdup(tmp_pwd);
 	}
-	else
+	if (!pwd)
 		pwd = get_goto_default_pwd(begin_list);
 	set_pwd(begin_list, pwd);
+	free(pwd);
 	return (0);
 }

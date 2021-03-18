@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 15:15:26 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/17 11:20:38 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/18 08:59:02 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*ft_check_if_binary(char **paths, char *str)
 
 int		ft_is_builtin(char *arg)
 {
-	return (ft_strcmp(arg, "echo") == 0
+	return (ft_strcmp(arg, "echo") == 0 || ft_strcmp(arg, "cd") == 0
 		|| ft_strcmp(arg, "pwd") == 0 || ft_strcmp(arg, "export") == 0
 		|| ft_strcmp(arg, "unset") == 0 || ft_strcmp(arg, "env") == 0);
 }

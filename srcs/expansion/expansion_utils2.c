@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 11:22:12 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/17 11:25:54 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/18 09:44:53 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,10 @@ char	*add_quotes(char *str)
 		free(tmp);
 		i++;
 	}
+	i = 0;
+	while (split[i])
+		free(split[i++]);
+	free(split);
 	return (dst);
 }
 

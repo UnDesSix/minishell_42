@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 19:17:47 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/17 11:26:09 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/18 09:38:13 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,14 @@ char	*manage_dollar(char *line, t_env_str *env, int *i, t_list *begin_list)
 	return (line);
 }
 
-char	*expansion(char *line, t_list *begin_list)
+char	*expansion(char *orline, t_list *begin_list)
 {
 	int			i;
 	t_env_str	env;
 	char		*tmp_line;
 	int			tmp_i;
 	char		*tmp_var;
+	char		*line = ft_strdup(orline);
 
 	i = 0;
 	env.quote = 0;

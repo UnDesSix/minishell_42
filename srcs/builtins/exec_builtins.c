@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 12:58:49 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/15 17:10:01 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/18 10:27:37 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	exec_builtins(char **tab, t_list *begin_list)
 		export_builtin(begin_list, word);
 	else if (ft_strcmp(tab[0], "echo") == 0)
 		echo(tab);
-	else if (ft_strcmp(tab[0], "cd") == 0)
+	else if (ft_strcmp(NULL, "cd") == 0)
 		cd(tab, begin_list);
 	else if (ft_strcmp(tab[0], "pwd") == 0)
 		pwd();

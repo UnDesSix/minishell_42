@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 11:31:01 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/17 11:31:29 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/18 10:22:17 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@
 # include <sys/stat.h>
 # include <signal.h>
 # include "structures.h"
+# include <sys/errno.h>
+
+extern int	errno;
 
 /*
 **	AST CREATIOM
@@ -93,9 +96,9 @@ void	incre_word(char *line, t_lexer *lex, t_word *word);
 **	BUILTINS
 */
 
-int		pwd(void);
-int		echo(char **tab);
-int		cd(char **tab, t_list *begin_list);
+int		pwd(t_word *word);
+int		echo(t_word *word);
+int		cd(t_word *word, t_list *begin_list);
 int		ft_exit(void);
 
 int		export_builtin(t_list *begin_list, t_word *word);
