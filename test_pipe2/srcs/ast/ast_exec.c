@@ -6,7 +6,7 @@
 /*   By: mlarboul <mlarboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 12:02:08 by mlarboul          #+#    #+#             */
-/*   Updated: 2021/03/15 17:56:20 by mlarboul         ###   ########.fr       */
+/*   Updated: 2021/03/17 15:10:37 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,36 +25,55 @@ int		exec_arg(t_node *node, t_saver *saver, int flag)
 	if (pid == 0)
 	{
 		node->envp = list_to_tabs(saver->envp_list, 0);
-		
-		execve(node->cmd, node->args, node->envp);
+//		printf("EXEC : CMD    : %s\n", node->args[0]);
+//		printf("EXEC : input  : %d\n", node->pfd_input);
+//		printf("EXEC : output : %d\n\n", node->pfd_output);
+		if (node->pfd_input != STDOUT)
+		{
+			close(0);
+			dup(node->pfd_input);
+		}
+		if (node->pfd_output != STDIN)
+		{
+			close(1);
+			dup(node->pfd_output);
+		}
+		execve(node->args[0], node->args, node->envp);
 		exit(0);
 	}
+
+	if (node->pfd_input != STDOUT)
+		close(node->pfd_input);
+	if (node->pfd_output != STDIN)
+		close(node->pfd_output);
 	return (0);
 }
 
-int		exec_pipe(t_node *node, t_saver *saver)
-{
-	if (saver->current_pfd != NULL)
-		saver->past_pfd = saver->current_pfd;
-	else
-		saver->past_pfd = NULL;
-	node->pfd = malloc(sizeof(int) * 2);
-	if (pipe(node->pfd) < 0)
-	{
-		printf("Pipe issues.\n");
-		return (-1);
-	}
-	saver->current_pfd = node->pfd;
-	return (0);
-}
+/*
+   int		exec_pipe(t_node *node, t_saver *saver)
+   {
+   if (saver->current_pfd != NULL)
+   saver->past_pfd = saver->current_pfd;
+   else
+   saver->past_pfd = NULL;
+   node->pfd = malloc(sizeof(int) * 2);
+   if (pipe(node->pfd) < 0)
+   {
+   printf("Pipe issues.\n");
+   return (-1);
+   }
+   saver->current_pfd = node->pfd;
+   return (0);
+   }
+ */
 
 int		exec_node(t_node *node, t_saver *saver, int flag)
 {
-	if (node->type == PIPE)
-		exec_pipe(node, saver);
-//	else if(node->type == REDI)
-//		execute_arg(node, saver);
-	else if (node->type == ARG)
+	//	if (node->type == PIPE)
+	//		exec_pipe(node, saver);
+	//	else if(node->type == REDI)
+	//		execute_arg(node, saver);
+	if (node->type == ARG)
 		exec_arg(node, saver, flag);
 	return (0);
 }

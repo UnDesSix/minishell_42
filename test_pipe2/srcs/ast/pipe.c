@@ -6,7 +6,7 @@
 /*   By: mlarboul <mlarboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 12:02:08 by mlarboul          #+#    #+#             */
-/*   Updated: 2021/03/15 17:59:16 by mlarboul         ###   ########.fr       */
+/*   Updated: 2021/03/18 10:29:47 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,47 @@
 
 int		pipe_arg(t_node *node, t_saver *saver, int flag)
 {
-	node->input = 0;
-	node->output = 1;
-	if (saver->past_pfd == NULL)
+	node->pfd_input = 0;
+	node->pfd_output = 1;
+//	printf("saver->curr_pfd[1] : %d\n", saver->curr_pfd[1]);
+//	printf("arg ID / TOTAL %d / %d\n", node->arg_id, saver->arg_nb);
+	if (saver->curr_pfd == NULL)
+	{
+//		printf("I GO HERE 0\n");
+		return (0);
+	}
+	if (saver->past_pfd == NULL && node->arg_id < saver->arg_nb)
+	{
+//		printf("I GO HERE 1\n");
 		node->pfd_output = saver->curr_pfd[1];
+	}
+	else if (node->arg_id < saver->arg_nb)
+	{
+//		printf("I GO HERE 2\n");
+		node->pfd_input = saver->past_pfd[0];
+		node->pfd_output = saver->curr_pfd[1];
+	}
 	else
 	{
-		if (flag == 1)
+//		printf("I GO HERE 3\n");
+		node->pfd_input = saver->curr_pfd[0];
+		if (saver->redi_on == TRUE)
 		{
-			node->pfd_input = saver->past_pfd[0];
 			node->pfd_output = saver->curr_pfd[1];
-		}
-		else
-		{
-			node->pfd_input = saver->past_pfd[0];
+			saver->redi_on = FALSE;
 		}
 	}
+//	printf("PIPE : CMD    : %s\n", node->args[0]);
+//	printf("PIPE : input  : %d\n", node->pfd_input);
+//	printf("PIPE : output : %d\n\n", node->pfd_output);
 	return (0);
 }
 
 int		pipe_pipe(t_node *node, t_saver *saver)
 {
-	if (saver->current_pfd != NULL)
+	if (saver->curr_pfd != NULL)
 		saver->past_pfd = saver->curr_pfd;
-	else
-		saver->past_pfd = NULL;
+	node->pfd = malloc(sizeof(int) * 2);
 	if (pipe(node->pfd) < 0)
 	{
 		printf("Pipe issues.\n");
@@ -52,13 +68,12 @@ int		pipe_node(t_node *node, t_saver *saver, int flag)
 {
 	if (node->type == PIPE)
 		pipe_pipe(node, saver);
-//	else if(node->type == REDI)
-//		execute_arg(node, saver);
+	else if(node->type == REDI)
+		manage_redi(node, saver);
 	else if (node->type == ARG)
 		pipe_arg(node, saver, flag);
 	return (0);
 }
-
 
 void	btree_prefix_pipe(t_node *node, t_saver *saver, int flag)
 {
@@ -66,7 +81,7 @@ void	btree_prefix_pipe(t_node *node, t_saver *saver, int flag)
 		return ;
 	pipe_node(node, saver, flag);
 	if (node->left)
-		btree_prefix_exec(node->left, saver, 1);
+		btree_prefix_pipe(node->left, saver, LEFT);
 	if (node->right)
-		btree_prefix_exec(node->right, saver, 0);
+		btree_prefix_pipe(node->right, saver, RIGHT);
 }
