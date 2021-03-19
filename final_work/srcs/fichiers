@@ -1,9 +1,0 @@
-Matt :
-ast_clean.c
-ast_count.c
-ast_exec.c
-pipe.c
-ast_run.c
-redirection.c
-
-ast_run(root, begin_list);
