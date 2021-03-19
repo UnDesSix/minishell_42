@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 12:05:25 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/18 15:08:10 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/19 16:34:28 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ int		ctrl_d(char **line, char buffer, char *stack)
 {
 	if (buffer == '\0')
 	{
-		printf("s->[%s]\n", stack);
 		*line = ft_strdup("exit");
 		printf("exit\n");
 		return (1);

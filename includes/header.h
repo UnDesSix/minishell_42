@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 11:31:01 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/18 15:35:15 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/19 16:29:52 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define SIMPLE_L 8
 # define SPEOP_LST "=>|<;"
 # define DQ_BS_SPECHAR "\"$`\\"
-# define STOP_ENV_VAR_CHAR " \"'$|/	~;*[#=%!-"
+# define STOP_ENV_VAR_CHAR " \"'$?|/	~;*[#=%!-"
 # define STDOUT 0
 # define STDIN 1
 # define RIGHT 0
@@ -93,7 +93,8 @@ int     get_exp_var(char *tmp_line, int tmp_i, t_env_str *env, t_list *begin_lis
 **	LEXER / PARSER
 */
 
-t_word	*sort_words(t_word *word);
+int ft_check_lexer(t_word *word);
+t_word	*sort_word(t_word *word);
 int		word_is_redi(char *str);
 t_word	*ft_lexer(char *line);
 int		get_next_line(int fd, char **line);
@@ -108,6 +109,8 @@ int		handle_quotes(char *line, t_lexer *lex, t_word *word);
 void	btree_prefix_exec(t_node *root, t_saver *saver, int side);
 void	incre_word(char *line, t_lexer *lex, t_word *word);
 int		ft_is_builtin(char *arg);
+t_word	*ft_wordup(t_word *word);
+t_word	*ft_wordjoin(t_word *w1, t_word *w2);
 
 /*
 **	BUILTINS
@@ -153,4 +156,11 @@ int		unset_builtin(t_list **begin_list, t_word *word);
 
 void	print_word(t_word word);
 void	print2DUtil(t_node *root, int space);
+
+/*
+**	SIGNALS
+*/
+
+void	signals();
+
 #endif

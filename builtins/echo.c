@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 16:25:32 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/18 10:06:13 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/19 12:23:55 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ int	echo(t_word *word)
 	i = flag;
 	while (word[i].content)
 	{
-		ft_putstr(word[i].content);
+		if (ft_strcmp(word[i].content, "$?") == 0)
+			ft_putnbr_fd(g_proc.ret, 1);
+		else
+			ft_putstr(word[i].content);
 		if (word[i + 1].content)
 			ft_putstr(" ");
 		i++;

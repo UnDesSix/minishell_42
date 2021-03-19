@@ -6,7 +6,7 @@
 /*   By: mlarboul <mlarboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 12:02:10 by mlarboul          #+#    #+#             */
-/*   Updated: 2021/03/18 13:40:24 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/19 11:29:04 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		clean_node(t_node *node)
 	//		execute_arg(node, saver);
 	if (node->type == ARG)
 	{
-
+		free(node->word);
 		if (node->pfd_input != STDOUT)
 		{
 			//			printf("CLEAN : CMD    : %s\n", node->args[0]);

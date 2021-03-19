@@ -1,18 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   functions.h                                        :+:      :+:    :+:   */
+/*   check_lexer.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/26 17:43:30 by calide-n          #+#    #+#             */
-/*   Updated: 2021/01/26 17:44:43 by calide-n         ###   ########.fr       */
+/*   Created: 2021/03/19 16:18:16 by calide-n          #+#    #+#             */
+/*   Updated: 2021/03/19 16:21:37 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FUNCTIONS_H
-# define FUNCTIONS_H
+#include "../includes/header.h"
 
-# include "minishell.h"
+int	ft_check_lexer(t_word *word)
+{
+	int	i;
 
-#endif
+	i = 0;
+	while (word[i].content)
+	{
+		if (ft_strcmp(word[i].content, ";") == 0)
+			if (word[i + 1].content == NULL && i == 0)
+			{
+				ft_putstr("bash: syntax error near unexpected token `;'\n");
+				return (0);
+			}
+		i++;
+	}
+	return (1);
+}
