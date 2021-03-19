@@ -10,6 +10,7 @@ INCS	= -I./includes
 
 SRCS_NAME	= main.c							\
 			  debug.c							\
+			  signals/signals.c					\
 			  builtins/cd.c						\
 			  builtins/exit.c					\
 			  builtins/pwd.c					\
@@ -32,8 +33,10 @@ SRCS_NAME	= main.c							\
 			  ast/ast_utils.c					\
 			  lexer/get_next_line.c 			\
 			  lexer/sort_words.c 				\
+			  lexer/sort_words_utils.c			\
 			  lexer/get_nb_word.c				\
 			  lexer/lexer_utils.c				\
+			  lexer/check_lexer.c				\
 			  lexer/lexer.c						\
 			  lexer/lexer_quotes.c				\
 			  parser/ft_identify.c				\

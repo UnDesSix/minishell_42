@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 18:14:08 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/18 11:48:03 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/19 17:43:18 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ t_word	*ft_wordup(t_word *word)
 	t_word	*dest;
 
 	i = 0;
+	if (!word)
+		return (NULL);
 	while (word[i].content)
 		i++;
 	dest = malloc(sizeof(t_word) * (i + 1));

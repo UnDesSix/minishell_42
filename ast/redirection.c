@@ -6,7 +6,7 @@
 /*   By: mlarboul <mlarboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 18:17:39 by mlarboul          #+#    #+#             */
-/*   Updated: 2021/03/18 22:22:54 by mlarboul         ###   ########.fr       */
+/*   Updated: 2021/03/19 18:26:47 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int		ft_simple_right(t_node *node, t_saver *saver)
 		return (-1);
 	}
 //	printf("simple fd : %d\n", fd);
+	node->redi_fd = fd;
 	saver->redi_on = TRUE;
 	saver->redi_fd = fd;
 	return (0);
@@ -50,6 +51,7 @@ int		ft_double_right(t_node *node, t_saver *saver)
 		}
 		read_bytes = read(fd, buffer, 4096);
 	}
+	node->redi_fd = fd;
 	saver->redi_on = TRUE;
 	saver->redi_fd = fd;
 	return (0);

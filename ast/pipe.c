@@ -6,7 +6,7 @@
 /*   By: mlarboul <mlarboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 12:02:08 by mlarboul          #+#    #+#             */
-/*   Updated: 2021/03/18 23:37:26 by mlarboul         ###   ########.fr       */
+/*   Updated: 2021/03/19 18:53:50 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		pipe_arg(t_node *node, t_saver *saver, int flag)
 
 	node->pfd_input = 0;
 	node->pfd_output = 1;
-	printf("saver->redi_fd : %d\n", saver->redi_fd);
+//	printf("saver->redi_fd : %d\n", saver->redi_fd);
 	printf("arg ID / TOTAL %d / %d\n", node->arg_id, saver->arg_nb);
 	if (saver->curr_pfd == NULL)
 	{
@@ -50,12 +50,26 @@ int		pipe_arg(t_node *node, t_saver *saver, int flag)
 	{
 		printf("I GO HERE 2\n");
 		node->pfd_input = saver->past_pfd[0];
-		node->pfd_output = saver->curr_pfd[1];
+		if (saver->redi_on == TRUE)
+		{
+			printf("I GO HERE 1.3\n");
+			node->pfd_output = saver->redi_fd;
+			saver->redi_on = FALSE;
+			close(saver->curr_pfd[1]);
+		}
+		else
+			node->pfd_output = saver->curr_pfd[1];
 	}
 	else
 	{
 		printf("I GO HERE 3\n");
 		node->pfd_input = saver->curr_pfd[0];
+		if (saver->redi_on == TRUE)
+		{
+			printf("I GO HERE 1.3\n");
+			node->pfd_output = saver->redi_fd;
+			saver->redi_on = FALSE;
+		}
 	}
 //	printf("PIPE : CMD    : %s\n", node->args[0]);
 //	printf("PIPE : input  : %d\n", node->pfd_input);

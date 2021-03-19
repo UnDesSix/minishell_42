@@ -6,22 +6,28 @@
 /*   By: mlarboul <mlarboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 12:02:08 by mlarboul          #+#    #+#             */
-/*   Updated: 2021/03/18 19:58:16 by mlarboul         ###   ########.fr       */
+/*   Updated: 2021/03/19 16:09:52 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/header.h"
 
-int		exec_arg(t_node *node, t_saver *saver, int flag)
+int		ft_is_cmd(char *str)
+{
+	struct stat stats;
+
+	if (stat(str, &stats) == 0)
+		return (1);
+	ft_putstr("msh: ");
+	ft_putstr(str);
+	ft_putstr(": command not found\n");
+	return (0);
+}
+
+int		exec_arg_fork(t_node *node, t_saver *saver, int flag)
 {
 	pid_t	pid;
-	int		ret;
 
-	if (ft_is_builtin(node->word[0].content))
-	{
-		exec_builtins(node->word, saver->envp_list);
-		return (0);
-	}
 	pid = fork();
 	if (pid < 0)
 	{
@@ -31,9 +37,6 @@ int		exec_arg(t_node *node, t_saver *saver, int flag)
 	if (pid == 0)
 	{
 		node->envp = list_to_tabs(saver->envp_list, 0);
-//		printf("EXEC : CMD    : %s\n", node->args[0]);
-//		printf("EXEC : input  : %d\n", node->pfd_input);
-//		printf("EXEC : output : %d\n\n", node->pfd_output);
 		if (node->pfd_input != STDOUT)
 		{
 			close(0);
@@ -44,11 +47,28 @@ int		exec_arg(t_node *node, t_saver *saver, int flag)
 			close(1);
 			dup(node->pfd_output);
 		}
-		execve(node->args[0], node->args, node->envp);
-		exit(0);
+		if (ft_is_builtin(node->word[0].content))
+			exit(exec_builtins(node->word, saver->envp_list));
+		else if (ft_is_cmd(node->args[0]))
+			execve(node->args[0], node->args, node->envp);
+		exit(127);
 	}
 	g_proc.pid[g_proc.index] = pid;
 	g_proc.index++;
+	return (0);
+}
+
+int		exec_arg(t_node *node, t_saver *saver, int flag)
+{
+
+	if (ft_strcmp(node->word[0].content, "cd") == 0
+			|| ft_strcmp(node->word[0].content, "export") == 0
+			|| ft_strcmp(node->word[0].content, "unset") == 0)
+	{
+		g_proc.ret = exec_builtins(node->word, saver->envp_list);
+		return (0);
+	}
+	exec_arg_fork(node, saver, flag);
 	if (node->pfd_input != STDOUT)
 		close(node->pfd_input);
 	if (node->pfd_output != STDIN)
@@ -72,7 +92,7 @@ int		exec_arg(t_node *node, t_saver *saver, int flag)
    saver->current_pfd = node->pfd;
    return (0);
    }
- */
+   */
 
 int		exec_node(t_node *node, t_saver *saver, int flag)
 {
