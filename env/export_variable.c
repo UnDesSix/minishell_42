@@ -6,7 +6,7 @@
 /*   By: mlarboul <mlarboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 11:48:12 by mlarboul          #+#    #+#             */
-/*   Updated: 2021/03/21 15:27:30 by mlarboul         ###   ########.fr       */
+/*   Updated: 2021/03/21 21:30:07 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,14 +139,14 @@ int	export_variable(t_word *word, t_list **begin_list)
 				&& !ft_strcmp(word[i + 1].content, "="))
 		{
 			if (perm_variables(begin_list, word, &i) < 0)
-				return (-1);
+				return (1);
 		}
 		else
 		{
 			elm_found = ft_list_find(*begin_list, word[i].content, ft_strcmp);
 			if (!elm_found)
 				if (create_var(begin_list, word[i].content, NULL, 0) < 0)
-					return (-1);
+					return (1);
 		}
 		i++;
 	}

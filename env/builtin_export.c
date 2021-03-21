@@ -6,7 +6,7 @@
 /*   By: mlarboul <mlarboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 10:08:37 by mlarboul          #+#    #+#             */
-/*   Updated: 2021/03/21 20:35:27 by mlarboul         ###   ########.fr       */
+/*   Updated: 2021/03/21 21:26:30 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,17 @@ int	export_alone(t_list *begin_list)
 
 	i = 0;
 	if (ft_list_duplicate(&dup_list, begin_list) < 0)
-		return (-1);
+		return (1);
 	ft_list_sort(&dup_list, ft_strcmp);
 	tabs = list_to_tabs(dup_list, 1);
 	if (!tabs)
-		return (-1);
+		return (1);
 	ft_list_clear(dup_list, free_var);
 	while (tabs[i])
 	{
 		tmp = ft_strjoin("declare -x ", tabs[i]);
 		if (!tmp)
-			return (-1);
+			return (1);
 		free(tabs[i]);
 		tabs[i] = tmp;
 		i++;
