@@ -13,11 +13,8 @@ SRCS_NAME	=	main.c							\
 				signals/signals.c				\
 				builtins/cd.c					\
 				builtins/exit.c					\
-				builtins/pwd.c					\
 				builtins/echo.c					\
 				builtins/exec_builtins.c		\
-				expansion/expansion.c			\
-				expansion/expansion_utils.c		\
 				expansion/expansion_utils2.c	\
 				ast/ast_exec.c					\
 				ast/ast_clean.c					\
@@ -25,22 +22,16 @@ SRCS_NAME	=	main.c							\
 				ast/pipe.c						\
 				ast/ast_run.c					\
 				ast/redirection.c				\
-				ast/ast.c						\
 				ast/check_ast.c					\
 				ast/ast_pipe.c					\
 				ast/ast_redi.c					\
 				ast/ast_args.c					\
 				ast/ast_utils.c					\
 				ast/define_std_inout.c			\
-				lexer/get_next_line.c 			\
 				lexer/sort_words.c 				\
 				lexer/sort_words_utils.c		\
 				lexer/get_nb_word.c				\
-				lexer/lexer_utils.c				\
-				lexer/check_lexer.c				\
-				lexer/lexer.c					\
 				lexer/lexer_quotes.c			\
-				parser/ft_identify.c			\
 				env/builtin_export.c			\
 				env/export_variable.c			\
 				env/ft_list_clear.c				\
@@ -58,16 +49,23 @@ SRCS_NAME	=	main.c							\
 				env/ft_create_elem.c			\
 				env/ft_list_find.c				\
 				env/list_to_tabs.c				\
+												\
+				builtins/pwd.c					\
+				expansion/expansion.c			\
+				expansion/expansion_utils.c		\
+				ast/ast.c						\
+				lexer/get_next_line.c 			\
+				lexer/lexer_utils.c				\
+				lexer/check_lexer.c				\
+				lexer/lexer.c					\
+				parser/ft_identify.c			\
 
 
 SRCS_PATH	= ./
-
 OBJS_PATH	= ./objs/
 
 SRCS	= $(addprefix $(SRCS_PATH), $(SRCS_NAME))
-
 OBJS	= $(SRCS:.c=.o)
-
 
 %.o: %.c
 	$(CC) $(INCS) -c $< -o $@
