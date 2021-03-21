@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 13:04:21 by calide-n          #+#    #+#             */
-/*   Updated: 2021/01/30 17:00:46 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/22 00:16:16 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static char	*ft_fill_str(char const *s1, char const *set, char *str, int len)
 	return (str);
 }
 
-char	*ft_strtrim(char const *s1, char const *set)
+char		*ft_strtrim(char const *s1, char const *set)
 {
 	char	*str;
 	size_t	i;

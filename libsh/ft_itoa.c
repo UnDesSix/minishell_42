@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 12:50:47 by calide-n          #+#    #+#             */
-/*   Updated: 2021/01/30 16:48:10 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/22 00:15:09 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	ft_get_nbr_size(int nb)
 	return (size);
 }
 
-char	*ft_itoa(int n)
+char		*ft_itoa(int n)
 {
 	char			*nbr;
 	unsigned int	nb;
