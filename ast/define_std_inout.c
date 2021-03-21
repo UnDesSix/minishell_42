@@ -6,7 +6,7 @@
 /*   By: mlarboul <mlarboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 15:10:27 by mlarboul          #+#    #+#             */
-/*   Updated: 2021/03/21 15:19:40 by mlarboul         ###   ########.fr       */
+/*   Updated: 2021/03/21 16:59:03 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int		define_std_inout(t_node *node, t_saver *saver, int flag)
 	node->redi_right_fd = -2;
 	node->redi_left_fd = -2;
 	if (saver->curr_pfd == NULL)
-		return(define_std_inout_1(node, saver));
+		return (define_std_inout_1(node, saver));
 	if (saver->past_pfd == NULL && node->arg_id < saver->arg_nb)
 		define_std_inout_2(node, saver);
 	else if (node->arg_id < saver->arg_nb)
