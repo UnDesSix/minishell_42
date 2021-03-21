@@ -6,7 +6,7 @@
 /*   By: mlarboul <mlarboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 12:02:08 by mlarboul          #+#    #+#             */
-/*   Updated: 2021/03/21 18:12:08 by mlarboul         ###   ########.fr       */
+/*   Updated: 2021/03/21 20:09:10 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int		exec_arg(t_node *node, t_saver *saver)
 		g_proc.ret = -1;
 	if (ft_strcmp(node->word[0].content, "cd") == 0
 			|| (ft_strcmp(node->word[0].content, "export") == 0 && 
-				!node->word[1].content)
+				node->word[1].content)
 			|| ft_strcmp(node->word[0].content, "unset") == 0 ||
 			ft_strcmp(node->word[0].content, "exit") == 0)
 	{
