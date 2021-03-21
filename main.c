@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 19:26:04 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/21 17:48:50 by mlarboul         ###   ########.fr       */
+/*   Updated: 2021/03/21 21:25:02 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,11 @@ int	ft_manage_line(char *orline, t_list *begin_list)
 	// initialize the variable 'word' to silence WARNING	=> CALIXTE
 	*/
 	word = NULL;
-	if (!ft_check_lexer(word))
-		return (1);
 	//printf("[%s]\n", line);
 	word = ft_lexer(line);
 	if (!word)
+		return (1);
+	if (!ft_check_lexer(word))
 		return (1);
 	word = sort_word(word);
 	if (!word)
