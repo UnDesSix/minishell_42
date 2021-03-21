@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 18:14:08 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/21 15:20:37 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/21 17:00:22 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 t_word	*ft_wordup(t_word *word)
 {
-	int	i;
+	int		i;
 	t_word	*dest;
 
 	i = 0;
@@ -38,7 +38,7 @@ t_word	*ft_wordup(t_word *word)
 	return (dest);
 }
 
-int	ft_while_args(t_word *word, t_ast_var ast_var, t_node *node,
+int		ft_while_args(t_word *word, t_ast_var ast_var, t_node *node,
 		t_list *begin_list)
 {
 	char	**tab;

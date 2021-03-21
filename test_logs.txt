@@ -1,0 +1,26 @@
+[OK]	echo pute > file10
+[OK]	echo Bonjour >file1 jeune homme
+[OK]	echo Bonjour >file1 jeune homme > file2 ca va >file3
+[OK]	ls | echo OK
+[OK]	ls | echo bonjour > file11 | ls
+[OK]	ls | hexdump > f0 | echo Bonjour >f1 jeune homme > f2 ca va >f3 | ls
+[OK]	echo bonjour >f1 mec >f2 | echo ok > f3 | echo >f4 >>f5 oui | echo final >f7
+[OK]	echo hey > file ; cat file
+[OK]	export filename="file_test" ; echo "hi Bro" > $filename
+[OK]	echo hey >> file ; hexdump file | cat
+[OK]	echo hey >> file ; hexdump file | cat -e
+[OK]	echo test > file01 > file02 > file03 ; tail file1 file2 file3
+[OK]	echo test > file01 > file02 > file03 ; tail file01 file02 file03
+[OK]	> b1 echo hey matt ; cat b1
+[OK]	echo <file10  #file10 with content#
+[OK]	cat <file10  #file10 with content#
+[OK]	ls | cat <file10
+[OK]	ls | cat | cat <file10
+[OK]	ls | cat | cat <file10 <file0
+[OK]	ls | cat | cat <file10 <file0
+[OK]	ls | cat | cat <file10 <file0 | cat
+[OK]	ls | cat | cat <file10 <file0 | hexdump -C
+[OK]	ls | cat | cat -e <file10 <file0 | hexdump -C
+[OK]	ls | cat | sleep 3 | sleep 3 | sleep 3 | cat -e <file10 <file0 | hexdump -C
+[OK]	ls | cat | cat -e <file10 <file0 | hexdump -C | sleep 3 | sleep 3 | sleep 3
+[OK]	ls | cat | ls | ls | ls | cat -e <file10 <file0 | hexdump -C

@@ -76,7 +76,7 @@ $(NAME): $(OBJ)
 
 $(OBJ_PATH)%.o: %.c
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
-	$(CC) -o $@ -c $< -D BUFFER_SIZE=1024
+	$(CC) -o $@ -c $<
 
 $(OBJ_BONUS_PATH)%.o: %.c
 	mkdir $(OBJ_BONUS_PATH) 2> /dev/null || true

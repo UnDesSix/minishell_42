@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 15:15:26 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/18 08:59:02 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/21 18:41:24 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,11 @@ char	*ft_check_cmd(char *str, t_list *begin_list)
 	char	*dst;
 
 	ret = 0;
+	dst = NULL;
 	paths = ft_get_paths(begin_list);
 	if (!paths)
 		return (NULL);
-	if (str)
+	if (str != NULL)
 	{
 		if (!ft_is_builtin(str) && str[0] != '/')
 		{

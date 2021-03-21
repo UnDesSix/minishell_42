@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 12:05:25 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/19 16:34:28 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/21 18:38:35 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ char	*ft_strjoin_char(char *str, char c)
 
 char	*manage_stack(char *old_stack, char buffer)
 {
-	char	*tmp;
 	char	*stack;
 
 	if (!old_stack)
@@ -82,6 +81,7 @@ int		ft_check_multi_lines(char **stack, char buffer)
 
 int		ctrl_d(char **line, char buffer, char *stack)
 {
+	(void)stack;
 	if (buffer == '\0')
 	{
 		*line = ft_strdup("exit");

@@ -6,7 +6,7 @@
 /*   By: mlarboul <mlarboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 12:02:08 by mlarboul          #+#    #+#             */
-/*   Updated: 2021/03/21 12:44:21 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/21 20:08:36 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		ft_is_cmd(char *str)
 {
-	struct stat stats;
+	struct	stat stats;
 
 	if (stat(str, &stats) == 0)
 		return (1);
@@ -24,7 +24,7 @@ int		ft_is_cmd(char *str)
 	return (0);
 }
 
-int		exec_arg_fork(t_node *node, t_saver *saver, int flag)
+int		exec_arg_fork(t_node *node, t_saver *saver)
 {
 	pid_t	pid;
 
@@ -58,7 +58,7 @@ int		exec_arg_fork(t_node *node, t_saver *saver, int flag)
 	return (0);
 }
 
-int		exec_arg(t_node *node, t_saver *saver, int flag)
+int		exec_arg(t_node *node, t_saver *saver)
 {
 	int	ret;
 
@@ -66,7 +66,7 @@ int		exec_arg(t_node *node, t_saver *saver, int flag)
 		g_proc.ret = -1;
 	if (ft_strcmp(node->word[0].content, "cd") == 0
 			|| (ft_strcmp(node->word[0].content, "export") == 0 && 
-				!node->word[1].content)
+				node->word[1].content)
 			|| ft_strcmp(node->word[0].content, "unset") == 0 ||
 			ft_strcmp(node->word[0].content, "exit") == 0)
 	{
@@ -76,7 +76,7 @@ int		exec_arg(t_node *node, t_saver *saver, int flag)
 		g_proc.ret = ret; 
 		return (2);
 	}
-	exec_arg_fork(node, saver, flag);
+	exec_arg_fork(node, saver);
 	if (node->pfd_input != STDOUT)
 		close(node->pfd_input);
 	if (node->pfd_output != STDIN)
@@ -84,46 +84,24 @@ int		exec_arg(t_node *node, t_saver *saver, int flag)
 	return (0);
 }
 
-/*
-   int		exec_pipe(t_node *node, t_saver *saver)
-   {
-   if (saver->current_pfd != NULL)
-   saver->past_pfd = saver->current_pfd;
-   else
-   saver->past_pfd = NULL;
-   node->pfd = malloc(sizeof(int) * 2);
-   if (pipe(node->pfd) < 0)
-   {
-   printf("Pipe issues.\n");
-   return (-1);
-   }
-   saver->current_pfd = node->pfd;
-   return (0);
-   }
-   */
-
-int		exec_node(t_node *node, t_saver *saver, int flag)
+int		exec_node(t_node *node, t_saver *saver)
 {
-	//	if (node->type == PIPE)
-	//		exec_pipe(node, saver);
-	//	else if(node->type == REDI)
-	//		execute_arg(node, saver);
 	if (node->type == ARG)
-		return (exec_arg(node, saver, flag));
+		return (exec_arg(node, saver));
 	return (0);
 }
 
 
-int	btree_prefix_exec(t_node *node, t_saver *saver, int flag)
+int	btree_prefix_exec(t_node *node, t_saver *saver)
 {
 	int	ret;
 
 	if (!node)
 		return (-1);
-	ret = exec_node(node, saver, flag);
+	ret = exec_node(node, saver);
 	if (node->left)
-		ret = btree_prefix_exec(node->left, saver, 1);
+		ret = btree_prefix_exec(node->left, saver);
 	if (node->right)
-		ret = btree_prefix_exec(node->right, saver, 0);
+		ret = btree_prefix_exec(node->right, saver);
 	return (ret);
 }

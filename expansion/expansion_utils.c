@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 12:42:45 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/17 11:21:11 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/21 18:37:30 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	set_exp_quote(char c, t_env_str *env)
 		env->quote = 2;
 }
 
-int		go_to_end_var(char *line, int i, int quote)
+int		go_to_end_var(char *line, int i)
 {
 	i++;
 	if (ft_isdigit(line[i]))

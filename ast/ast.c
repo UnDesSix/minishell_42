@@ -6,7 +6,7 @@
 /*   By: calide-n <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 14:38:38 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/17 10:12:13 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/21 18:38:09 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 
 int	ast(t_word *word, t_ast_var ast_var, t_node *node, t_list *begin_list)
 {
-	t_word	*tmp;
 	int		ret;
 
 	set_node(node);

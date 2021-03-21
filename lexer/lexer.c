@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 18:57:22 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/17 11:15:11 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/21 18:39:53 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ int		handle_bcklsh(char *line, t_lexer *lex, t_word *word)
 int		handle_spechar(char *line, t_lexer *lex, t_word *word)
 {
 	char	*tmp;
-	char	*tmp_word;
 
 	if (!ft_is_special_operator(line[lex->i]))
 		return (0);

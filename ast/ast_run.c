@@ -6,11 +6,15 @@
 /*   By: mlarboul <mlarboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 15:04:29 by mlarboul          #+#    #+#             */
-/*   Updated: 2021/03/21 12:52:05 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/21 18:14:55 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/header.h"
+
+/*
+// FUCNTION INITIALIZE
+*/
 
 int		ast_run(t_node *root, t_list *begin_list)
 {
@@ -21,13 +25,14 @@ int		ast_run(t_node *root, t_list *begin_list)
 	ret = 0;
 	saver = malloc(sizeof(t_saver));
 	saver->arg_nb = 0;
+	saver->redi_right = FALSE;
+	saver->redi_left = FALSE;
 	saver->past_pfd = NULL;
 	saver->curr_pfd = NULL;
 	saver->envp_list = begin_list;
-	saver->redi_on = FALSE;
 	btree_prefix_count(root, &(saver->arg_nb));
-	btree_prefix_pipe(root, saver, 2);
-	ret = btree_prefix_exec(root, saver, 2);
+	btree_prefix_pipe(root, saver);
+	ret = btree_prefix_exec(root, saver);
 	if (ret != 2)
 	{
 		if (ret == -2)

@@ -6,7 +6,7 @@
 /*   By: mlarboul <mlarboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 10:08:37 by mlarboul          #+#    #+#             */
-/*   Updated: 2021/03/04 21:16:40 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/21 18:18:10 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ int	export_alone(t_list *begin_list)
 int	export_builtin(t_list *begin_list, t_word *word)
 {
 	int		i;
-	int		var_is_def;
-	t_var	*var;
+//	int		var_is_def;		//USELESS => MATT
+//	t_var	*var;			//USELESS => MATT
 
 	i = 2;
 	if (!word[1].content)

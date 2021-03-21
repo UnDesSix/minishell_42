@@ -6,7 +6,7 @@
 /*   By: mlarboul <mlarboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 11:48:00 by mlarboul          #+#    #+#             */
-/*   Updated: 2021/03/04 21:23:32 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/21 18:18:49 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ int		env_builtin(t_list *begin_list, t_word *word)
 
 int		unset_builtin(t_list **begin_list, t_word *word)
 {
-	t_list	*tmp;
 	int		i;
 
 	i = 1;
