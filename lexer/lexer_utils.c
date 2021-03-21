@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 18:45:36 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/17 11:31:22 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/21 18:39:14 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	ft_init_word(t_word *word)
 
 void	set_quote(int *b, int *quotes, int value, char *str)
 {
+	(void)str;
 	*quotes = value;
 	*b += 1;
 }
@@ -73,7 +74,6 @@ int		ft_is_bs_spechar(char c)
 char	*ft_strdup_with_limits(char *str, int b, int e)
 {
 	int		i;
-	int		tmp;
 	char	*dst;
 	int		quotes;
 

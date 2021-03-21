@@ -6,13 +6,13 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 16:19:12 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/21 17:53:34 by mlarboul         ###   ########.fr       */
+/*   Updated: 2021/03/21 18:31:57 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/header.h"
 
-int	pwd(t_word *word)
+int	pwd(void)
 {
 	char	pwd[4096];
 
