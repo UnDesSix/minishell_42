@@ -6,7 +6,7 @@
 /*   By: mlarboul <mlarboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 15:23:28 by mlarboul          #+#    #+#             */
-/*   Updated: 2021/03/21 15:23:42 by mlarboul         ###   ########.fr       */
+/*   Updated: 2021/03/21 18:14:31 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,24 +26,24 @@ int		manage_pipe(t_node *node, t_saver *saver)
 	return (0);
 }
 
-int		pipe_node(t_node *node, t_saver *saver, int flag)
+int		pipe_node(t_node *node, t_saver *saver)
 {
 	if (node->type == PIPE)
 		manage_pipe(node, saver);
 	else if (node->type == REDI)
 		manage_redi(node, saver);
 	else if (node->type == ARG)
-		define_std_inout(node, saver, flag);
+		define_std_inout(node, saver);
 	return (0);
 }
 
-void	btree_prefix_pipe(t_node *node, t_saver *saver, int flag)
+void	btree_prefix_pipe(t_node *node, t_saver *saver)
 {
 	if (!node)
 		return ;
-	pipe_node(node, saver, flag);
+	pipe_node(node, saver);
 	if (node->left)
-		btree_prefix_pipe(node->left, saver, LEFT);
+		btree_prefix_pipe(node->left, saver);
 	if (node->right)
-		btree_prefix_pipe(node->right, saver, RIGHT);
+		btree_prefix_pipe(node->right, saver);
 }

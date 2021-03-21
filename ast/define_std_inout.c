@@ -6,7 +6,7 @@
 /*   By: mlarboul <mlarboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 15:10:27 by mlarboul          #+#    #+#             */
-/*   Updated: 2021/03/21 16:59:03 by mlarboul         ###   ########.fr       */
+/*   Updated: 2021/03/21 18:13:18 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int		define_std_inout_4(t_node *node, t_saver *saver)
 	return (0);
 }
 
-int		define_std_inout(t_node *node, t_saver *saver, int flag)
+int		define_std_inout(t_node *node, t_saver *saver)
 {
 	node->pfd_input = 0;
 	node->pfd_output = 1;

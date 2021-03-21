@@ -6,7 +6,7 @@
 /*   By: mlarboul <mlarboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 12:02:08 by mlarboul          #+#    #+#             */
-/*   Updated: 2021/03/21 17:00:54 by mlarboul         ###   ########.fr       */
+/*   Updated: 2021/03/21 18:12:08 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		ft_is_cmd(char *str)
 	return (0);
 }
 
-int		exec_arg_fork(t_node *node, t_saver *saver, int flag)
+int		exec_arg_fork(t_node *node, t_saver *saver)
 {
 	pid_t	pid;
 
@@ -58,7 +58,7 @@ int		exec_arg_fork(t_node *node, t_saver *saver, int flag)
 	return (0);
 }
 
-int		exec_arg(t_node *node, t_saver *saver, int flag)
+int		exec_arg(t_node *node, t_saver *saver)
 {
 	int	ret;
 
@@ -76,7 +76,7 @@ int		exec_arg(t_node *node, t_saver *saver, int flag)
 		g_proc.ret = ret; 
 		return (2);
 	}
-	exec_arg_fork(node, saver, flag);
+	exec_arg_fork(node, saver);
 	if (node->pfd_input != STDOUT)
 		close(node->pfd_input);
 	if (node->pfd_output != STDIN)
@@ -84,24 +84,24 @@ int		exec_arg(t_node *node, t_saver *saver, int flag)
 	return (0);
 }
 
-int		exec_node(t_node *node, t_saver *saver, int flag)
+int		exec_node(t_node *node, t_saver *saver)
 {
 	if (node->type == ARG)
-		return (exec_arg(node, saver, flag));
+		return (exec_arg(node, saver));
 	return (0);
 }
 
 
-int	btree_prefix_exec(t_node *node, t_saver *saver, int flag)
+int	btree_prefix_exec(t_node *node, t_saver *saver)
 {
 	int	ret;
 
 	if (!node)
 		return (-1);
-	ret = exec_node(node, saver, flag);
+	ret = exec_node(node, saver);
 	if (node->left)
-		ret = btree_prefix_exec(node->left, saver, 1);
+		ret = btree_prefix_exec(node->left, saver);
 	if (node->right)
-		ret = btree_prefix_exec(node->right, saver, 0);
+		ret = btree_prefix_exec(node->right, saver);
 	return (ret);
 }
