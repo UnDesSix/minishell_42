@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 12:58:49 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/21 12:36:22 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/21 21:14:56 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	exec_builtins(t_word *word, t_list *begin_list)
 	else if (ft_strcmp(word[0].content, "cd") == 0)
 		return (cd(word, begin_list));
 	else if (ft_strcmp(word[0].content, "pwd") == 0)
-		return (pwd(word));
+		return (pwd());
 	else if (ft_strcmp(word[0].content, "exit") == 0)
 		return (ft_exit(word));
 	return (0);
