@@ -6,7 +6,7 @@
 /*   By: mlarboul <mlarboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 11:48:17 by mlarboul          #+#    #+#             */
-/*   Updated: 2021/03/03 18:55:21 by mlarboul         ###   ########.fr       */
+/*   Updated: 2021/03/21 20:25:57 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_bool	var_is_well_syntaxed(char *str, char *builtin)
 	i = 0;
 	if (ft_isalpha(str[i]) == FALSE && str[i] != '_')
 	{
-		printf("bash: %s: `%s': invalid parameter name\n", builtin, str);
+		printf("msh: %s: `%s': invalid parameter name\n", builtin, str);
 		return (FALSE);
 	}
 	i++;
@@ -36,7 +36,7 @@ t_bool	var_is_well_syntaxed(char *str, char *builtin)
 	{
 		if (ft_isalnum(str[i]) == FALSE && str[i] != '_')
 		{
-			printf("bash: %s: `%s': invalid parameter name\n", builtin, str);
+			printf("msh: %s: `%s': invalid parameter name\n", builtin, str);
 			return (FALSE);
 		}
 		i++;
