@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 19:26:04 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/21 15:14:46 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/21 17:48:50 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,16 @@ int	ft_manage_line(char *orline, t_list *begin_list)
 {
 	t_word	*word;
 	t_node *root;
-	t_saver *saver;
+//	t_saver *saver;				//USELESS?					=>CALIXTE
 	t_ast_var	ast_var;
-	char	*tmp;
+//	char	*tmp; 				//USELESS?					=> CALIXTE
 	char	*line;
 
 	line = expansion(orline, begin_list);
+	/*
+	// initialize the variable 'word' to silence WARNING	=> CALIXTE
+	*/
+	word = NULL;
 	if (!ft_check_lexer(word))
 		return (1);
 	//printf("[%s]\n", line);
@@ -154,6 +158,8 @@ int	get_input(t_list *begin_list)
 
 int main(int argc, char **argv, char **envp)
 {
+	(void)argc;					// Should we use argc ?		=> CALIXTE
+	(void)argv;					// Should we use argv ?		=> CALIXTE
 	t_list	*begin_list;
 
 	g_proc.ret = 0;
