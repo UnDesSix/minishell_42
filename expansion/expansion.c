@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 19:17:47 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/18 15:53:39 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/21 15:48:59 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,33 @@ char	*manage_dollar(char *line, t_env_str *env, int *i, t_list *begin_list)
 	return (line);
 }
 
-void	manage_exit_status(t_list *begin_list)
+char	*manage_exit_status(char *line, t_env_str *env, int *real_i, t_list *begin_list)
 {
-	t_list	*tmp_list;
-
-	tmp_list = begin_list;
+//	char	*tmp_line;
+//	int		i;
+//	int		j;
+//	char	*nbr;
+//
+//	i = *real_i;
+//	j = *real_i;
+//	while (line[i])
+//		i++;
+//	nbr = ft_itoa(g_proc.ret);
+//	printf("[%s]\n", nbr);
+//	tmp_line = malloc(sizeof(char) * (ft_strlen(nbr) + i - 1));
+//	i = 0;
+//	while (nbr[i])
+//	{
+//		tmp_line[i] = nbr[i];
+//		i++;
+//	}
+//	while (line[j])
+//		tmp_line[i++] = line[j++];
+//	tmp_line[i] = '\0';
+//	printf("[%s]\n", nbr);
+//	*real_i = -1;
+//	env->quote = 0;
+	return (line);
 }
 
 char	*expansion(char *orline, t_list *begin_list)
@@ -107,7 +129,7 @@ char	*expansion(char *orline, t_list *begin_list)
 				&& env.quote != 1)
 			line = manage_tild(line, &env, &i);
 		else if (line[i] == '$' && line[i + 1] == '?')
-			manage_exit_status(begin_list);
+			manage_exit_status(line, &env, &i, begin_list);
 		else if (line[i] == '$' && line[i + 1] != ' ' &&
 			line[i + 1] && env.quote != 1)
 			line = manage_dollar(line, &env, &i, begin_list);

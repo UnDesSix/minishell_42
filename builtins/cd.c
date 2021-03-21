@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 15:14:00 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/18 18:58:58 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/20 16:22:46 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ int		cd(t_word *word, t_list *begin_list)
 		if (errno != 0)
 		{
 			printf("msh: cd: %s: %s\n", word[1].content, strerror(errno));
+			g_proc.ret = 1;
 			return (1);
 		}
 		getcwd(tmp_pwd, sizeof(tmp_pwd));

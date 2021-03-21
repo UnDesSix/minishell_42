@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 20:42:02 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/18 15:38:56 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/20 16:20:49 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ typedef int		t_bool;
 
 typedef struct	s_process
 {
-	pid_t	*pid;
+	pid_t	pid[4096];
 	int		index;
 	int		ret;
 }				t_process;

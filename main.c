@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 19:26:04 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/19 16:44:35 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/21 15:14:46 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int	ft_manage_line(char *orline, t_list *begin_list)
 	char	*line;
 
 	line = expansion(orline, begin_list);
+	if (!ft_check_lexer(word))
+		return (1);
 	//printf("[%s]\n", line);
 	word = ft_lexer(line);
 	if (!word)
@@ -45,20 +47,7 @@ int	ft_manage_line(char *orline, t_list *begin_list)
 	word = sort_word(word);
 	if (!word)
 		return (1);
-	if (!ft_check_lexer(word))
-		return (1);
-//	for (int z = 0; word[z].content; z++)
-//		printf("[%s]", word[z].content);
-//	printf("\n");
 	free(line);
-	if (word[0].content)
-	{
-		if (ft_strcmp(word[0].content, "exit") == 0)
-		{
-			ft_free_words(word);
-			return (0);
-		}
-	}
 	root = (t_node *)malloc(sizeof(t_node));
 	ast_var.index = 0;
 	ast_var.i = 0;
@@ -68,9 +57,13 @@ int	ft_manage_line(char *orline, t_list *begin_list)
 		ft_free_words(word);
 		return (1);
 	}
-	ast_run(root, begin_list);
-	free(g_proc.pid);
-	print2DUtil(root, 0);
+	if (ast_run(root, begin_list) == -2)
+	{
+		ft_free_words(word);
+		ft_free_ast(root);
+		return (0);
+	}
+//	print2DUtil(root, 0);
 	ft_free_words(word);
 	ft_free_ast(root);
 	return (1);
@@ -102,7 +95,7 @@ int	divide_lines(char *line, t_list *begin_list)
 			if (lol[i + 1] == ';' || i == 0)
 			{
 				printf("msh: syntax error near unexpected token `;'\n");
-				g_proc.ret = 258;
+				g_proc.ret = 256;
 				return (1);
 			}
 			tmp_i = i;
@@ -139,6 +132,7 @@ int	get_input(t_list *begin_list)
 	signals();
 	while (42)
 	{
+		g_proc.index = 0;
 		ret = get_next_line(0, &line);
 		if (line)
 		{
@@ -163,8 +157,9 @@ int main(int argc, char **argv, char **envp)
 	t_list	*begin_list;
 
 	g_proc.ret = 0;
+	g_proc.index = 0;
 	begin_list = tabs_to_list(envp);
 	get_input(begin_list);
 	ft_list_clear(begin_list, free_var);
-	return (0);
+	return (g_proc.ret);
 }

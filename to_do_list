@@ -1,0 +1,21 @@
+__PRIO__
+
+\\Redo exit (with argument)
+
+check env variables ($>, SGV)
+recode $? checking + if ($?var => 0var)
+double pipes ||
+string ending with ">" or "|" or ";"
+recode ";" errors (the actual code is discuting lol)
+check pwd with arguments (pwd ok)
+norme
+leaks
+make sure process status are good
+^D with line
+make sure ^C, ^\ work fine
+fix tabs
+
+
+__SECONDARY STUFF__
+Delete BUFFER_SIZE on compilation
+cat instead of /bin/cat for errors

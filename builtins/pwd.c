@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 16:19:12 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/18 14:54:27 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/20 14:37:24 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,6 @@ int	pwd(t_word *word)
 {
 	char	pwd[4096];
 
-	if (word[1].content)
-	{
-		printf("pwd: too many arguments\n");
-		return (-1);
-	}
 	errno = 0;
 	getcwd(pwd, sizeof(pwd));
 	if (errno != 0)

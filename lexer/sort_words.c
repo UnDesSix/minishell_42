@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 09:08:03 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/19 12:17:36 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/21 15:22:02 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,10 +114,6 @@ t_word	*sort_word(t_word *word)
 	new = ft_wordjoin(tmp_new, tmp);
 	free(tmp_new);
 	free(tmp);
-	begin = x;
-//	for (int z = 0; new[z].content; z++)
-//		printf("[%s] ", new[z].content);
-//	printf("\n");
 	free(word);
 	return (new);
 }

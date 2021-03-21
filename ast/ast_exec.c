@@ -6,7 +6,7 @@
 /*   By: mlarboul <mlarboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 12:02:08 by mlarboul          #+#    #+#             */
-/*   Updated: 2021/03/19 16:09:52 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/21 12:44:21 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,21 @@ int		exec_arg_fork(t_node *node, t_saver *saver, int flag)
 
 int		exec_arg(t_node *node, t_saver *saver, int flag)
 {
+	int	ret;
 
+	if (ft_strcmp(node->word[0].content, "echo") != 0)
+		g_proc.ret = -1;
 	if (ft_strcmp(node->word[0].content, "cd") == 0
-			|| ft_strcmp(node->word[0].content, "export") == 0
-			|| ft_strcmp(node->word[0].content, "unset") == 0)
+			|| (ft_strcmp(node->word[0].content, "export") == 0 && 
+				!node->word[1].content)
+			|| ft_strcmp(node->word[0].content, "unset") == 0 ||
+			ft_strcmp(node->word[0].content, "exit") == 0)
 	{
-		g_proc.ret = exec_builtins(node->word, saver->envp_list);
-		return (0);
+		ret = exec_builtins(node->word, saver->envp_list);
+		if (ret == -2)
+			return (-2);
+		g_proc.ret = ret; 
+		return (2);
 	}
 	exec_arg_fork(node, saver, flag);
 	if (node->pfd_input != STDOUT)
@@ -101,18 +109,21 @@ int		exec_node(t_node *node, t_saver *saver, int flag)
 	//	else if(node->type == REDI)
 	//		execute_arg(node, saver);
 	if (node->type == ARG)
-		exec_arg(node, saver, flag);
+		return (exec_arg(node, saver, flag));
 	return (0);
 }
 
 
-void	btree_prefix_exec(t_node *node, t_saver *saver, int flag)
+int	btree_prefix_exec(t_node *node, t_saver *saver, int flag)
 {
+	int	ret;
+
 	if (!node)
-		return ;
-	exec_node(node, saver, flag);
+		return (-1);
+	ret = exec_node(node, saver, flag);
 	if (node->left)
-		btree_prefix_exec(node->left, saver, 1);
+		ret = btree_prefix_exec(node->left, saver, 1);
 	if (node->right)
-		btree_prefix_exec(node->right, saver, 0);
+		ret = btree_prefix_exec(node->right, saver, 0);
+	return (ret);
 }
