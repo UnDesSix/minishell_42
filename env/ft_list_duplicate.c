@@ -6,7 +6,7 @@
 /*   By: mlarboul <mlarboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 10:08:23 by mlarboul          #+#    #+#             */
-/*   Updated: 2021/03/04 21:43:25 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/21 15:26:22 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_var	*ft_var_duplicate(t_var *data)
 **	beginning of the list and will return (0). If something wrong happens (most)
 **	likely malloc errors, the function returns (-1).
 **	The only case *dst_size can be NULL because of an error is if malloc failed
-**	on the first call of ft_list_push_back. 
+**	on the first call of ft_list_push_back.
 */
 
 int		ft_list_duplicate(t_list **dst_list, t_list *src_list)

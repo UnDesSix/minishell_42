@@ -6,25 +6,25 @@
 /*   By: mlarboul <mlarboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 11:48:12 by mlarboul          #+#    #+#             */
-/*   Updated: 2021/03/04 21:17:45 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/21 15:27:30 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/header.h"
 
 /*
- **	This function is called when the variable content is not empty. It takes
- **	four parameters :
- **		- begin_list : in order to create a new variable and add the element
- **		to the current list (using create_var function).
- **		- elm_found : equal to the element with a the same variable name.
- **		Otherwise it is equal to NULL.
- **		- word : to access to the variable name and content.
- **		- i : the adress of the index so it can be increment from that
- **		particular function.
- **	The function returns (-1) if a error occurs and (0) if everything went well.
- **	TODO : NEED TO ADD (t_var *) for (elm_found->data)
- */
+**	This function is called when the variable content is not empty. It takes
+**	four parameters :
+**		- begin_list : in order to create a new variable and add the element
+**		to the current list (using create_var function).
+**		- elm_found : equal to the element with a the same variable name.
+**		Otherwise it is equal to NULL.
+**		- word : to access to the variable name and content.
+**		- i : the adress of the index so it can be increment from that
+**		particular function.
+**	The function returns (-1) if a error occurs and (0) if everything went well.
+**	TODO : NEED TO ADD (t_var *) for (elm_found->data)
+*/
 
 int	perm_var_filled(t_list **begin_list, t_list *elm_found,
 		t_word *word, int *i)
@@ -50,18 +50,18 @@ int	perm_var_filled(t_list **begin_list, t_list *elm_found,
 }
 
 /*
- **	This function is called when the variable content is empty. It takes four
- **	parameters :
- **		- begin_list : in order to create a new variable and add the element
- **		to the current list (using create_var function).
- **		- elm_found : equal to the element with a the same variable name.
- **		Otherwise it is equal to NULL.
- **		- word : to access to the variable name and content.
- **		- i : the adress of the index so it can be increment from that
- **		particular function.
- **	The function returns (-1) if a error occurs and (0) if everything went well.
- **	TODO : NEED TO ADD (t_var *) for (elm_found->data)
- */
+**	This function is called when the variable content is empty. It takes four
+**	parameters :
+**		- begin_list : in order to create a new variable and add the element
+**		to the current list (using create_var function).
+**		- elm_found : equal to the element with a the same variable name.
+**		Otherwise it is equal to NULL.
+**		- word : to access to the variable name and content.
+**		- i : the adress of the index so it can be increment from that
+**		particular function.
+**	The function returns (-1) if a error occurs and (0) if everything went well.
+**	TODO : NEED TO ADD (t_var *) for (elm_found->data)
+*/
 
 int	perm_var_empty(t_list **begin_list, t_list *elm_found,
 		t_word *word, int *i)
@@ -87,10 +87,10 @@ int	perm_var_empty(t_list **begin_list, t_list *elm_found,
 }
 
 /*
- **	perm_variables simply checks if the variable content is right after the `='
- **	(no space between) and if the content is different from a null-byte only.
- **	The function returns (-1) if a error occurs and (0) if everything went well.
- */
+**	perm_variables simply checks if the variable content is right after the `='
+**	(no space between) and if the content is different from a null-byte only.
+**	The function returns (-1) if a error occurs and (0) if everything went well.
+*/
 
 int	perm_variables(t_list **begin_list, t_word *word, int *i)
 {
@@ -112,19 +112,19 @@ int	perm_variables(t_list **begin_list, t_word *word, int *i)
 }
 
 /*
- **	export_variables adds new elements to the list. There are two kinds of var
- **	that can be added : permanent variables (stay in the envp even when execve
- **	is called) and temporary variables. Temporary variables have a content equal
- **	to NULL unlike permanent variables which at least have a content of one
- **	null-byte.
- **	This function returns either a (0) if everything went well, otherwise it
- **	returns (-1), which probably results of a malloc issue.
- **	The first purpose of the function is to define if the variable is either
- **	permanent or temporary. Then it either call the sub-function perm_variable
- **	either it creates a temp_variable (if it doesn't already exit).
- **	This verification keeps going as long as the word exists, the ID equal 2
- **	and the syntax is correct.
- */
+**	export_variables adds new elements to the list. There are two kinds of var
+**	that can be added : permanent variables (stay in the envp even when execve
+**	is called) and temporary variables. Temporary variables have a content equal
+**	to NULL unlike permanent variables which at least have a content of one
+**	null-byte.
+**	This function returns either a (0) if everything went well, otherwise it
+**	returns (-1), which probably results of a malloc issue.
+**	The first purpose of the function is to define if the variable is either
+**	permanent or temporary. Then it either call the sub-function perm_variable
+**	either it creates a temp_variable (if it doesn't already exit).
+**	This verification keeps going as long as the word exists, the ID equal 2
+**	and the syntax is correct.
+*/
 
 int	export_variable(t_word *word, t_list **begin_list)
 {
@@ -150,12 +150,5 @@ int	export_variable(t_word *word, t_list **begin_list)
 		}
 		i++;
 	}
-	//t_list	*tmp1 = *begin_list;
-	//while (tmp1)
-	//{
-	//	printf("%s=", ((t_var *)tmp1->data)->name);
-	//	printf("%s\n", ((t_var *)tmp1->data)->content);
-	//	tmp1 = tmp1->next;
-	//}
 	return (0);
 }
