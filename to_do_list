@@ -3,9 +3,7 @@ Global		:
 - Check .sh send by eoliveir (for instance `echo"h"\o`)
 
 Matthieu	:
-- Test unset, export and env
 - Fix export with bad syntaxed variables => MUST NOT STOP
-- Parse and execute the tree (handle several sleep)
 - Implement $?
 - Implement $_
 - Implement $SHLVL
