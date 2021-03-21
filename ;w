@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 12:05:25 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/21 21:05:42 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/21 20:50:47 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ int		get_next_line(int fd, char **line)
 	int			ret;
 	char		*tmp;
 
+	ret = 1;
 	*line = NULL;
 	stack = NULL;
 	buffer = '\0';
@@ -106,7 +107,7 @@ int		get_next_line(int fd, char **line)
 		ret = read(fd, &buffer, 1);
 		if (ctrl_d(line, buffer, stack))
 			return (1);
-		if (buffer != '\n' && ret != 0)
+		if (buffer != '\n')
 		{
 			tmp = manage_stack(stack, buffer);
 			free(stack);
