@@ -6,7 +6,7 @@
 /*   By: mlarboul <mlarboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 11:48:12 by mlarboul          #+#    #+#             */
-/*   Updated: 2021/03/21 23:28:46 by mlarboul         ###   ########.fr       */
+/*   Updated: 2021/03/22 00:18:39 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ int	perm_variables(t_list **begin_list, t_word *word, int *i)
 int	exp_var_well_synt(t_word *word, t_list **begin_list, int *i)
 {
 	t_list	*elm_found;
-	
+
 	if (!word[*i].space && word[*i + 1].content
 			&& !ft_strcmp(word[*i + 1].content, "="))
 	{
@@ -128,7 +128,6 @@ int	exp_var_well_synt(t_word *word, t_list **begin_list, int *i)
 	}
 	return (0);
 }
-
 
 /*
 **	export_variables adds new elements to the list. There are two kinds of var

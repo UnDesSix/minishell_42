@@ -6,15 +6,11 @@
 /*   By: mlarboul <mlarboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 11:48:00 by mlarboul          #+#    #+#             */
-/*   Updated: 2021/03/21 22:47:00 by mlarboul         ###   ########.fr       */
+/*   Updated: 2021/03/22 00:19:21 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/header.h"
-
-/*
-** TODO : Split main into ENV / EXPORT / UNSET
-*/
 
 void	increment_shlvl(t_list *begin_list)
 {
@@ -48,7 +44,7 @@ t_list	*tabs_to_list(char **envp)
 {
 	t_list	*begin_list;
 	int		env_size;
-	
+
 	env_size = 0;
 	while (envp[env_size])
 		env_size++;
@@ -63,8 +59,8 @@ t_list	*tabs_to_list(char **envp)
 **	The function env_builtin displays the environment.
 **	The function takes two parameters, beginning of the list and argv.
 **	It should be called alone without any arguments. If there are argument
-**	it returns error 1 and display a error message. This error dooesn t exist 
-**	in the real function. 
+**	it returns error 1 and display a error message. This error dooesn t exist
+**	in the real function.
 **	Otherwise, it displays the list of environemental variables, with the last
 **	variables at the end of the list and returns 0.
 */
@@ -91,6 +87,29 @@ int		env_builtin(t_list *begin_list, t_word *word)
 	return (1);
 }
 
+char	*unset_conca(t_word *word, int *i)
+{
+	char	*tmp;
+	char	*str_to_unset;
+
+	str_to_unset = ft_strdup(word[*i].content);
+	if (str_to_unset == NULL)
+		return (NULL);
+	while (word[*i].content && !word[*i].space && word[*i + 1].content)
+	{
+		tmp = ft_strdup(str_to_unset);
+		if (tmp == NULL)
+			return (NULL);
+		free(str_to_unset);
+		str_to_unset = ft_strjoin(tmp, word[*i + 1].content);
+		if (str_to_unset == NULL)
+			return (NULL);
+		free(tmp);
+		*i = *i + 1;
+	}
+	return (str_to_unset);
+}
+
 /*
 **	The function unset_builtin remove a variable from the env list.
 **	The function takes two parameters, the address of the address of the
@@ -104,41 +123,23 @@ int		env_builtin(t_list *begin_list, t_word *word)
 int		unset_builtin(t_list **begin_list, t_word *word)
 {
 	int		i;
+	int		ret;
+	char	*str_to_unset;
 
 	i = 1;
-// CHECK SYNTAX FOR ALL VARIABLES
+	ret = 0;
 	while (word[i].content)
 	{
-		if (!var_is_well_syntaxed(word[i].content, "unset"))
+		str_to_unset = unset_conca(word, &i);
+		if (str_to_unset == NULL)
 			return (1);
-		ft_list_remove_if(begin_list, word[i].content, ft_strcmp, free_var);
+		if (var_is_well_syntaxed(str_to_unset, "unset"))
+			ft_list_remove_if(begin_list, str_to_unset, ft_strcmp, free_var);
+		else
+			ret = 1;
+		if (str_to_unset)
+			free(str_to_unset);
 		i++;
 	}
-//	t_list	*tmp1 = *begin_list;
-//	while (tmp1)
-//	{
-//		printf("%s=", ((t_var *)tmp1->data)->name);
-//		printf("%s\n", ((t_var *)tmp1->data)->content);
-//		tmp1 = tmp1->next;
-//	}
-	return (0);
+	return (ret);
 }
-
-/*
-**	Segfault without argument because first if is going somewhere it should not
-*/
-
-//int		sub_main(t_block block, char **envp)
-//{
-//	t_list	*begin_list;
-//
-//	begin_list = tabs_to_list(envp);
-//	if (ft_strcmp(block.word[0].content, "env") == 0)
-//		env_builtin(begin_list, block);
-//	else if (ft_strcmp(block.word[0].content, "unset") == 0)
-//		unset_builtin(&begin_list, block);
-//	else if (ft_strcmp(block.word[0].content, "export") == 0)
-//		export_builtin(begin_list, block);
-//	ft_list_clear(begin_list, free_var);
-//	return (0);
-//}
