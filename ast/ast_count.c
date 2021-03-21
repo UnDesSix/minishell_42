@@ -6,7 +6,7 @@
 /*   By: mlarboul <mlarboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 12:02:08 by mlarboul          #+#    #+#             */
-/*   Updated: 2021/03/17 17:32:15 by mlarboul         ###   ########.fr       */
+/*   Updated: 2021/03/21 15:22:10 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int		count_node(t_node *node, int *count)
 	}
 	return (0);
 }
-
 
 void	btree_prefix_count(t_node *node, int *count)
 {

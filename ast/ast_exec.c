@@ -6,7 +6,7 @@
 /*   By: mlarboul <mlarboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 12:02:08 by mlarboul          #+#    #+#             */
-/*   Updated: 2021/03/19 16:09:52 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/21 15:24:50 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,35 +76,12 @@ int		exec_arg(t_node *node, t_saver *saver, int flag)
 	return (0);
 }
 
-/*
-   int		exec_pipe(t_node *node, t_saver *saver)
-   {
-   if (saver->current_pfd != NULL)
-   saver->past_pfd = saver->current_pfd;
-   else
-   saver->past_pfd = NULL;
-   node->pfd = malloc(sizeof(int) * 2);
-   if (pipe(node->pfd) < 0)
-   {
-   printf("Pipe issues.\n");
-   return (-1);
-   }
-   saver->current_pfd = node->pfd;
-   return (0);
-   }
-   */
-
 int		exec_node(t_node *node, t_saver *saver, int flag)
 {
-	//	if (node->type == PIPE)
-	//		exec_pipe(node, saver);
-	//	else if(node->type == REDI)
-	//		execute_arg(node, saver);
 	if (node->type == ARG)
 		exec_arg(node, saver, flag);
 	return (0);
 }
-
 
 void	btree_prefix_exec(t_node *node, t_saver *saver, int flag)
 {

@@ -6,7 +6,7 @@
 /*   By: mlarboul <mlarboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 12:02:10 by mlarboul          #+#    #+#             */
-/*   Updated: 2021/03/19 18:26:57 by mlarboul         ###   ########.fr       */
+/*   Updated: 2021/03/21 15:21:49 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,25 +21,17 @@ int		clean_node(t_node *node)
 		if (node->pfd)
 			free(node->pfd);
 	}
-	else if(node->type == REDI)
-		close(node->redi_fd);
 	else if (node->type == ARG)
 	{
 		free(node->word);
+		if (node->redi_right_fd >= 0)
+			close(node->redi_right_fd);
+		if (node->redi_left_fd >= 0)
+			close(node->redi_left_fd);
 		if (node->pfd_input != STDOUT)
-		{
-			//			printf("CLEAN : CMD    : %s\n", node->args[0]);
-			//			printf("CLEAN : input  : %d\n", node->pfd_input);
-			//			printf("CLEAN : output : %d\n\n", node->pfd_output);
 			close(node->pfd_input);
-		}
 		if (node->pfd_output != STDIN)
-		{
-			//			printf("CLEAN : CMD    : %s\n", node->args[0]);
-			//			printf("CLEAN : input  : %d\n", node->pfd_input);
-			//			printf("CLEAN : output : %d\n\n", node->pfd_output);
 			close(node->pfd_output);
-		}
 	}
 	return (0);
 }
@@ -54,4 +46,3 @@ void	btree_prefix_clean(t_node *node)
 	if (node->right)
 		btree_prefix_clean(node->right);
 }
-

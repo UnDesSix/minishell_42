@@ -6,7 +6,7 @@
 /*   By: mlarboul <mlarboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 18:17:39 by mlarboul          #+#    #+#             */
-/*   Updated: 2021/03/19 18:26:47 by mlarboul         ###   ########.fr       */
+/*   Updated: 2021/03/21 15:22:50 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,9 @@ int		ft_simple_right(t_node *node, t_saver *saver)
 		printf("Something wrong happened. Use ERRNO\n");
 		return (-1);
 	}
-//	printf("simple fd : %d\n", fd);
-	node->redi_fd = fd;
-	saver->redi_on = TRUE;
-	saver->redi_fd = fd;
+	node->redi_right_fd = fd;
+	saver->redi_right = TRUE;
+	saver->redi_right_fd = fd;
 	return (0);
 }
 
@@ -51,9 +50,25 @@ int		ft_double_right(t_node *node, t_saver *saver)
 		}
 		read_bytes = read(fd, buffer, 4096);
 	}
-	node->redi_fd = fd;
-	saver->redi_on = TRUE;
-	saver->redi_fd = fd;
+	node->redi_right_fd = fd;
+	saver->redi_right = TRUE;
+	saver->redi_right_fd = fd;
+	return (0);
+}
+
+int		ft_simple_left(t_node *node, t_saver *saver)
+{
+	int fd;
+
+	fd = open(node->file_name, O_RDWR);
+	if (fd < 0)
+	{
+		printf("Something wrong happened. Use ERRNO\n");
+		return (-1);
+	}
+	node->redi_left_fd = fd;
+	saver->redi_left = TRUE;
+	saver->redi_left_fd = fd;
 	return (0);
 }
 
@@ -63,8 +78,8 @@ int		manage_redi(t_node *node, t_saver *saver)
 		ft_simple_right(node, saver);
 	else if (node->redi_type == DOUBLE_R)
 		ft_double_right(node, saver);
-//	else if (node->redi_type == SIMPLE_L)
-//		ft_simple_left(node, saver);
+	else if (node->redi_type == SIMPLE_L)
+		ft_simple_left(node, saver);
 	else
 		return (-1);
 	return (0);
