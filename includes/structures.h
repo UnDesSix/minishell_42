@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 20:42:02 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/21 16:15:18 by mlarboul         ###   ########.fr       */
+/*   Updated: 2021/03/21 17:25:31 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,38 +53,38 @@ typedef struct	s_word
 	int		builtin;
 }				t_word;
 
-typedef struct  s_node
+typedef struct	s_node
 {
-    struct s_node   *right;
-    struct s_node   *left;
-    pid_t           child_pid;
-    int             type;
-    int             arg_id;
-    char            *file_name;
-	int             fd;
-    int				redi_right_fd;
-    int				redi_left_fd;
-    int             *pfd;
-    int             redi_type;
-    int             pfd_input;
-    int             pfd_output;
-    char            *cmd;
-    char            **args;
-    char            **envp;
+	struct s_node	*right;
+	struct s_node	*left;
+	pid_t			child_pid;
+	int				type;
+	int				arg_id;
+	char			*file_name;
+	int				fd;
+	int				redi_right_fd;
+	int				redi_left_fd;
+	int				*pfd;
+	int				redi_type;
+	int				pfd_input;
+	int				pfd_output;
+	char			*cmd;
+	char			**args;
+	char			**envp;
 	t_word			*word;
-}               t_node;
+}				t_node;
 
-typedef struct  s_saver
+typedef struct	s_saver
 {
-    t_list  *envp_list;
-    int     arg_nb;
-    int     redi_right;
-    int     redi_left;
-    int     *past_pfd;
-    int     *curr_pfd;
-    int     redi_right_fd;
-    int     redi_left_fd;
-}               t_saver;
+	t_list	*envp_list;
+	int		arg_nb;
+	int		redi_right;
+	int		redi_left;
+	int		*past_pfd;
+	int		*curr_pfd;
+	int		redi_right_fd;
+	int		redi_left_fd;
+}				t_saver;
 
 typedef struct	s_env_str
 {
