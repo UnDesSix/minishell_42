@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 11:31:01 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/21 18:21:42 by mlarboul         ###   ########.fr       */
+/*   Updated: 2021/03/21 18:37:55 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ char		*expansion(char *line, t_list *begin_list);
 void		init_exp_var(t_env_str *env, char **tmp_line, char *line);
 void		free_exp_var(t_env_str *env, char *tmp_line);
 void		set_exp_quote(char c, t_env_str *env);
-int			go_to_end_var(char *line, int i, int quote);
+int			go_to_end_var(char *line, int i);
 char		*add_quote_word(char *str);
 char		*add_quotes(char *str);
 char		*replace_var(char *str, t_list *begin_list);
@@ -114,7 +114,7 @@ t_word		*ft_wordjoin(t_word *w1, t_word *w2);
 **	BUILTINS
 */
 
-int			pwd(t_word *word);
+int			pwd(void);
 int			echo(t_word *word);
 int			cd(t_word *word, t_list *begin_list);
 int			ft_exit(t_word *word);
