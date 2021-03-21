@@ -31,6 +31,7 @@ SRCS_NAME	= main.c							\
 			  ast/ast_redi.c					\
 			  ast/ast_args.c					\
 			  ast/ast_utils.c					\
+			  ast/define_std_inout.c			\
 			  lexer/get_next_line.c 			\
 			  lexer/sort_words.c 				\
 			  lexer/sort_words_utils.c			\

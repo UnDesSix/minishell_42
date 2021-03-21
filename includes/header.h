@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 11:31:01 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/19 16:29:52 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/21 15:18:23 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void    btree_prefix_pipe(t_node *node, t_saver *saver, int flag);
 void    btree_prefix_exec(t_node *node, t_saver *saver, int flag);
 void    btree_prefix_clean(t_node *node);
 int     manage_redi(t_node *node, t_saver *saver);
-
+int		define_std_inout(t_node *node, t_saver *saver, int flag);
 /*
 **	EXPANSION
 */
