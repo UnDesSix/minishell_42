@@ -6,7 +6,7 @@
 /*   By: mlarboul <mlarboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 12:02:08 by mlarboul          #+#    #+#             */
-/*   Updated: 2021/03/21 16:04:55 by mlarboul         ###   ########.fr       */
+/*   Updated: 2021/03/21 17:00:54 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		ft_is_cmd(char *str)
 {
-	struct stat stats;
+	struct	stat stats;
 
 	if (stat(str, &stats) == 0)
 		return (1);
