@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 11:31:01 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/21 17:07:24 by mlarboul         ###   ########.fr       */
+/*   Updated: 2021/03/21 17:10:39 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@
 # include "structures.h"
 # include <sys/errno.h>
 
-extern int	g_errno;
 t_process	g_proc;
 
 /*
