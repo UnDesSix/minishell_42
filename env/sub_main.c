@@ -6,7 +6,7 @@
 /*   By: mlarboul <mlarboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 11:48:00 by mlarboul          #+#    #+#             */
-/*   Updated: 2021/03/21 18:18:49 by mlarboul         ###   ########.fr       */
+/*   Updated: 2021/03/21 22:47:00 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,27 @@
 /*
 ** TODO : Split main into ENV / EXPORT / UNSET
 */
+
+void	increment_shlvl(t_list *begin_list)
+{
+	t_list	*elm_found;
+	int		level;
+	t_var	*new_var;
+
+	elm_found = ft_list_find(begin_list, "SHLVL", ft_strcmp);
+	if (!elm_found)
+	{
+		new_var = malloc(sizeof(t_var));
+		new_var->name = ft_strdup("SHLVL");
+		new_var->content = ft_strdup("1");
+		ft_list_push_back(&begin_list, new_var);
+		return ;
+	}
+	level = ft_atoi(((t_var *)elm_found->data)->content);
+	level++;
+	free(((t_var *)elm_found->data)->content);
+	((t_var *)elm_found->data)->content = ft_itoa(level);
+}
 
 /*
 **	The function tabs_to_list converts envp (char **) into a
@@ -34,6 +55,7 @@ t_list	*tabs_to_list(char **envp)
 	begin_list = ft_list_push_strs(env_size, envp);
 	if (!begin_list)
 		return (NULL);
+	increment_shlvl(begin_list);
 	return (begin_list);
 }
 
