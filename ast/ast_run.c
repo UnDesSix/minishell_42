@@ -6,7 +6,7 @@
 /*   By: mlarboul <mlarboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 15:04:29 by mlarboul          #+#    #+#             */
-/*   Updated: 2021/03/21 23:49:42 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/22 16:15:45 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int		ast_run(t_node *root, t_list *begin_list)
 	saver->curr_pfd = NULL;
 	saver->envp_list = begin_list;
 	btree_prefix_count(root, &(saver->arg_nb));
-	btree_prefix_pipe(root, saver);
+	btree_prefix_pipe(root, begin_list, saver);
 	ret = btree_prefix_exec(root, saver);
 	if (get_return(ret, root, saver) == -2)
 		return (-2);

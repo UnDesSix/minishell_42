@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 17:13:32 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/15 17:23:13 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/22 00:15:55 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static int	ft_get_word_nb(char const *s, char c)
 	return (nb);
 }
 
-char	**ft_split(char *s, char c)
+char		**ft_split(char *s, char c)
 {
 	size_t	nb_of_words;
 	char	**tab;

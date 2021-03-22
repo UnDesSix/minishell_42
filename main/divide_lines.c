@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 15:14:03 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/22 15:42:43 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/22 17:54:43 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		manage_endof_line(char *line, int i,
 	i--;
 	while (line[i] == ' ')
 		i--;
-	if (begin < i)
+	if (begin <= i)
 		if (ft_manage_line(&line[begin], begin_list) == 0)
 			return (0);
 	return (1);

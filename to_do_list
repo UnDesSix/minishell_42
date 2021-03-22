@@ -1,27 +1,4 @@
-norme
-flags
-exit
-$?
-quotes
-pwd
-	
-
-FIX
-ls | bonjour -> status return 
-
-
-string ending with ">" or "|" or ";"
-
-check env variables ($>, SGV)
-recode ";" errors (the actual code is discuting lol)
-
-check pwd with arguments (pwd ok)
-make sure process status are good
-^D with line
-make sure ^C, ^\ work fine
-fix tabs
-
-
-__SECONDARY STUFF__
-Delete BUFFER_SIZE on compilation
-cat instead of /bin/cat for errors
+main -> ^C
+ast/exec
+main/divide_line
+main/manage_line

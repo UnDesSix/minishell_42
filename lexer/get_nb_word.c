@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 14:41:04 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/22 15:02:42 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/22 17:50:46 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,10 @@ void	get_nb_spe_op(char *line, int *nb_word, int i)
 {
 	if (line[i + 1] != ' ' && line[i + 1] != '\0')
 		*nb_word += 1;
-	if (line[i - 1])
-		if (line[i - 1] != ' ' && line[i - 1] != '\0')
-			*nb_word += 1;
+	if (i > 0)
+		if (line[i - 1])
+			if (line[i - 1] != ' ' && line[i - 1] != '\0')
+				*nb_word += 1;
 }
 
 void	if_quotes_bcklsh(char *line, char *stop, int i)

@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 18:35:28 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/15 19:10:17 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/22 17:03:58 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	check_ast(t_node *node)
 	if (node->right)
 		if (check_ast(node->right) == -1)
 			return (-1);
-	if (check_node(node))
+	if (check_node(node) == -1)
 		return (-1);
 	return (0);
 }

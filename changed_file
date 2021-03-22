@@ -1,8 +1,0 @@
-ast_pipe.c
-ast_redi.c
-exit.c
-makefile
-header.h
-expansion *
-/added file/ free_split.c
-ast_exec.c

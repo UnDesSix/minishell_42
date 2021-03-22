@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 18:14:56 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/21 23:53:20 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/22 16:13:48 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int		ft_while_redi(t_word *word, t_ast_var ast_var,
 				word[ast_var.i].sep == 0)
 		{
 			ft_handle_redi_type(word[ast_var.i].content, node);
-			fill_node(node, REDI, NULL, word[ast_var.i + 1].content);
+			fill_node(node, REDI, word[ast_var.i + 1].content);
 			tmp_i = ast_var.index;
 			ast_var.index = ast_var.i + 2;
 			if (ft_manage_branch(word, &node->left, ast_var, begin_list) < 0)

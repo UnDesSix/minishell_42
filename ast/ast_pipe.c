@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 18:15:33 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/21 23:42:14 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/21 16:07:35 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ int	ft_while_pipe(t_word *word, t_ast_var ast_var, t_node *node,
 	ast_var.i = ast_var.index;
 	while (word[ast_var.i].content)
 	{
-		if (ft_strcmp(word[ast_var.i].content, "|") == 0 &&
-			word[ast_var.i].sep == 0)
+		if (ft_strcmp(word[ast_var.i].content, "|") == 0)
 		{
 			node->type = PIPE;
 			tmp_index = ast_var.index;

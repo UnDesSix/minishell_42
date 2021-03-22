@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 19:26:04 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/22 15:44:53 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/22 18:15:48 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,17 @@ int		get_input(t_list *begin_list)
 int		main(int argc, char **argv, char **envp)
 {
 	t_list	*begin_list;
+	t_list	*elem;
 
 	(void)argc;
 	(void)argv;
 	g_proc.ret = 0;
 	g_proc.index = 0;
-//	g_proc.shell_lvl = 0;
+	g_proc.shell_lvl = 0;
 	begin_list = tabs_to_list(envp);
+	elem = ft_list_find(begin_list, "SHLVL", ft_strcmp);
+	if (elem && ft_strcmp(((t_var *)elem->data)->content, "2") != 0)
+		g_proc.shell_lvl = 1;
 	get_input(begin_list);
 	ft_list_clear(begin_list, free_var);
 	return (g_proc.ret);

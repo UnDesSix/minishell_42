@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 12:58:49 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/21 18:36:00 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/21 21:22:52 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ int	exec_builtins(t_word *word, t_list *begin_list)
 	if (ft_strcmp(word[0].content, "env") == 0)
 		return (env_builtin(begin_list, word));
 	else if (ft_strcmp(word[0].content, "unset") == 0)
-		unset_builtin(&begin_list, word);
+		return (unset_builtin(&begin_list, word));
 	else if (ft_strcmp(word[0].content, "export") == 0)
-		export_builtin(begin_list, word);
+		return (export_builtin(begin_list, word));
 	else if (ft_strcmp(word[0].content, "echo") == 0)
 		return (echo(word));
 	else if (ft_strcmp(word[0].content, "cd") == 0)

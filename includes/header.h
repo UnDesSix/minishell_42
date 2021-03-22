@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 11:31:01 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/22 15:16:16 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/22 16:43:18 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,9 @@
 
 t_process	g_proc;
 
-
 /*
- *	MAIN
- */
+**	MAIN
+*/
 
 void		ft_free_words(t_word *word);
 int			ft_manage_line(char *orline, t_list *begin_list);
@@ -58,7 +57,7 @@ int			divide_lines(char *line, t_list *begin_list);
 int			ast(t_word *word, t_ast_var ast_var, t_node *node,
 			t_list *begin_list);
 void		ft_free_ast(t_node *node);
-void		fill_node(t_node *node, int type, char *cmd, char *file_name);
+void		fill_node(t_node *node, int type, char *file_name);
 char		**ft_token_to_tab(t_word *word);
 void		set_node(t_node *node);
 int			ft_while_pipe(t_word *word, t_ast_var ast_var, t_node *node, t_list
@@ -76,18 +75,19 @@ int			check_ast(t_node *ast);
 */
 void		btree_prefix_count(t_node *node, int *count);
 int			ast_run(t_node *root, t_list *begin_list);
-void		btree_prefix_pipe(t_node *node, t_saver *saver);
+void		btree_prefix_pipe(t_node *node, t_list *begin_list, t_saver *saver);
 int			btree_prefix_exec(t_node *node, t_saver *saver);
 void		btree_prefix_clean(t_node *node);
 int			manage_redi(t_node *node, t_saver *saver);
-int			define_std_inout(t_node *node, t_saver *saver);
+int			define_std_inout(t_node *node, t_list *begin_list, t_saver *saver);
+void		change_underscore_var(t_node *node, t_list *begin_list,
+			t_saver *saver);
 
 /*
 **	EXPANSION
 */
-
-char		*expansion(char *line, t_list *begin_list);
 void		free_exit_status(char *tmp, char *nbr, char *tmp_line);
+char		*expansion(char *line, t_list *begin_list);
 void		init_exp_var(t_env_str *env, char **tmp_line, char *line);
 void		free_exp_var(t_env_str *env, char *tmp_line);
 void		set_exp_quote(char c, t_env_str *env);
@@ -160,13 +160,6 @@ void		print_tabs(char **tabs);
 t_list		*tabs_to_list(char **envp);
 int			env_builtin(t_list *begin_list, t_word *word);
 int			unset_builtin(t_list **begin_list, t_word *word);
-
-/*
-**	DEBUG
-*/
-
-void		print_word(t_word word);
-void		print2DUtil(t_node *root, int space);
 
 /*
 **	SIGNALS

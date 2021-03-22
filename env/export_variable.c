@@ -6,7 +6,7 @@
 /*   By: mlarboul <mlarboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 11:48:12 by mlarboul          #+#    #+#             */
-/*   Updated: 2021/03/21 15:27:30 by mlarboul         ###   ########.fr       */
+/*   Updated: 2021/03/22 00:18:39 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 **		- i : the adress of the index so it can be increment from that
 **		particular function.
 **	The function returns (-1) if a error occurs and (0) if everything went well.
-**	TODO : NEED TO ADD (t_var *) for (elm_found->data)
 */
 
 int	perm_var_filled(t_list **begin_list, t_list *elm_found,
@@ -60,7 +59,6 @@ int	perm_var_filled(t_list **begin_list, t_list *elm_found,
 **		- i : the adress of the index so it can be increment from that
 **		particular function.
 **	The function returns (-1) if a error occurs and (0) if everything went well.
-**	TODO : NEED TO ADD (t_var *) for (elm_found->data)
 */
 
 int	perm_var_empty(t_list **begin_list, t_list *elm_found,
@@ -111,6 +109,26 @@ int	perm_variables(t_list **begin_list, t_word *word, int *i)
 	return (0);
 }
 
+int	exp_var_well_synt(t_word *word, t_list **begin_list, int *i)
+{
+	t_list	*elm_found;
+
+	if (!word[*i].space && word[*i + 1].content
+			&& !ft_strcmp(word[*i + 1].content, "="))
+	{
+		if (perm_variables(begin_list, word, i) < 0)
+			return (-1);
+	}
+	else
+	{
+		elm_found = ft_list_find(*begin_list, word[*i].content, ft_strcmp);
+		if (!elm_found)
+			if (create_var(begin_list, word[*i].content, NULL, 0) < 0)
+				return (-1);
+	}
+	return (0);
+}
+
 /*
 **	export_variables adds new elements to the list. There are two kinds of var
 **	that can be added : permanent variables (stay in the envp even when execve
@@ -129,26 +147,20 @@ int	perm_variables(t_list **begin_list, t_word *word, int *i)
 int	export_variable(t_word *word, t_list **begin_list)
 {
 	int		i;
-	t_list	*elm_found;
+	int		ret;
 
 	i = 1;
-	while (word[i].content && word[i].type == 2
-			&& var_is_well_syntaxed(word[i].content, "export"))
+	ret = 0;
+	while (word[i].content && word[i].type == 2)
 	{
-		if (!word[i].space && word[i + 1].content
-				&& !ft_strcmp(word[i + 1].content, "="))
+		if (var_is_well_syntaxed(word[i].content, "export"))
 		{
-			if (perm_variables(begin_list, word, &i) < 0)
-				return (-1);
+			if (exp_var_well_synt(word, begin_list, &i) < 0)
+				return (1);
 		}
 		else
-		{
-			elm_found = ft_list_find(*begin_list, word[i].content, ft_strcmp);
-			if (!elm_found)
-				if (create_var(begin_list, word[i].content, NULL, 0) < 0)
-					return (-1);
-		}
+			ret = 1;
 		i++;
 	}
-	return (0);
+	return (ret);
 }
