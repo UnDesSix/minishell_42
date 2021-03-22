@@ -6,7 +6,7 @@
 /*   By: mlarboul <mlarboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 18:17:39 by mlarboul          #+#    #+#             */
-/*   Updated: 2021/03/22 17:26:23 by mlarboul         ###   ########.fr       */
+/*   Updated: 2021/03/22 18:35:28 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int		ft_double_right(t_node *node, t_saver *saver)
 	fd = open(node->file_name, O_RDWR | O_CREAT, 0664);
 	if (fd < 0)
 	{
-		printf("(open) msh : %s: %s\n", node->file_name, strerror(errno));
+		printf("msh : %s: %s\n", node->file_name, strerror(errno));
 		saver->redi_open = FALSE;
 		return (-1);
 	}
@@ -47,7 +47,7 @@ int		ft_double_right(t_node *node, t_saver *saver)
 	{
 		if (read_bytes < 0)
 		{
-			printf("(read) msh : %s: %s\n", node->file_name, strerror(errno));
+			printf("msh : %s: %s\n", node->file_name, strerror(errno));
 			saver->redi_open = FALSE;
 			return (-1);
 		}
