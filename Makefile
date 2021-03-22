@@ -10,7 +10,7 @@ INCS		=	-I./includes
 
 SRCS_NAME	=	main.c							\
 				main/manage_line.c				\
-				main/devide_line.c				\
+				main/divide_lines.c				\
 				signals/signals.c				\
 				builtins/cd.c					\
 				builtins/exit.c					\
