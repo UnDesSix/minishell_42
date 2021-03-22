@@ -6,7 +6,7 @@
 /*   By: mlarboul <mlarboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 12:02:08 by mlarboul          #+#    #+#             */
-/*   Updated: 2021/03/22 18:40:07 by mlarboul         ###   ########.fr       */
+/*   Updated: 2021/03/22 20:05:54 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,8 @@ int		exec_arg(t_node *node, t_saver *saver)
 {
 	int	ret;
 
-	// NEED TO BE NORMED
-	if (node->redi_open == FALSE)
-	{
-		g_proc.ret = 1;
+	if (check_content_and_redi(node) == 2)
 		return (2);
-	}
 	if (ft_strcmp(node->word[0].content, "echo") != 0)
 		g_proc.ret = -1;
 	if (ft_strcmp(node->word[0].content, "cd") == 0
