@@ -6,11 +6,30 @@
 /*   By: mlarboul <mlarboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 12:02:10 by mlarboul          #+#    #+#             */
-/*   Updated: 2021/03/21 15:21:49 by mlarboul         ###   ########.fr       */
+/*   Updated: 2021/03/22 01:22:48 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/header.h"
+
+void	change_underscore_var(t_node *node, t_list *begin_list, t_saver *saver)
+{
+	t_list	*elm_found;
+	int		i;
+
+	i = 0;
+	if (node->arg_id == saver->arg_nb)
+	{
+		while (node->args[i] && node->args[i + 1])
+			i++;
+		elm_found = ft_list_find(begin_list, "_", ft_strcmp);
+		free(((t_var *)elm_found->data)->content);
+		if (ft_strcmp("$_", node->args[i]))
+			((t_var *)elm_found->data)->content = ft_strdup(node->args[i]);
+		else
+			((t_var *)elm_found->data)->content = ft_strdup("");
+	}
+}
 
 int		clean_node(t_node *node)
 {
