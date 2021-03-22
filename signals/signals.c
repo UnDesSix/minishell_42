@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 16:27:37 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/21 22:53:20 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/22 20:30:27 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	ctrl_slash(int sig)
 	int	i;
 
 	i = 0;
-	if (g_proc.pid[0] != 0)
+	if (g_proc.index != 0)
 	{
 		while (i < g_proc.index)
 		{
