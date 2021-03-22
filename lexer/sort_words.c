@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 09:08:03 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/21 15:22:02 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/22 14:54:59 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,101 +19,60 @@ int		word_is_redi(char *str)
 			|| ft_strcmp(str, "<") == 0);
 }
 
-int		get_words_tabs_sizes(t_word **new_word,
-		t_word **store_redi, t_word *word)
+t_word	*sort_segment(t_word *word)
 {
-	int	i;
-	int	nb_redi;
-
-	i = 0;
-	nb_redi = 0;
-	while (word[i].content)
-		if (word_is_redi(word[i++].content))
-			nb_redi++;
-	*store_redi = (t_word *)malloc(sizeof(t_word) * ((2 * nb_redi) + 1));
-	*new_word = (t_word *)malloc(sizeof(t_word) * (i + 1));
-	return (0);
-}
-
-int		copy_word(t_word *new_word, t_word *store_redi, t_word *word)
-{
+	t_word	*before;
+	t_word	*redi;
+	t_word	*new;
 	int		i;
-	int		y;
-	int		x;
 
 	i = 0;
-	x = 0;
-	y = 0;
-	while (word[i].content)
-	{
-		if (word_is_redi(word[i].content))
-		{
-			store_redi[y++] = word[i++];
-			store_redi[y++] = word[i++];
-		}
-		else
-			new_word[x++] = word[i++];
-	}
-	store_redi[y].content = NULL;
-	return (x);
+	before = copy_without_redi(word);
+	redi = copy_only_redi(word);
+	new = ft_wordjoin(before, redi);
+	free(before);
+	free(redi);
+	return (new);
 }
 
-t_word	*sort_words(t_word *word)
+t_word	*manage_enf_of_word(t_word *word, t_word *new)
 {
-	t_word	*store_redi;
-	t_word	*new_word;
-	int		x;
-	int		y;
+	t_word		*segment;
+	t_word		*tmp_new;
 
-	x = 0;
-	y = 0;
-	get_words_tabs_sizes(&new_word, &store_redi, word);
-	if (!new_word || !store_redi)
-		return (NULL);
-	x = copy_word(new_word, store_redi, word);
-	y = 0;
-	while (store_redi[y].content)
-		new_word[x++] = store_redi[y++];
-	new_word[x].content = NULL;
-	free(store_redi);
-	//	free(word);
-	return (new_word);
+	segment = sort_segment(word);
+	tmp_new = ft_wordjoin(new, segment);
+	if (new)
+		free(new);
+	free(segment);
+	return (tmp_new);
 }
 
 t_word	*sort_word(t_word *word)
 {
-	t_word	*tmp;
-	t_word	*new;
-	t_word	*tmp_new;
-	char	*tmp_content;
-	int		x;
-	int		begin;
+	t_sort_var	var;
+	t_word		*new;
 
-	begin = 0;
-	x = 0;
+	var.x = 0;
+	var.begin = 0;
 	new = NULL;
-	while (word[x].content)
+	while (1)
 	{
-		if (ft_strcmp(word[x].content, "|") == 0)
+		if (!word[var.x].content)
 		{
-			tmp_content = ft_strdup(word[x].content);
-			free(word[x].content);
-			word[x].content = NULL;
-			tmp = sort_words(&word[begin]);
-			new = ft_wordjoin(new, tmp);
-			word[x].content = tmp_content; 
-			free(tmp);
-			begin = x;
+			new = manage_enf_of_word(&word[var.begin], new);
+			break ;
 		}
-		x++;
+		else if (ft_strcmp(word[var.x].content, "|") == 0)
+		{
+			free(word[var.x].content);
+			word[var.x].content = NULL;
+			new = manage_enf_of_word(&word[var.begin], new);
+			var.begin = var.x;
+			word[var.x].content = ft_strdup("|");
+		}
+		var.x++;
 	}
-	tmp = sort_words(&word[begin]);
-	tmp_new = ft_wordup(new);
-	if (new != NULL)
-		free(new);
-	new = ft_wordjoin(tmp_new, tmp);
-	free(tmp_new);
-	free(tmp);
 	free(word);
 	return (new);
 }

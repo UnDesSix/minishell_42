@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 18:16:19 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/17 10:23:26 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/22 15:00:34 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,9 @@ void	ft_free_ast(t_node *node)
 	if (node->file_name)
 		free(node->file_name);
 	if (node->args)
+	{
 		free(node->args);
+	}
 	free(node);
 	return ;
 }

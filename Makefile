@@ -9,13 +9,13 @@ LIBSH		=	libsh/libsh.a
 INCS		=	-I./includes
 
 SRCS_NAME	=	main.c							\
-				debug.c							\
+				main/manage_line.c				\
+				main/divide_lines.c				\
 				signals/signals.c				\
 				builtins/cd.c					\
 				builtins/exit.c					\
 				builtins/echo.c					\
 				builtins/exec_builtins.c		\
-				expansion/expansion_utils2.c	\
 				ast/ast_exec.c					\
 				ast/ast_clean.c					\
 				ast/ast_count.c					\
@@ -29,6 +29,7 @@ SRCS_NAME	=	main.c							\
 				ast/ast_utils.c					\
 				ast/define_std_inout.c			\
 				lexer/sort_words.c 				\
+				lexer/sort_words_copy.c 		\
 				lexer/sort_words_utils.c		\
 				lexer/get_nb_word.c				\
 				lexer/lexer_quotes.c			\
@@ -49,6 +50,8 @@ SRCS_NAME	=	main.c							\
 				env/ft_create_elem.c			\
 				env/ft_list_find.c				\
 				env/list_to_tabs.c				\
+				expansion/expansion_utils2.c	\
+				expansion/free_split.c			\
 												\
 				builtins/pwd.c					\
 				expansion/expansion.c			\

@@ -6,6 +6,10 @@ quotes
 pwd
 	
 
+FIX
+ls | bonjour -> status return 
+
+
 string ending with ">" or "|" or ";"
 
 check env variables ($>, SGV)

@@ -6,11 +6,22 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 11:22:12 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/18 09:44:53 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/21 23:28:13 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/header.h"
+
+char	*recreate_line(char *tmp_line, int i, t_env_str *env, char *line)
+{
+	tmp_line[i] = '\0';
+	free(env->before_var);
+	env->before_var = ft_strjoin(tmp_line, env->var);
+	free(line);
+	line = ft_strjoin(env->before_var, env->after_var);
+	free_exp_var(env, tmp_line);
+	return (line);
+}
 
 char	*add_quote_word(char *str)
 {
@@ -56,10 +67,7 @@ char	*add_quotes(char *str)
 		free(tmp);
 		i++;
 	}
-	i = 0;
-	while (split[i])
-		free(split[i++]);
-	free(split);
+	free_split(split);
 	return (dst);
 }
 

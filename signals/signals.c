@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 16:27:37 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/20 16:59:32 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/21 22:53:20 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ void	ctrl_c(int sig)
 		g_proc.ret = 130;
 		ft_putstr("\n");
 	}
-	else
+	else if (g_proc.shell_lvl == 0)
 	{
 		g_proc.ret = 1;
-        ft_putstr_fd("\n\033[1m\033[31m➜\033[0m msh ", 1);
+		ft_putstr_fd("\n\033[1m\033[31m➜\033[0m msh ", 1);
 	}
 	return ;
 }
@@ -57,7 +57,7 @@ void	ctrl_slash(int sig)
 	return ;
 }
 
-void	signals()
+void	signals(void)
 {
 	signal(SIGINT, ctrl_c);
 	signal(SIGQUIT, ctrl_slash);

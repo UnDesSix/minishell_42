@@ -6,13 +6,13 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 14:41:04 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/21 15:25:19 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/22 15:02:42 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/header.h"
 
-int	get_ret(char stop, int i, char *line, int nb_word)
+int		get_ret(char stop, int i, char *line, int nb_word)
 {
 	if (stop != ' ')
 	{
@@ -25,7 +25,30 @@ int	get_ret(char stop, int i, char *line, int nb_word)
 	return (nb_word);
 }
 
-int	get_nb_word(char *line)
+void	get_nb_spe_op(char *line, int *nb_word, int i)
+{
+	if (line[i + 1] != ' ' && line[i + 1] != '\0')
+		*nb_word += 1;
+	if (line[i - 1])
+		if (line[i - 1] != ' ' && line[i - 1] != '\0')
+			*nb_word += 1;
+}
+
+void	if_quotes_bcklsh(char *line, char *stop, int i)
+{
+	if (line[i] == '\\' && *stop != '\'')
+		i++;
+	if (line[i] == '"' && *stop == ' ')
+		*stop = '"';
+	if (line[i] == '\'' && *stop == ' ')
+		*stop = '\'';
+	if (line[i] == '"' && *stop == '"')
+		*stop = ' ';
+	if (line[i] == '\'' && *stop == '\'')
+		*stop = ' ';
+}
+
+int		get_nb_word(char *line)
 {
 	int		i;
 	int		nb_word;
@@ -36,24 +59,9 @@ int	get_nb_word(char *line)
 	stop = ' ';
 	while (line[i])
 	{
-		if (line[i] == '\\' && stop != '\'')
-			i++;
-		else if (line[i] == '"' && stop == ' ')
-			stop = '"';
-		else if (line[i] == '\'' && stop == ' ')
-			stop = '\'';
-		else if (line[i] == '"' && stop == '"')
-			stop = ' ';
-		else if (line[i] == '\'' && stop == '\'')
-			stop = ' ';
-		else if (ft_is_special_operator(line[i]) && stop == ' ')
-		{
-			if (line[i + 1] != ' ' && line[i + 1] != '\0')
-				nb_word++;
-			if (line[i - 1])
-				if (line[i - 1] != ' ' && line[i - 1] != '\0')
-					nb_word++;
-		}
+		if_quotes_bcklsh(line, &stop, i);
+		if (ft_is_special_operator(line[i]) && stop == ' ')
+			get_nb_spe_op(line, &nb_word, i);
 		else if (line[i] == ' ' && stop == ' ')
 		{
 			nb_word++;
