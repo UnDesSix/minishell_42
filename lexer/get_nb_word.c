@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 14:41:04 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/22 18:42:06 by mlarboul         ###   ########.fr       */
+/*   Updated: 2021/03/22 18:55:58 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ int		get_ret(char stop, int i, char *line, int nb_word)
 {
 	if (stop != ' ')
 	{
-		printf("Error quotes\n");
+		printf("error quotes\n");
+		g_proc.ret = 1;
 		return (-1);
 	}
 	if (i > 0)
@@ -39,13 +40,13 @@ void	if_quotes_bcklsh(char *line, char *stop, int i)
 {
 	if (line[i] == '\\' && *stop != '\'')
 		i++;
-	if (line[i] == '"' && *stop == ' ')
+	else if (line[i] == '"' && *stop == ' ')
 		*stop = '"';
-	if (line[i] == '\'' && *stop == ' ')
+	else if (line[i] == '\'' && *stop == ' ')
 		*stop = '\'';
-	if (line[i] == '"' && *stop == '"')
+	else if (line[i] == '"' && *stop == '"')
 		*stop = ' ';
-	if (line[i] == '\'' && *stop == '\'')
+	else if (line[i] == '\'' && *stop == '\'')
 		*stop = ' ';
 }
 

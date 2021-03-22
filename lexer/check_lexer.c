@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 16:18:16 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/22 18:50:22 by mlarboul         ###   ########.fr       */
+/*   Updated: 2021/03/22 19:00:04 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int	ft_check_lexer(t_word *word)
 		i++;
 	}
 	if (word[i - 1].content)
-	{
 		if (ft_strcmp(word[i - 1].content, ">") == 0 ||
 			ft_strcmp(word[i - 1].content, ">>") == 0 ||
 			ft_strcmp(word[i - 1].content, "<") == 0)
@@ -38,6 +37,5 @@ int	ft_check_lexer(t_word *word)
 			g_proc.ret = 1;
 			return (0);
 		}
-	}
 	return (1);
 }
