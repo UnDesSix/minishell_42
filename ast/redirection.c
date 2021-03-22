@@ -6,7 +6,7 @@
 /*   By: mlarboul <mlarboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 18:17:39 by mlarboul          #+#    #+#             */
-/*   Updated: 2021/03/21 15:22:50 by mlarboul         ###   ########.fr       */
+/*   Updated: 2021/03/22 17:26:23 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int		ft_simple_right(t_node *node, t_saver *saver)
 	fd = open(node->file_name, O_RDWR | O_TRUNC | O_CREAT, 0664);
 	if (fd < 0)
 	{
-		printf("Something wrong happened. Use ERRNO\n");
+		printf("msh : %s: %s\n", node->file_name, strerror(errno));
+		saver->redi_open = FALSE;
 		return (-1);
 	}
 	node->redi_right_fd = fd;
@@ -37,7 +38,8 @@ int		ft_double_right(t_node *node, t_saver *saver)
 	fd = open(node->file_name, O_RDWR | O_CREAT, 0664);
 	if (fd < 0)
 	{
-		printf("Something wrong happened while openning. Use ERRNO\n");
+		printf("(open) msh : %s: %s\n", node->file_name, strerror(errno));
+		saver->redi_open = FALSE;
 		return (-1);
 	}
 	read_bytes = read(fd, buffer, 4096);
@@ -45,7 +47,8 @@ int		ft_double_right(t_node *node, t_saver *saver)
 	{
 		if (read_bytes < 0)
 		{
-			printf("Something wrong happened while reading. Use ERRNO\n");
+			printf("(read) msh : %s: %s\n", node->file_name, strerror(errno));
+			saver->redi_open = FALSE;
 			return (-1);
 		}
 		read_bytes = read(fd, buffer, 4096);
@@ -63,7 +66,8 @@ int		ft_simple_left(t_node *node, t_saver *saver)
 	fd = open(node->file_name, O_RDWR);
 	if (fd < 0)
 	{
-		printf("Something wrong happened. Use ERRNO\n");
+		printf("msh : %s: %s\n", node->file_name, strerror(errno));
+		saver->redi_open = FALSE;
 		return (-1);
 	}
 	node->redi_left_fd = fd;
@@ -74,13 +78,14 @@ int		ft_simple_left(t_node *node, t_saver *saver)
 
 int		manage_redi(t_node *node, t_saver *saver)
 {
+	if (saver->redi_open == FALSE)
+		return (-1);
 	if (node->redi_type == SIMPLE_R)
-		ft_simple_right(node, saver);
+		return (ft_simple_right(node, saver));
 	else if (node->redi_type == DOUBLE_R)
-		ft_double_right(node, saver);
+		return (ft_double_right(node, saver));
 	else if (node->redi_type == SIMPLE_L)
-		ft_simple_left(node, saver);
+		return (ft_simple_left(node, saver));
 	else
 		return (-1);
-	return (0);
 }

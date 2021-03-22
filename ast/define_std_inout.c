@@ -6,7 +6,7 @@
 /*   By: mlarboul <mlarboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 15:10:27 by mlarboul          #+#    #+#             */
-/*   Updated: 2021/03/22 01:14:21 by mlarboul         ###   ########.fr       */
+/*   Updated: 2021/03/22 17:24:44 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ int		define_std_inout(t_node *node, t_list *begin_list, t_saver *saver)
 	node->pfd_output = 1;
 	node->redi_right_fd = -2;
 	node->redi_left_fd = -2;
+	node->redi_open = saver->redi_open;
 	change_underscore_var(node, begin_list, saver);
 	if (saver->curr_pfd == NULL)
 		return (define_std_inout_1(node, saver));

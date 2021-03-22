@@ -6,7 +6,7 @@
 /*   By: mlarboul <mlarboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 15:23:28 by mlarboul          #+#    #+#             */
-/*   Updated: 2021/03/22 16:40:26 by mlarboul         ###   ########.fr       */
+/*   Updated: 2021/03/22 17:24:01 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int		manage_pipe(t_node *node, t_saver *saver)
 		return (-1);
 	}
 	saver->curr_pfd = node->pfd;
+	saver->redi_open = TRUE;
 	return (0);
 }
 

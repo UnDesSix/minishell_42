@@ -6,7 +6,7 @@
 /*   By: mlarboul <mlarboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 15:04:29 by mlarboul          #+#    #+#             */
-/*   Updated: 2021/03/22 16:15:45 by mlarboul         ###   ########.fr       */
+/*   Updated: 2021/03/22 17:27:53 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int		ast_run(t_node *root, t_list *begin_list)
 	ret = 0;
 	saver = malloc(sizeof(t_saver));
 	saver->arg_nb = 0;
+	saver->redi_open = TRUE;
 	saver->redi_right = FALSE;
 	saver->redi_left = FALSE;
 	saver->past_pfd = NULL;

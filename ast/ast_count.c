@@ -6,7 +6,7 @@
 /*   By: mlarboul <mlarboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 12:02:08 by mlarboul          #+#    #+#             */
-/*   Updated: 2021/03/21 15:22:10 by mlarboul         ###   ########.fr       */
+/*   Updated: 2021/03/22 17:16:52 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int		count_node(t_node *node, int *count)
 	{
 		(*count)++;
 		node->arg_id = (*count);
+		node->redi_open = TRUE;
 	}
 	return (0);
 }
