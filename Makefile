@@ -73,6 +73,7 @@ OBJS	= $(SRCS:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS)
+	make -C libsh/
 	$(CC) $(OBJS) $(LIBSH) $(INCS) -o $(NAME)
 
 clean:
@@ -81,6 +82,7 @@ clean:
 	$(RM) $(OBJS_PATH)
 
 fclean: clean
+	make fclean -C libsh/
 	$(RM) $(NAME)
 
 relib:
