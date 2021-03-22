@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 11:31:01 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/22 01:19:11 by mlarboul         ###   ########.fr       */
+/*   Updated: 2021/03/22 16:26:33 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,14 @@
 # include <sys/errno.h>
 
 t_process	g_proc;
+
+/*
+**	MAIN
+*/
+
+void		ft_free_words(t_word *word);
+int			ft_manage_line(char *orline, t_list *begin_list);
+int			divide_lines(char *line, t_list *begin_list);
 
 /*
 **	AST CREATIOM
@@ -78,7 +86,7 @@ void		change_underscore_var(t_node *node, t_list *begin_list,
 /*
 **	EXPANSION
 */
-
+void		free_exit_status(char *tmp, char *nbr, char *tmp_line);
 char		*expansion(char *line, t_list *begin_list);
 void		init_exp_var(t_env_str *env, char **tmp_line, char *line);
 void		free_exp_var(t_env_str *env, char *tmp_line);
@@ -89,6 +97,8 @@ char		*add_quotes(char *str);
 char		*replace_var(char *str, t_list *begin_list);
 int			get_exp_var(char *tmp_line, int tmp_i, t_env_str *env,
 			t_list *begin_list);
+char		*recreate_line(char *tmp_line, int i, t_env_str *env, char *linw);
+void		free_split(char **tab);
 
 /*
 **	LEXER / PARSER
@@ -111,6 +121,8 @@ void		incre_word(char *line, t_lexer *lex, t_word *word);
 int			ft_is_builtin(char *arg);
 t_word		*ft_wordup(t_word *word);
 t_word		*ft_wordjoin(t_word *w1, t_word *w2);
+t_word		*copy_without_redi(t_word *word);
+t_word		*copy_only_redi(t_word *word);
 
 /*
 **	BUILTINS
