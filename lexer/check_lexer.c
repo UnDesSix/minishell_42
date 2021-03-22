@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 16:18:16 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/21 19:24:29 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/22 18:50:22 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	ft_check_lexer(t_word *word)
 			if (word[i + 1].content == NULL && i == 0)
 			{
 				ft_putstr("bash: syntax error near unexpected token `;'\n");
+				g_proc.ret = 1;
 				return (0);
 			}
 		i++;
@@ -33,7 +34,8 @@ int	ft_check_lexer(t_word *word)
 			ft_strcmp(word[i - 1].content, ">>") == 0 ||
 			ft_strcmp(word[i - 1].content, "<") == 0)
 		{
-			ft_putstr("msh: Syntax Error\n");
+			ft_putstr("msh: syntax Error\n");
+			g_proc.ret = 1;
 			return (0);
 		}
 	}

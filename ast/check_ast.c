@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 18:35:28 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/22 18:42:33 by mlarboul         ###   ########.fr       */
+/*   Updated: 2021/03/22 18:48:20 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	check_node(t_node *node)
 		if (node->right == NULL || node->left == NULL)
 		{
 			printf("msh: syntax error\n");
+			g_proc.ret = 1;
 			return (-1);
 		}
 	}
@@ -27,6 +28,7 @@ int	check_node(t_node *node)
 		if (node->file_name == NULL)
 		{
 			printf("msh: syntax error\n");
+			g_proc.ret = 1;
 			return (-1);
 		}
 	}
