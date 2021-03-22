@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 20:42:02 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/22 16:28:29 by mlarboul         ###   ########.fr       */
+/*   Updated: 2021/03/22 17:23:07 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ typedef struct	s_node
 	int				arg_id;
 	char			*file_name;
 	int				fd;
+	int				redi_open;
 	int				redi_right_fd;
 	int				redi_left_fd;
 	int				*pfd;
@@ -90,6 +91,7 @@ typedef struct	s_saver
 	int		*curr_pfd;
 	int		redi_right_fd;
 	int		redi_left_fd;
+	int		redi_open;
 }				t_saver;
 
 typedef struct	s_env_str
