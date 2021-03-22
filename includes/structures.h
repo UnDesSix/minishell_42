@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 20:42:02 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/21 17:26:28 by mlarboul         ###   ########.fr       */
+/*   Updated: 2021/03/22 00:43:51 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ typedef struct	s_node
 	int				redi_type;
 	int				pfd_input;
 	int				pfd_output;
-	char			*cmd;
 	char			**args;
 	char			**envp;
 	t_word			*word;
