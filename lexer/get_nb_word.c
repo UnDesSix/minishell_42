@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 14:41:04 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/22 18:55:58 by mlarboul         ###   ########.fr       */
+/*   Updated: 2021/03/22 20:38:52 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,17 @@ void	get_nb_spe_op(char *line, int *nb_word, int i)
 				*nb_word += 1;
 }
 
-void	if_quotes_bcklsh(char *line, char *stop, int i)
+void	if_quotes_bcklsh(char *line, char *stop, int *i)
 {
-	if (line[i] == '\\' && *stop != '\'')
-		i++;
-	else if (line[i] == '"' && *stop == ' ')
+	if (line[*i] == '\\' && *stop != '\'')
+		*i += 1;
+	else if (line[*i] == '"' && *stop == ' ')
 		*stop = '"';
-	else if (line[i] == '\'' && *stop == ' ')
+	else if (line[*i] == '\'' && *stop == ' ')
 		*stop = '\'';
-	else if (line[i] == '"' && *stop == '"')
+	else if (line[*i] == '"' && *stop == '"')
 		*stop = ' ';
-	else if (line[i] == '\'' && *stop == '\'')
+	else if (line[*i] == '\'' && *stop == '\'')
 		*stop = ' ';
 }
 
@@ -61,7 +61,7 @@ int		get_nb_word(char *line)
 	stop = ' ';
 	while (line[i])
 	{
-		if_quotes_bcklsh(line, &stop, i);
+		if_quotes_bcklsh(line, &stop, &i);
 		if (ft_is_special_operator(line[i]) && stop == ' ')
 			get_nb_spe_op(line, &nb_word, i);
 		else if (line[i] == ' ' && stop == ' ')
