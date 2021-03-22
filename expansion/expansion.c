@@ -6,22 +6,11 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 19:17:47 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/21 19:14:15 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/21 23:05:19 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/header.h"
-
-char	*recreate_line(char *tmp_line, int i, t_env_str *env, char *line)
-{
-	tmp_line[i] = '\0';
-	free(env->before_var);
-	env->before_var = ft_strjoin(tmp_line, env->var);
-	free(line);
-	line = ft_strjoin(env->before_var, env->after_var);
-	free_exp_var(env, tmp_line);
-	return (line);
-}
 
 void	get_after_var(char *line, int i, t_env_str *env)
 {
@@ -101,10 +90,7 @@ char	*manage_exit_status(char *line, t_env_str *env, int *real_i)
 	free(line);
 	tmp[*real_i] = '\0';
 	line = ft_strjoin(tmp, tmp_line);
-	free(tmp);
-	free(nbr);
-	free(tmp_line);
-//	env->quote = 0;
+	free_exit_status(tmp, nbr, tmp_line);
 	(void)env;
 	return (line);
 }
@@ -113,8 +99,9 @@ char	*expansion(char *orline, t_list *begin_list)
 {
 	int			i;
 	t_env_str	env;
-	char		*line = ft_strdup(orline);
+	char		*line;
 
+	line = ft_strdup(orline);
 	i = 0;
 	env.quote = 0;
 	while (line[i])

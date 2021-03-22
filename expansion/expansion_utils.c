@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 12:42:45 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/21 18:37:30 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/21 23:07:16 by calide-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,11 @@ int		go_to_end_var(char *line, int i)
 	while (ft_isalnum(line[i]) || line[i] == '_')
 		i++;
 	return (i);
+}
+
+void	free_exit_status(char *tmp, char *nbr, char *tmp_line)
+{
+	free(tmp);
+	free(nbr);
+	free(tmp_line);
 }
