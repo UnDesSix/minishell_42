@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 18:16:19 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/17 10:23:26 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/22 01:06:03 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,8 @@ int		ft_manage_branch(t_word *word, t_node **node,
 ** FILL_NODE -> fills an existing node with the given data
 */
 
-void	fill_node(t_node *node, int type, char *cmd, char *file_name)
+void	fill_node(t_node *node, int type, char *file_name)
 {
-	node->cmd = ft_strdup(cmd);
 	node->file_name = ft_strdup(file_name);
 	node->type = type;
 }
@@ -82,7 +81,6 @@ void	set_node(t_node *node)
 	node->file_name = NULL;
 	node->fd = 0;
 	node->redi_type = 0;
-	node->cmd = NULL;
 	node->args = NULL;
 }
 
