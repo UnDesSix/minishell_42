@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 11:31:01 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/22 16:26:33 by mlarboul         ###   ########.fr       */
+/*   Updated: 2021/03/22 16:43:18 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,13 +160,6 @@ void		print_tabs(char **tabs);
 t_list		*tabs_to_list(char **envp);
 int			env_builtin(t_list *begin_list, t_word *word);
 int			unset_builtin(t_list **begin_list, t_word *word);
-
-/*
-**	DEBUG
-*/
-
-void		print_word(t_word word);
-void		print2DUtil(t_node *root, int space);
 
 /*
 **	SIGNALS
