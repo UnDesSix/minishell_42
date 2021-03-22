@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 15:15:26 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/22 18:30:55 by mlarboul         ###   ########.fr       */
+/*   Updated: 2021/03/22 19:44:28 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,9 @@ char	*ft_check_if_binary(char **paths, char *str)
 int		ft_is_builtin(char *arg)
 {
 	return (ft_strcmp(arg, "echo") == 0 || ft_strcmp(arg, "cd") == 0
-		|| ft_strcmp(arg, "pwd") == 0 || ft_strcmp(arg, "export") == 0
-		|| ft_strcmp(arg, "unset") == 0 || ft_strcmp(arg, "env") == 0);
+			|| ft_strcmp(arg, "pwd") == 0 || ft_strcmp(arg, "export") == 0
+			|| ft_strcmp(arg, "unset") == 0 || ft_strcmp(arg, "env") == 0
+			|| ft_strcmp(arg, "exit") == 0);
 }
 
 char	**ft_get_paths(t_list *begin_list)
@@ -54,6 +55,8 @@ char	**ft_get_paths(t_list *begin_list)
 			break ;
 		tmp_list = tmp_list->next;
 	}
+	if (!tmp_list)
+		return (NULL);
 	path = ft_strdup((((t_var *)(tmp_list->data))->content));
 	if (!path)
 		return (NULL);
@@ -84,20 +87,20 @@ char	*ft_check_cmd(char *str, t_list *begin_list)
 
 	ret = 0;
 	dst = NULL;
-	paths = ft_get_paths(begin_list);
-	if (!paths)
-		return (NULL);
 	if (str != NULL)
 	{
 		if (!ft_is_builtin(str) && str[0] != '/')
 		{
+			paths = ft_get_paths(begin_list);
+			if (!paths)
+				return (NULL);
 			tmp = ft_strdup(str);
 			dst = ft_check_if_binary(paths, tmp);
 			free(tmp);
+			free_paths(paths);
 		}
 		else
 			dst = ft_strdup(str);
 	}
-	free_paths(paths);
 	return (dst);
 }

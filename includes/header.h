@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 11:31:01 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/22 16:43:18 by mlarboul         ###   ########.fr       */
+/*   Updated: 2021/03/22 20:05:26 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int			ft_while_args(t_word *word, t_ast_var ast_var, t_node *node, t_list
 int			ft_manage_branch(t_word *word, t_node **node, t_ast_var ast_var,
 			t_list *begin_list);
 int			check_ast(t_node *ast);
+int			check_content_and_redi(t_node *node);
 
 /*
 **	AST EXECUTION

@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 19:26:04 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/22 18:15:48 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/22 19:25:35 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,12 @@ void	ft_free_words(t_word *word)
 	x = 0;
 	while (word[x].content)
 	{
-		free(word[x].content);
+		if (word[x].content)
+			free(word[x].content);
 		x++;
 	}
-	free(word);
+	if (word)
+		free(word);
 }
 
 int		get_input(t_list *begin_list)
