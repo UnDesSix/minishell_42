@@ -6,7 +6,7 @@
 /*   By: mlarboul <mlarboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 12:02:08 by mlarboul          #+#    #+#             */
-/*   Updated: 2021/03/22 18:32:49 by mlarboul         ###   ########.fr       */
+/*   Updated: 2021/03/22 18:40:07 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ int		ft_is_cmd(char *str)
 
 void	init_pid_proc(t_node *node, t_saver *saver)
 {
-	if (ft_strcmp(node->args[0], "./minishell") == 0)
-		g_proc.shell_lvl = 1;
 	node->envp = list_to_tabs(saver->envp_list, 0);
 	if (node->pfd_input != STDOUT)
 	{
