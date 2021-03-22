@@ -6,7 +6,7 @@
 /*   By: mlarboul <mlarboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 15:23:28 by mlarboul          #+#    #+#             */
-/*   Updated: 2021/03/22 01:17:51 by mlarboul         ###   ########.fr       */
+/*   Updated: 2021/03/22 16:40:26 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	btree_prefix_pipe(t_node *node, t_list *begin_list, t_saver *saver)
 		return ;
 	pipe_node(node, begin_list, saver);
 	if (node->left)
-		btree_prefix_pipe(node->left, begin_list,  saver);
+		btree_prefix_pipe(node->left, begin_list, saver);
 	if (node->right)
 		btree_prefix_pipe(node->right, begin_list, saver);
 }
