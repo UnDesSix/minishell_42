@@ -6,7 +6,7 @@
 /*   By: calide-n <calide-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 11:31:01 by calide-n          #+#    #+#             */
-/*   Updated: 2021/03/21 18:37:55 by calide-n         ###   ########.fr       */
+/*   Updated: 2021/03/22 01:19:11 by mlarboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_process	g_proc;
 int			ast(t_word *word, t_ast_var ast_var, t_node *node,
 			t_list *begin_list);
 void		ft_free_ast(t_node *node);
-void		fill_node(t_node *node, int type, char *cmd, char *file_name);
+void		fill_node(t_node *node, int type, char *file_name);
 char		**ft_token_to_tab(t_word *word);
 void		set_node(t_node *node);
 int			ft_while_pipe(t_word *word, t_ast_var ast_var, t_node *node, t_list
@@ -67,11 +67,13 @@ int			check_ast(t_node *ast);
 */
 void		btree_prefix_count(t_node *node, int *count);
 int			ast_run(t_node *root, t_list *begin_list);
-void		btree_prefix_pipe(t_node *node, t_saver *saver);
+void		btree_prefix_pipe(t_node *node, t_list *begin_list, t_saver *saver);
 int			btree_prefix_exec(t_node *node, t_saver *saver);
 void		btree_prefix_clean(t_node *node);
 int			manage_redi(t_node *node, t_saver *saver);
-int			define_std_inout(t_node *node, t_saver *saver);
+int			define_std_inout(t_node *node, t_list *begin_list, t_saver *saver);
+void		change_underscore_var(t_node *node, t_list *begin_list,
+			t_saver *saver);
 
 /*
 **	EXPANSION
