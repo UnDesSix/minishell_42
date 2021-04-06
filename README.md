@@ -1,4 +1,2 @@
 # minishell_42
 
-
-
